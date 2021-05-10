@@ -1,0 +1,18 @@
+/***************************************************/
+/* Commands */
+/***************************************************/
+
+//install bootstrap
+npm install --save bootstrap 
+
+//install fontawesome
+npm install --save @fortawesome/fontawesome-free
+
+//install jquery
+npm install --save jquery
+
+//install jquery dom
+npm install --save-dev --save-exact jsdom jsdom-global
+
+//use the scrips and css from node modules
+https://stackoverflow.com/questions/26773767/purpose-of-installing-twitter-bootstrap-through-npm
