@@ -9,4 +9,22 @@ html
     script(src="/js/jquery.min.js") 
     script(src="/js/popper.min.js")
     script(src="/js/bootstrap.min.js") 
-    block content
+
+    nav.navbar.fixed-top.navbar-expand-md.navbar-light                     
+      .container
+        a.navbar-brand(href='/') Loc8r                                     
+          button.navbar-toggler(type='button', data-toggle='collapse',
+          data-target='#navbarMain')                                     
+            span.navbar-toggler-icon
+        #navbarMain.navbar-collapse.collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/about/') About  
+
+    .container
+      block content
+
+      footer
+      .row
+        .col-12
+          small &copy; Getting Mean - Parthiban Sekar 2021
