@@ -9,17 +9,18 @@ html
   body
     script(src="/js/jquery.min.js") 
     script(src="/js/popper.min.js")
-    script(src="/bootstrap/dist/js/bootstrap.min.js") 
+    script(src="/bootstrap/dist/js/bootstrap.min.js")
 
-    nav.navbar.fixed-top.navbar-expand-md.navbar-light                     
+    nav.navbar.fixed-top.navbar-light.navbar-expand-lg
       .container
-        a.navbar-brand(href='/') Loc8r                                     
-          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarMain')                                     
-            span.navbar-toggler-icon
-          #navbarMain.navbar-collapse.collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item
-            a.nav-link(href='/about/') About  
+        a.navbar-brand(href='/') Loc8r
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarMain', aria-controls="navbarMain" aria-expanded="false")
+          span.navbar-toggler-icon
+        #navbarMain.navbar-collapse.collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item
+              a.nav-link(href='/about/') About
+          //- span This is my first Mean app.
 
     .container
       block content
