@@ -19,11 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js')));
+
 app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist')));
 app.use('/js', express.static(path.join(__dirname, '/node_modules/@popperjs/core/dist/umd')));
-app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
-
+app.use('/bootstrap', express.static(path.join(__dirname, '/node_modules/bootstrap/')));
+app.use('/static', express.static(path.join(__dirname, '/node_modules/@fortawesome/fontawesome-free')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

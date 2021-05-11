@@ -3,20 +3,20 @@ html
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
-    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/static/css/all.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     script(src="/js/jquery.min.js") 
     script(src="/js/popper.min.js")
-    script(src="/js/bootstrap.min.js") 
+    script(src="/bootstrap/dist/js/bootstrap.min.js") 
 
     nav.navbar.fixed-top.navbar-expand-md.navbar-light                     
       .container
         a.navbar-brand(href='/') Loc8r                                     
-          button.navbar-toggler(type='button', data-toggle='collapse',
-          data-target='#navbarMain')                                     
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarMain')                                     
             span.navbar-toggler-icon
-        #navbarMain.navbar-collapse.collapse
+          #navbarMain.navbar-collapse.collapse
         ul.navbar-nav.mr-auto
           li.nav-item
             a.nav-link(href='/about/') About  
