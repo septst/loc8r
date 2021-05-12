@@ -41,7 +41,6 @@ block content
         .col-12
           .card.card-primary.review-card
             .card-block
-              a.btn.btn-primary.float-right(href='/location/review/new') Add review
               h2.card-title Customer reviews
               each review in location.reviews
                 .row.review
@@ -54,6 +53,7 @@ block content
                     small.reviewTimestamp= review.timestamp
                   .col-12
                     p !{(review.reviewText).replace(/\n/g, '<br/>')}
+              a.btn.btn-primary.float-right(href='/location/review/new') Add review
               
     .col-12.col-lg-3
       p.lead #{location.name} #{sidebar.context}
