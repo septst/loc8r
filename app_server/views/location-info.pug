@@ -53,7 +53,7 @@ block content
                     | &nbsp;
                     small.reviewTimestamp= review.timestamp
                   .col-12
-                    p {(review.reviewText).replace(/\n/g, '<br/>')}
+                    p !{(review.reviewText).replace(/\n/g, '<br/>')}
               
     .col-12.col-lg-3
       p.lead #{location.name} #{sidebar.context}
