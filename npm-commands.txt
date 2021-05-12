@@ -16,3 +16,10 @@ npm install --save-dev --save-exact jsdom jsdom-global
 
 //use the scrips and css from node modules
 https://stackoverflow.com/questions/26773767/purpose-of-installing-twitter-bootstrap-through-npm
+
+
+git add --all
+
+git commit -m ""
+
+git push heroku master
