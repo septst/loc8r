@@ -23,3 +23,7 @@ git add --all
 git commit -m ""
 
 git push heroku master
+
+
+//install mongoose
+npm i mongoose
