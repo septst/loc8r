@@ -30,3 +30,12 @@ npm i mongoose
 
 //to install readline for windows
 npm install --save readline
+
+//navigate to 
+C:\Users\Parthiban.Sekar\Downloads\mongodb-database-tools-windows-x86_64-100.3.1\mongodb-database-tools-windows-x86_64-100.3.1\bin
+
+//dump data
+mongodump -d Loc8r -o C:\MEAN\momgo_dump
+
+//restore data
+mongorestore --uri mongodb+srv://loc8ruser:Dostoevsky@loc8r.rfeuf.mongodb.net/master-dev C:\MEAN\momgo_dump\Loc8r

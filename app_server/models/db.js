@@ -1,8 +1,19 @@
 const mongoose = require('mongoose');
 const readline = require('readline');
 
-const mainDbUri = 'mongodb://localhost/loc8r';
-const logDbUri = 'mongodb://localhost/loc8r-log';
+let mainDbUri = 'mongodb://127.0.0.1:27017/loc8r';
+let logDbUri = 'mongodb://127.0.0.1:27017/loc8r-log';
+
+if (process.env.NODE_ENV === 'production')
+{
+    console.log('Running in production environment');
+    console.log(process.env.MONGODB_URI);
+    const mongoUri = 'mongodb+srv://loc8ruser:Dostoevsky@loc8r.rfeuf.mongodb.net/';
+
+    mainDbUri = mongoUri + 'master-dev'; 
+    logDbUri = mongoUri + 'log-dev';
+}
+
 
 const connectOptions = {
     useUnifiedTopology: true,
@@ -18,9 +29,8 @@ const connections = [
 
 for (let connection of connections)
 {
-    let dbName = connection.name;
     connection.on('connected', () => {
-        console.log(`Mongoose connected to ${dbName}`);
+        console.log(`Mongoose connected to ${connection.name}`);
     }); 
 
     connection.on('error', err => {
@@ -28,7 +38,7 @@ for (let connection of connections)
     }); 
 
     connection.on('disconnected', () => {
-        console.log(`Mongoose disconnected from ${dbName}`);
+        console.log(`Mongoose disconnected from ${connection.name}`);
     });
 };
 
@@ -78,3 +88,8 @@ process.on('SIGTERM', () => {
       process.exit(0);                                   
     });
 });
+
+
+require('./locations');
+
+// mongoose.model('Location', locationSchema);
