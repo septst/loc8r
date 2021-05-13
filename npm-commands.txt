@@ -27,3 +27,6 @@ git push heroku master
 
 //install mongoose
 npm i mongoose
+
+//to install readline for windows
+npm install --save readline
