@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production')
 {
     console.log('Running in production environment');
     const mongoUri = process.env.MONGODB_URI;
-
+    console.log(process.env.MONGODB_URI);
     mainDbUri = mongoUri + 'master-dev'; 
     logDbUri = mongoUri + 'log-dev';
 }

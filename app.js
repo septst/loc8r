@@ -7,9 +7,10 @@ const dom = require('jsdom-global')();
 const favicon = require('favicons');
 //mongo connection script
 require('./app_server/models/db');
+require('./app_api/models/db');
 
 const indexRouter = require('./app_server/routes/index');
-const usersRouter = require('./app_server/routes/users');
+const apiRouter = require('./app_api/routes/index');
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use('/bootstrap', express.static(path.join(__dirname, '/node_modules/bootstr
 app.use('/static', express.static(path.join(__dirname, '/node_modules/@fortawesome/fontawesome-free')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
