@@ -1,7 +1,18 @@
 
 //- Print ratings
-mixin outputRating(rating)                 
+mixin outputRating(rating)              
   - for (let i = 1; i <= rating; i++)      
     i.fas.fa-star
   - for (let i = rating; i < 5; i++)      
     i.far.fa-star
+
+//- Format ISO date
+mixin formatDate(dateString)
+  - const date = new Date(dateString);                                      
+  - const monthNames = ['January', 'February', 'March', 'April'];
+  - monthNames.push('May', 'June', 'July', 'August', 'September', 'October', 'November','December');
+  - const d = date.getDate();                                               
+  - const m = monthNames[date.getMonth()];                                  
+  - const y = date.getFullYear();                                           
+  - const output = `${d} ${m} ${y}`;                                        
+  = output                                   

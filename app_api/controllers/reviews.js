@@ -43,6 +43,7 @@ const doAddReview = (req, res, location) => {
             reviewText
           });
           location.save((err, location) => {
+              console.log("New loc =>", location);
               if(err){
                   res
                     .status(400)
@@ -70,7 +71,8 @@ const reviewsCreate = (req, res) => {
                 .status(400)
                 .json(err);
             } else {
-            doAddReview(req, res, location);
+                console.log("Call doAddReview");
+                doAddReview(req, res, location);
             }
         });
     } else {
@@ -182,7 +184,7 @@ const reviewsUpdateOne = (req, res) => {
     );
   };
   
-  const reviewsDeleteOne = (req, res) => {
+const reviewsDeleteOne = (req, res) => {
     const {locationid, reviewid} = req.params;
     if (!locationid || !reviewid) {
       return res

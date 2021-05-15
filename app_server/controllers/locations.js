@@ -1,5 +1,6 @@
 const request = require('request');
 const apiOptionsBuilder = require('./api-request').apiOptionsBuilder;
+const baseController = require('./base-controller');
 
 const formatDistance = (distance) => {
   let thisDistance = 0;
@@ -15,7 +16,7 @@ const formatDistance = (distance) => {
 };
 
 const renderHomePage = (req, res, responseBody) => {
-  console.log("responseBody =>", responseBody);
+
   let message = null;
   if(!(responseBody instanceof Array)){
     message = "API lookup error";
@@ -75,33 +76,82 @@ const renderDetailsPage = (req, res, location) =>{
   });
 }
 
-// Get 'Location Info' page
-const locationInfo = function(req, res){
+const getLocationInfo = (req, res, callback) =>{
   let requestOptions = new apiOptionsBuilder()
                    .addPath(`/api/locations/${req.params.locationId}`)
                    .addMethod('GET')
                    .build();
   request(requestOptions,
-    (err, response, body) => {
-      const data = body;
-      data.coords = {
-        lng: body.coords[0],
-        lat: body.coords[1]
-      };
-      renderDetailsPage(req, res, data);
-    })
+    (err, {statusCode}, body) => {
+      if(statusCode === 200){
+        const data = body;
+        data.coords = {
+          lng: body.coords[0],
+          lat: body.coords[1]
+        };
+        callback(req, res, data);
+      }else{
+        baseController.showError(req, res, statusCode);        
+      }
+    });
+};
+
+// Get 'Location Info' page
+const locationInfo = function(req, res){
+  getLocationInfo(req, res, 
+    (req, res, responseData) => renderDetailsPage(req, res, responseData));
+};
+
+const renderReviewForm  = (req, res, {name}) =>{
+  res.render('location-review-form', {
+    title: `Review ${name} on Loc8r`,                        
+    pageHeader: { title: `Review ${name}`},
+    error: req.query.err
+  });
+};
+
+const doAddReview = function(req, res){
+    
+  const locationId = req.params.locationId;
+  const postData = {
+    author: req.body.name,
+    rating: parseInt(req.body.rating, 10),
+    reviewText: req.body.review
+  };
+  let requestOptions = new apiOptionsBuilder()
+                   .addPath(`/api/locations/${req.params.locationId}/reviews`)
+                   .addMethod('POST')
+                   .addData(postData)
+                   .build();
+  console.log("opt =>",requestOptions);
+
+  if (!postData.author || !postData.rating || !postData.reviewText) {
+    res.redirect(`/location/${locationid}/review/new?err=val`);
+  } else {
+    request(requestOptions,
+      (err, {statusCode}, {name}) => {
+        console.log("statusCode=>",statusCode);
+        if(statusCode === 201){
+          res.redirect(`/location/${locationid}`); 
+        } else if (statusCode === 400 && name && name === 'ValidationError') {
+          res.redirect(`/location/${locationid}/review/new?err=val`);
+        } else{
+          baseController.showError(req, res, err);
+        };
+    });
+  }
 };
 
 // Get 'Add Review' page
-const addReview = function(req, res){
-    res.render('location-review-form', {
-      title: 'Review Starcups on Loc8r',
-      pageHeader: { title: 'Review Starcups' }
-    });
+const addReview = (req, res) => {
+  getLocationInfo(req, res,
+    (req, res, responseData) => renderReviewForm(req, res, responseData)
+  );
 };
 
 module.exports = {
     homeList,
     locationInfo,
-    addReview
+    addReview,
+    doAddReview
 };

@@ -50,10 +50,11 @@ block content
                       | &nbsp;
                     span.reviewAuthor= review.author
                     | &nbsp;
-                    small.reviewTimestamp= review.timestamp
+                    small.reviewTimestamp
+                     +formatDate(review.createdOn)
                   .col-12
                     p !{(review.reviewText).replace(/\n/g, '<br/>')}
-              a.btn.btn-primary.float-right(href='/location/review/new') Add review
+              a.btn.btn-primary.float-right(href=`/location/${location._id}/review/new`) Add review
               
     .col-12.col-lg-3
       p.lead #{location.name} #{sidebar.context}

@@ -105,3 +105,7 @@ body {
   color: #fff;
   background-color: #108a93;
 }
+
+.form-group{
+  margin-bottom:10px;
+}

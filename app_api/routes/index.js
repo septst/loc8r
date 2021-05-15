@@ -19,7 +19,7 @@ router
 // Reviews
 router
     .route('/locations/:locationId/reviews')
-    .get(ctrlReviews.reviewsCreate);
+    .post(ctrlReviews.reviewsCreate);
 router
     .route('/locations/:locationId/reviews/:reviewId')
     .get(ctrlReviews.reviewsReadOne)
