@@ -81,7 +81,7 @@ const getLocationInfo = (req, res, callback) =>{
                    .addPath(`/api/locations/${req.params.locationId}`)
                    .addMethod('GET')
                    .build();
-                   
+
   request(requestOptions,
     (err, {statusCode}, body) => {
       if(statusCode === 200){
@@ -113,7 +113,6 @@ const renderReviewForm  = (req, res, {name}) =>{
 
 const doAddReview = function(req, res){
     
-  const locationId = req.params.locationId;
   const postData = {
     author: req.body.name,
     rating: parseInt(req.body.rating, 10),

@@ -19,7 +19,7 @@ const doSetAverageRating = (location) => {
     }
   };
   
-  const updateAverageRating = (locationId) => {
+const updateAverageRating = (locationId) => {
     locationModel
         .findById(locationId)
         .select('rating reviews')
@@ -43,7 +43,6 @@ const doAddReview = (req, res, location) => {
             reviewText
           });
           location.save((err, location) => {
-              console.log("New loc =>", location);
               if(err){
                   res
                     .status(400)
@@ -62,19 +61,18 @@ const doAddReview = (req, res, location) => {
 const reviewsCreate = (req, res) => {
     const locationId = req.params.locationId;
     if (locationId) {
-        Loc
-        .findById(locationId)
-        .select('reviews')
-        .exec((err, location) => {
-            if (err) {
-            res
-                .status(400)
-                .json(err);
-            } else {
-                console.log("Call doAddReview");
-                doAddReview(req, res, location);
-            }
-        });
+        locationModel
+            .findById(locationId)
+            .select('reviews')
+            .exec((err, location) => {
+                if (err) {
+                res
+                    .status(400)
+                    .json(err);
+                } else {
+                    doAddReview(req, res, location);
+                }
+            });
     } else {
         res
         .status(404)
@@ -130,10 +128,10 @@ const reviewsUpdateOne = (req, res) => {
       return res
         .status(404)
         .json({
-          "message": "Not found, locationid and reviewid are both required"
+          "message": "Not found, locationId and reviewId are both required"
         });
     }
-    Loc
+    locationModel
       .findById(req.params.locationId)
       .select('reviews')
       .exec((err, location) => {
@@ -189,10 +187,10 @@ const reviewsDeleteOne = (req, res) => {
     if (!locationId || !reviewId) {
       return res
         .status(404)
-        .json({'message': 'Not found, locationid and reviewid are both required'});
+        .json({'message': 'Not found, locationId and reviewId are both required'});
     }
   
-    Loc
+    locationModel
       .findById(locationId)
       .select('reviews')
       .exec((err, location) => {
@@ -207,12 +205,12 @@ const reviewsDeleteOne = (req, res) => {
         }
   
         if (location.reviews && location.reviews.length > 0) {
-          if (!location.reviews.id(reviewid)) {
+          if (!location.reviews.id(reviewId)) {
             return res
               .status(404)
               .json({'message': 'Review not found'});
           } else {
-            location.reviews.id(reviewid).remove();
+            location.reviews.id(reviewId).remove();
             location.save(err => {
               if (err) {
                 return res
