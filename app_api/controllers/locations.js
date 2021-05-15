@@ -178,7 +178,7 @@ const locationsDeleteOne  = (req, res) => {
     }else{
         res
             .status(400)
-            .message("message": "Location Id is required.");
+            .json({"message": "Location Id is required."});
     }
 };
 
