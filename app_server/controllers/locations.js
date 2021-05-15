@@ -5,7 +5,7 @@ const baseController = require('./base-controller');
 const formatDistance = (distance) => {
   let thisDistance = 0;
   let unit = 'm';
-  console.log("distance =>", distance);
+
   if (distance > 1000) {                                        
     thisDistance = parseFloat(distance / 1000).toFixed(1);      
     unit = 'km';                                                
@@ -81,6 +81,7 @@ const getLocationInfo = (req, res, callback) =>{
                    .addPath(`/api/locations/${req.params.locationId}`)
                    .addMethod('GET')
                    .build();
+                   
   request(requestOptions,
     (err, {statusCode}, body) => {
       if(statusCode === 200){
@@ -130,7 +131,7 @@ const doAddReview = function(req, res){
   } else {
     request(requestOptions,
       (err, {statusCode}, {name}) => {
-        console.log("statusCode=>",statusCode);
+        console.log("err=>",statusCode);
         if(statusCode === 201){
           res.redirect(`/location/${locationid}`); 
         } else if (statusCode === 400 && name && name === 'ValidationError') {
