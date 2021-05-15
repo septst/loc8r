@@ -4,8 +4,7 @@ const readline = require('readline');
 let mainDbUri = 'mongodb://127.0.0.1:27017/loc8r';
 let logDbUri = 'mongodb://127.0.0.1:27017/loc8r-log';
 
-if (process.env.NODE_ENV === 'production')
-{
+if (process.env.NODE_ENV === 'production'){
     console.log('Running in production environment');
     const mongoUri = process.env.MONGODB_URI;
     mainDbUri = mongoUri + 'master-dev'; 

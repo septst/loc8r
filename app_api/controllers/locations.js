@@ -37,7 +37,7 @@ const locationsListByDistance = async (req, res) => {
               address: result.address,
               rating: result.rating,
               facilities: result.facilities,
-              distance: `${result.distance.calculated.toFixed()}m`
+              distance: `${result.distance.calculated.toFixed()}`
             }
           });
           res
@@ -50,6 +50,7 @@ const locationsListByDistance = async (req, res) => {
             .json(err);
     }
 };
+
 const locationsCreate  = (req, res) => {
     locationModel
         .create({
@@ -93,7 +94,7 @@ const locationsCreate  = (req, res) => {
 };
 
 const locationsReadOne = (req, res) => {
-   
+
     locationModel
       .findById(req.params.locationId)
       .exec((err, location) => {
