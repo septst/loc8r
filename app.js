@@ -6,7 +6,6 @@ const logger = require('morgan');
 const dom = require('jsdom-global')();
 const favicon = require('favicons');
 //mongo connection script
-require('./app_server/models/db');
 require('./app_api/models/db');
 
 const indexRouter = require('./app_server/routes/index');
