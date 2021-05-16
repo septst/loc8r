@@ -7,7 +7,6 @@ block content
   .row 
     .col-12.col-md-8
       form#addReview(action='', method = 'post', role='form')
-        h3= error
         - if (error == "val")
           .alert.alert-danger(role="alert") All fields required, please try again
         .form-group.row
