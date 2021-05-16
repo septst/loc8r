@@ -11,6 +11,8 @@ class apiOptionsBuilder{
     server = process.env.NODE_ENV === 'production' ? 
         'https://ps-loc8r.herokuapp.com':
         'http://localhost:3000';
+    
+    // server = 'http://localhost:3000';
    
     addPath(path){
         this.apiOptions.url = `${this.server}${path}`;
@@ -27,7 +29,7 @@ class apiOptionsBuilder{
     }
 
     addData(data){
-        this.apiOptions.json = JSON.stringify(data);
+        this.apiOptions.json = data;
         return this;
     }
 

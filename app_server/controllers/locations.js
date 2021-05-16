@@ -1,4 +1,5 @@
 const request = require('request');
+const got = require('got');
 const apiOptionsBuilder = require('./api-request').apiOptionsBuilder;
 const baseController = require('./base-controller');
 
@@ -112,33 +113,32 @@ const renderReviewForm  = (req, res, {name}) =>{
 };
 
 const doAddReview = function(req, res){
-    
+  const locationId = req.params.locationId;
   const postData = {
     author: req.body.name,
     rating: parseInt(req.body.rating, 10),
     reviewText: req.body.review
   };
   let requestOptions = new apiOptionsBuilder()
-                   .addPath(`/api/locations/${req.params.locationId}/reviews`)
+                   .addPath(`/api/locations/${locationId}/reviews`)
                    .addMethod('POST')
                    .addData(postData)
                    .build();
-  console.log("opt =>",requestOptions);
 
   if (!postData.author || !postData.rating || !postData.reviewText) {
     res.redirect(`/location/${locationid}/review/new?err=val`);
   } else {
     request(requestOptions,
       (err, {statusCode}, {name}) => {
-        console.log("err=>",statusCode);
         if(statusCode === 201){
-          res.redirect(`/location/${locationid}`); 
+          res.redirect(`/location/${locationId}`); 
         } else if (statusCode === 400 && name && name === 'ValidationError') {
-          res.redirect(`/location/${locationid}/review/new?err=val`);
+          res.redirect(`/location/${locationId}/review/new?err=val`);
         } else{
           baseController.showError(req, res, err);
         };
-    });
+      }
+    );
   }
 };
 
