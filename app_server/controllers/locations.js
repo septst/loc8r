@@ -126,7 +126,8 @@ const doAddReview = function(req, res){
                    .build();
 
   if (!postData.author || !postData.rating || !postData.reviewText) {
-    res.redirect(`/location/${locationid}/review/new?err=val`);
+    console.log("Val failed");
+    res.redirect(`/location/${locationId}/review/new?err=val`);
   } else {
     request(requestOptions,
       (err, {statusCode}, {name}) => {
