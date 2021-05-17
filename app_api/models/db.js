@@ -1,11 +1,13 @@
+const chalk = require('chalk');
 const mongoose = require('mongoose');
 const readline = require('readline');
+const log = console.log;
 
 let mainDbUri = 'mongodb://127.0.0.1:27017/loc8r';
 let logDbUri = 'mongodb://127.0.0.1:27017/loc8r-log';
 
 if (process.env.NODE_ENV === 'production'){
-    console.log('Running in production environment');
+    log(chalk.red('Running in production environment'));
     const mongoUri = process.env.MONGODB_URI;
     mainDbUri = mongoUri + 'master-dev'; 
     logDbUri = mongoUri + 'log-dev';
@@ -22,16 +24,16 @@ const connect = (dbUri) => {
 };
 
 mongoose.connection.on('connected', () => {
-    console.log('Mongoose connection: success');
+    log(chalk.green('Mongoose connection: success'));
   });
   
 mongoose.connection.on('error', err => {
-    console.log('Mongoose connection: failed with error: ' + err);
+    log(chalk.red('Mongoose connection: failed with error: ' + err));
     return connect();
 });
   
 mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose connection: disconnected');
+    log(chalk.yellow('Mongoose connection: disconnected'));
 });
 
 //for windows
@@ -52,7 +54,7 @@ if(process.platform === 'win32'){
 
 const gracefulShutdown = (msg, callback) => {
     mongoose.connection.close( () => {
-        console.log(`Mongoose disconnected through ${msg}`);
+        log(chalk.red(`Mongoose disconnected through ${msg}`));
         callback();
     });
 };

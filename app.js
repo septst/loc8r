@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dom = require('jsdom-global')();
 const favicon = require('favicons');
+const chalk = require('chalk');
+const log = console.log;
 //mongo connection script
 require('./app_api/models/db');
 
