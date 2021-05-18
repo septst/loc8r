@@ -3,28 +3,9 @@ extends layout
 include _includes/shared-functions
 
 block content
-  h1= pageHeader.title 
+  app-home-list
 
-  .row.banner
-    .col-12                                                               
-      h1= pageHeader.title                                                            
-        small &nbsp;#{pageHeader.strapline}
-
-  .row
-    .col-12.col-md-8
-      .error= message
-      each location in locations
-        .card                                                       
-          .card-block                                               
-            h4
-              a(href=`/location/${location._id}`)= location.name 
-              small &nbsp;
-                +outputRating(location.rating)
-              span.badge.badge-pill.badge-default.float-end= location.distance
-            p.address= location.address
-            .facilities 
-              each facility in location.facilities
-                span.badge.badge-warning= facility                                                 
-                                                             
-    .col-12.col-md-4                                                      
-      p.lead= sidebar
+block scripts
+  script(src="/build/runtime.953fb7dc503a65ac4830.js")
+  script(src="/build/polyfills.ba9d623b09987d4af1a3.js")
+  script(src="/build/main.db14f5b7796beb5d4539.js") 
