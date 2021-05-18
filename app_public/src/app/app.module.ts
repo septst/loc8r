@@ -4,7 +4,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { HttpClientModule } from '@angular/common/http';
 
 //library
-import { faStar} from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCheck} from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -30,6 +30,6 @@ import { DistancePipe } from './distance.pipe';
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faStar, farStar, faGithub);
+    library.addIcons(faStar, farStar, faCheck, faGithub);
   }
 }
