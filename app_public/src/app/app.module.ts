@@ -1,22 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
+
+//library
 import { faStar} from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
+//components
 import { AppComponent } from './app.component';
 import { HomeListComponent } from './home-list/home-list.component';
+
+//pipes
+import { DistancePipe } from './distance.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeListComponent
+    HomeListComponent,
+    DistancePipe
   ],
   imports: [
     BrowserModule,
-    FontAwesomeModule 
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [HomeListComponent]
