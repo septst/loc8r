@@ -32,9 +32,9 @@ app.use('/static', express.static(path.join(__dirname, '/node_modules/@fortaweso
 
 //cors
 app.use(cors());
-app.listen(80, () => {
-  console.log('CORS-enabled web server listening on port 80');
-});
+// app.listen(80, () => {
+//   console.log('CORS-enabled web server listening on port 80');
+// });
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);

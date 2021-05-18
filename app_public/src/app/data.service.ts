@@ -8,7 +8,7 @@ import { Location } from './home-list/home-list.component';
 })
 export class DataService {
 
-  private apiBaseUrl = "https://ps-loc8r.herokuapp.com";
+  private apiBaseUrl = "https://ps-loc8r.herokuapp.com/api";
   
   constructor(
     private http: HttpClient
