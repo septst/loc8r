@@ -9,7 +9,6 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 //components
-import { AppComponent } from './app.component';
 import { HomeListComponent } from './home-list/home-list.component';
 
 //pipes
@@ -18,7 +17,6 @@ import { DistancePipe } from './distance.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent,
     HomeListComponent,
     DistancePipe
   ],
