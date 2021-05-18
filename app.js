@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dom = require('jsdom-global')();
 const favicon = require('favicons');
-const chalk = require('chalk');
-const log = console.log;
+const cors = require('cors');
+
 //mongo connection script
 require('./app_api/models/db');
 
@@ -31,10 +31,9 @@ app.use('/bootstrap', express.static(path.join(__dirname, '/node_modules/bootstr
 app.use('/static', express.static(path.join(__dirname, '/node_modules/@fortawesome/fontawesome-free')));
 
 //cors
-app.use('/api', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
+app.use(cors());
+app.listen(80, () => {
+  console.log('CORS-enabled web server listening on port 80');
 });
 
 app.use('/', indexRouter);
