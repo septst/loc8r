@@ -56,7 +56,7 @@ const locationsCreate  = (req, res) => {
         .create({
             name: req.body.name,
             address: req.body.address,
-            facilities: req.body.facilities.split(','),
+            facilities: req.body.facilities,
             coords:{
                 type: "Point",
                 coordinates: [
