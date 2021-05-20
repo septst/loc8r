@@ -1,15 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { CounterService } from '../counter.service';
+import { Observable } from 'rxjs';
+
 import { DataService } from '../data.service';
 import { GeolocationService } from '../geolocation.service';
 
 export class Location {
-  _id: string = "";
-  name: string = "";
-  address: string = "";
-  distance: number = 0;
-  rating: number = 0;
-  facilities: string[] = [];
+  _id: string;
+  name: string;
+  address: string;
+  distance: number;
+  rating: number;
+  facilities: string[];
+  openingTimes: OpeningTime[];
+  coords: Coords;
+  reviews: [Review];
+}
+
+export class OpeningTime {
+  days: string;
+  opening: string;
+  closing: string;
+  closed: boolean;
+}
+
+export class Review {
+  _id: string;
+  author: string;
+  rating: number;
+  reviewText: string;
+  createdOn: Date;
+}
+
+export class Coords{
+  latitude: number;
+  longitude: number;
 }
 
 @Component({
@@ -20,20 +44,15 @@ export class Location {
 export class HomeListComponent implements OnInit {
 
   constructor(
-    private counterService: CounterService,
     private dataService: DataService,
     private geolocationService: GeolocationService) { }
 
-  public locations: Location[] = [];
+  public locations$: Observable<Location[]>;
 
   public message: string = "";
 
   ngOnInit(): void {
     this.getPosition();
-  }
-
-  public counter(i: number): Array<number> {
-    return this.counterService.counter(i);
   }
 
   private getPosition(): void {
@@ -47,13 +66,11 @@ export class HomeListComponent implements OnInit {
 
   private getLocations(position: any): void {
     this.message = 'Searching for nearby places...';
-    const lat: number = position.coords.latitude; 
-    const lng: number = position.coords.longitude; 
-    this.dataService.getLocations(lat, lng)
-      .then(locations => {
-        this.message = locations.length > 0 ? '' : 'No locations found';
-        this.locations = locations;
-      });
+    // const lat: number = position.coords.latitude; 
+    // const lng: number = position.coords.longitude; 
+    const lat: number = 12.9716;
+    const lng: number = 77.5946;
+    this.locations$ = this.dataService.getLocations(lat, lng)
   }
 
   private noGeo(): void {

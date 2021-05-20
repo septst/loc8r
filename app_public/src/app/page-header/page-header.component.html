@@ -1,8 +1,9 @@
 <div class="row banner">
     <div class="col-12">
         <h1>
-            {{content.title}}
-            <small>&nbsp;{{content.strapline }}</small>
+            {{title}}
+            <small *ngIf="strapline">&nbsp;{{strapline}}</small>
+            <app-rating-stars *ngIf="rating" [rating]="rating"></app-rating-stars>
         </h1>
     </div>
 </div>

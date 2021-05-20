@@ -19,6 +19,10 @@ import { AboutComponent } from './about/about.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AddLineBreaksPipe } from './add-line-breaks.pipe';
+import { AppRatingStarsComponent } from './app-rating-stars/app-rating-stars.component';
+import { LocationDetailsComponent } from './location-details/location-details.component';
+import { DetailsPageComponent } from './details-page/details-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AboutComponent,
     HomepageComponent,
     PageHeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    AddLineBreaksPipe,
+    AppRatingStarsComponent,
+    LocationDetailsComponent,
+    DetailsPageComponent
   ],
   imports: [
     BrowserModule,

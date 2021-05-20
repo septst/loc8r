@@ -7,7 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PageHeaderComponent implements OnInit {
 
-  @Input() content: any;
+  @Input() title: string;
+  @Input() strapline: string;
+  @Input() rating: number;
 
   constructor() { }
 
