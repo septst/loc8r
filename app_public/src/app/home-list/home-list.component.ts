@@ -3,38 +3,7 @@ import { Observable } from 'rxjs';
 
 import { DataService } from '../data.service';
 import { GeolocationService } from '../geolocation.service';
-
-export class Location {
-  _id: string;
-  name: string;
-  address: string;
-  distance: number;
-  rating: number;
-  facilities: string[];
-  openingTimes: OpeningTime[];
-  coords: Coordinates;
-  reviews: Review[];
-}
-
-export class OpeningTime {
-  days: string;
-  opening: string;
-  closing: string;
-  closed: boolean;
-}
-
-export class Review {
-  _id: string;
-  author: string;
-  rating: number;
-  reviewText: string;
-  createdOn: Date;
-}
-
-export class Coordinates{
-  type: string;
-  coordinates:number[];
-}
+import { Location } from '../location';
 
 @Component({
   selector: 'app-home-list',

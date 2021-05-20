@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Location } from './home-list/home-list.component';
+import { Location, Review } from './location';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private apiBaseUrl = "https://ps-loc8r.herokuapp.com/api";
+  private apiBaseUrl = environment.apiBaseUrl;
 
   constructor(
     private http: HttpClient
@@ -37,7 +38,7 @@ export class DataService {
         }));
   }
 
-  public addReviewById(locationId: string, formData: any): Observable<any> {
+  public addReviewById(locationId: string, formData: Review): Observable<any> {
     const url = `${this.apiBaseUrl}/locations/${locationId}/reviews`;
     return this.http
       .post(url, formData)

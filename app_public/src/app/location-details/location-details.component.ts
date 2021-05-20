@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
-import { Location } from '../home-list/home-list.component';
+import { Location, Review } from '../location';
 
 @Component({
   selector: 'app-location-details',
@@ -17,7 +17,7 @@ export class LocationDetailsComponent implements OnInit {
   public showForm: boolean = false;
   public formError: string;
   public addReviewSubscription: any;
-  public newReview = {
+  public newReview: Review = {
     author: "",
     rating: 5,
     reviewText: ""
@@ -31,7 +31,9 @@ export class LocationDetailsComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.addReviewSubscription.unsubscribe();
+    if (this.addReviewSubscription) {
+      this.addReviewSubscription.unsubscribe();
+    }
   }
 
   public onReviewSubmit(): void {
@@ -42,7 +44,7 @@ export class LocationDetailsComponent implements OnInit {
         this.dataService.addReviewById(this.location._id, this.newReview)
           .subscribe((review: any) => {
             console.log("Added your review successfully", "color:green");
-            let reviews = this.location.reviews.slice(0); 
+            let reviews = this.location.reviews.slice(0);
             reviews.unshift(review);
             this.location.reviews = reviews;
             this.resetAndHideReviewForm();

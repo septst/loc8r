@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { DataService } from '../data.service';
-import { Location } from '../home-list/home-list.component';
+import { Location } from '../location';
 
 @Component({
   selector: 'app-details-page',

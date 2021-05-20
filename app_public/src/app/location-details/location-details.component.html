@@ -44,9 +44,11 @@
     <div class="col-12">
         <div class="card card-primary review-card">
             <div class="card-block">
-                <h2 class="card-title">Customer reviews</h2>
                 <div class="row mb-3">
-                    <div class="col-12">
+                    <div class="col-8">
+                        <h2 class="card-title">Customer reviews</h2>
+                    </div>
+                    <div class="col-4">
                         <button type="button" class="btn btn-primary float-end" (click)="showForm = true;">
                             Add review
                         </button>
@@ -103,9 +105,9 @@
                         <div class="col-12 no-gutters review-header">
                             <app-rating-stars [rating]="review.rating">
                             </app-rating-stars>
-                            <span class="reviewAuthor">{{ review.author }}</span>
+                            <span class="reviewAuthor"> by {{ review.author }}</span>
                             <span>
-                                <small class="reviewTimestamp">{{ review.createdOn | date : 'd MMMM yyyy' }}</small>
+                                <small class="reviewTimestamp"> on {{ review.createdOn | date : 'd MMMM yyyy' }}</small>
                             </span>
                         </div>
                         <div class="col-12">
