@@ -111,7 +111,7 @@ const locationsReadOne = (req, res) => {
                 longitude: location.coords.coordinates[0],
                 latitude: location.coords.coordinates[1]
             };
-            console.log("location =>", location.coordinates);
+            console.log("location =>", location);
             return res
                 .status(200)
                 .json(location);
