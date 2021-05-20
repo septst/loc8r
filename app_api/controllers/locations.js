@@ -109,6 +109,7 @@ const locationsReadOne = (req, res) => {
         } else {
             location.coords.longitude = location.coords.coordinates[0];
             location.coords.latitude = location.coords.coordinates[1];
+            location.newCoords = location.coords.coordinates;
             return res
                 .status(200)
                 .json(location);
