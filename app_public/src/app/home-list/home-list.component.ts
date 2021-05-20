@@ -12,7 +12,7 @@ export class Location {
   rating: number;
   facilities: string[];
   openingTimes: OpeningTime[];
-  coords: Coords;
+  coordinates: Coordinates;
   reviews: [Review];
 }
 
@@ -31,7 +31,7 @@ export class Review {
   createdOn: Date;
 }
 
-export class Coords{
+export class Coordinates{
   latitude: number;
   longitude: number;
 }
