@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { AddLineBreaksPipe } from './add-line-breaks.pipe';
 import { AppRatingStarsComponent } from './app-rating-stars/app-rating-stars.component';
 import { LocationDetailsComponent } from './location-details/location-details.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
+import { MostRecentFirstPipe } from './most-recent-first.pipe';
 
 @NgModule({
   declarations: [
@@ -36,10 +38,13 @@ import { DetailsPageComponent } from './details-page/details-page.component';
     AddLineBreaksPipe,
     AppRatingStarsComponent,
     LocationDetailsComponent,
-    DetailsPageComponent
+    DetailsPageComponent,
+    MostRecentFirstPipe
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule

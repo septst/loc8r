@@ -30,11 +30,22 @@ export class DataService {
   public getLocationById(locationId: string): Observable<any> {
     const url = `${this.apiBaseUrl}/locations/${locationId}`;
     return this.http.get(url)
-    .pipe(
-      catchError((error) => {
-        console.log('Something has gone wrong', error, 'color: red;');
-        return throwError(error);
-      }));
+      .pipe(
+        catchError((error) => {
+          console.log('Something has gone wrong', error, 'color: red;');
+          return throwError(error);
+        }));
+  }
+
+  public addReviewById(locationId: string, formData: any): Observable<any> {
+    const url = `${this.apiBaseUrl}/locations/${locationId}/reviews`;
+    return this.http
+      .post(url, formData)
+      .pipe(
+        catchError((error) => {
+          console.log('Error occured while adding your review', error, 'color: red;');
+          return throwError(error);
+        }));
   }
 
   public handleError(error: any): Promise<any> {

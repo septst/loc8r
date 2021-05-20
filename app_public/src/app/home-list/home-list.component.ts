@@ -12,8 +12,8 @@ export class Location {
   rating: number;
   facilities: string[];
   openingTimes: OpeningTime[];
-  coordinates: Coordinates;
-  reviews: [Review];
+  coords: Coordinates;
+  reviews: Review[];
 }
 
 export class OpeningTime {
@@ -32,8 +32,8 @@ export class Review {
 }
 
 export class Coordinates{
-  latitude: number;
-  longitude: number;
+  type: string;
+  coordinates:number[];
 }
 
 @Component({

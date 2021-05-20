@@ -28,7 +28,6 @@ export class DetailsPageComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const locationId = routeParams.get("locationId");
     this.location$ = this.dataService.getLocationById(locationId || "");
-    console.log("loc =>", this.location$);    
   }
 
   public pageContent = {
