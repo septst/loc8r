@@ -107,11 +107,11 @@ const locationsReadOne = (req, res) => {
                 .status(404)
                 .json({"message": "location not found"});
         } else {
-            location.coords = {
+            location.coordinates = {
                 longitude: location.coords.coordinates[0],
                 latitude: location.coords.coordinates[1]
             };
-            console.log("location.coords =>", location.coords);
+            console.log("location.coordinates =>", location.coordinates);
             return res
                 .status(200)
                 .json(location);
