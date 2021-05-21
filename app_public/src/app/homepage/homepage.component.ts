@@ -14,7 +14,7 @@ export class HomepageComponent implements OnInit {
 
   public pageContent = {
     header: {
-      title: 'Loc8r',
+      title: 'New Loc8r',
       strapline: 'Find places to work with wifi near you!'
     },
     sidebar: 'Looking for wifi and a seat? Loc8r helps you find places \
