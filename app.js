@@ -36,7 +36,7 @@ app.use(cors());
 app.use('/api', apiRouter);
 // app.get(/(\/about)  | (\/location\/[A-Za-z0-9]{24})| (\/s+)/, function (req, res, next) {
 app.get("*", function (req, res, next) {
-  res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'app_public', 'dist', 'app-public', 'index.html'));
 });
 
 // catch 404 and forward to error handler
