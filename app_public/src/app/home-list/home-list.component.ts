@@ -23,7 +23,6 @@ export class HomeListComponent implements OnInit {
   public message: string = "";
 
   ngOnInit(): void {
-    this.loaderService.display(true);
     this.getPosition();
   }
 
@@ -43,7 +42,6 @@ export class HomeListComponent implements OnInit {
     console.log(`The currest position is ${lat}, ${lng}`);
 
     this.locations$ = this.dataService.getLocations(lat, lng);
-    this.loaderService.display(false);
   }
 
   private noGeo(): void {

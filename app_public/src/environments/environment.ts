@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "https://ps-loc8r.herokuapp.com/api"
+  apiBaseUrl: "https://newlocator.herokuapp.com/api"
 };
 
 /*
