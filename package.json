@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "SET DEBUG=loc8r:* & node ./bin/www"
+    "start": "SET DEBUG=loc8r:* & node ./bin/www",
+    "heroku-postbuild": "cd app_public && npm install"
   },
   "engines": {
     "node": ">=16.1.0",
