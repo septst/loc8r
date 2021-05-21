@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 //library
-import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCheck, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -54,6 +55,6 @@ import { MostRecentFirstPipe } from './most-recent-first.pipe';
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faStar, farStar, faCheck, faGithub);
+    library.addIcons(faStar, farStar, faCheck, faBars, faGithub);
   }
 }

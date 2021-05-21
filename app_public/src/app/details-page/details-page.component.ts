@@ -18,7 +18,7 @@ export class DetailsPageComponent implements OnInit {
   because it has accessible wifi and space to sit down with\
   your laptop and get some work done.\n\nIf you\'ve been and\
   you like it - or if you don\'t - please leave a review to\
-  help other people just like you.;"
+  help other people just like you."
 
   constructor(
     private route: ActivatedRoute,

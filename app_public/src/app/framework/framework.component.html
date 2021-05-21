@@ -1,14 +1,19 @@
 <header>
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg">
+    <nav class="navbar navbar-light navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" routerLink="/home">Loc8r</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain"
-                aria-controls="navbarMain" aria-expanded="false">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
+                <!-- <fa-icon [icon]="['fas', 'bars']"></fa-icon> -->
             </button>
-            <div class="navbar-collapse collapse" id="navbarMain">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" routerLink="/about/" routerLinkActive="active">About</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
                     </li>
                 </ul>
             </div>
