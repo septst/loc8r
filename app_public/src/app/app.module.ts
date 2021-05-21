@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { APP_BASE_HREF } from '@angular/common';
 
 //library
 import { faStar, faCheck, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -26,6 +25,8 @@ import { AppRatingStarsComponent } from './app-rating-stars/app-rating-stars.com
 import { LocationDetailsComponent } from './location-details/location-details.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { MostRecentFirstPipe } from './most-recent-first.pipe';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderService } from './loader.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MostRecentFirstPipe } from './most-recent-first.pipe';
     AppRatingStarsComponent,
     LocationDetailsComponent,
     DetailsPageComponent,
-    MostRecentFirstPipe
+    MostRecentFirstPipe,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { MostRecentFirstPipe } from './most-recent-first.pipe';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  exports:[LoaderComponent],
+  providers: [LoaderService],
   bootstrap: [FrameworkComponent]
 })
 export class AppModule {

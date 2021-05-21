@@ -22,7 +22,9 @@
 </header>
 
 <main class="container content" role="main">
-    <router-outlet></router-outlet>
+    <router-outlet>
+        <app-loader *ngIf="showLoader"></app-loader>
+    </router-outlet>
 </main>
 
 <footer class="footer">

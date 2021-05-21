@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 
 import { DataService } from '../data.service';
 import { GeolocationService } from '../geolocation.service';
+import { LoaderService } from '../loader.service';
 import { Location } from '../location';
 
 @Component({
@@ -14,13 +15,15 @@ export class HomeListComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private geolocationService: GeolocationService) { }
+    private geolocationService: GeolocationService,
+    private loaderService: LoaderService) { }
 
   public locations$: Observable<Location[]>;
 
   public message: string = "";
 
   ngOnInit(): void {
+    this.loaderService.display(true);
     this.getPosition();
   }
 
@@ -35,11 +38,12 @@ export class HomeListComponent implements OnInit {
 
   private getLocations(position: any): void {
     this.message = 'Searching for nearby places...';
-    const lat: number = position.coords.latitude; 
-    const lng: number = position.coords.longitude; 
+    const lat: number = position.coords.latitude;
+    const lng: number = position.coords.longitude;
     console.log(`The currest position is ${lat}, ${lng}`);
-    
-    this.locations$ = this.dataService.getLocations(lat, lng)
+
+    this.locations$ = this.dataService.getLocations(lat, lng);
+    this.loaderService.display(false);
   }
 
   private noGeo(): void {
