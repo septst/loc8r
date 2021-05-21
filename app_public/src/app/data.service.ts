@@ -19,6 +19,8 @@ export class DataService {
 
   public getLocations(lat: number, lng: number): Observable<any> {
     const maxDistance: number = 20000;
+    console.log(this.apiBaseUrl);
+    
     const url = `${this.apiBaseUrl}/locations?lng=${lng}&lat=${lat}&maxDistance=${maxDistance}`;
     return this.http.get(url)
       .pipe(
