@@ -26,8 +26,7 @@ export class LocationDetailsComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.hasDetails = (this.location !== null &&
-      this.location !== undefined && this.location instanceof Location);
+    
   }
 
   ngOnDestroy(): void {

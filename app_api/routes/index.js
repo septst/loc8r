@@ -3,6 +3,7 @@ const router = express.Router();
 
 const ctrlLocations = require('../controllers/locations');
 const ctrlReviews = require('../controllers/reviews');
+const ctrlSecrets = require('../controllers/secrets');
 
 // Locations
 router
@@ -25,5 +26,10 @@ router
     .get(ctrlReviews.reviewsReadOne)
     .put(ctrlReviews.reviewsUpdateOne)
     .delete(ctrlReviews.reviewsDeleteOne);
+
+//secrets
+router
+    .route('/secrets/:key')
+    .get(ctrlReviews);
 
 module.exports = router;
