@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { DataService } from '../data.service';
+import { SecretsService } from '../secrets.service';
 import { Location, Review } from '../location';
 
 @Component({
@@ -13,7 +14,7 @@ export class LocationDetailsComponent implements OnInit {
   @Input() location: Location;
 
   public hasDetails: boolean;
-  public gApiKai: string = "AIzaSyBQI3HH1w6dv7ihEcwdjYj65x_bScZT1IA";
+  public gApiKey: string = "";
   public showForm: boolean = false;
   public formError: string;
   public addReviewSubscription: any;
@@ -23,10 +24,19 @@ export class LocationDetailsComponent implements OnInit {
     reviewText: ""
   };
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private dataService: DataService,
+    private secretsService: SecretsService) { }
 
   ngOnInit(): void {
-    
+    this.secretsService
+      .getSecretByKey("GOOGLE_API_KEY")
+      .then(result => {
+        if (!result.message) {
+          this.gApiKey = result.secret;
+          console.log("Api key =>", this.gApiKey);          
+        }
+      });
   }
 
   ngOnDestroy(): void {

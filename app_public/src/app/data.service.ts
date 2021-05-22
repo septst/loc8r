@@ -18,12 +18,12 @@ export class DataService {
   ) { }
 
   public getLocations(lat: number, lng: number): Observable<any> {
-    const maxDistance: number = 20000;    
+    const maxDistance: number = 20000;
     const url = `${this.apiBaseUrl}/locations?lng=${lng}&lat=${lat}&maxDistance=${maxDistance}`;
     return this.http.get(url)
       .pipe(
         catchError((error) => {
-          console.log('Something has gone wrong', error, 'color: red;');
+          console.error(`Something has gone wrong while calling ${url}. The error details are ${error}`);
           return throwError(error);
         }));
   }
@@ -33,7 +33,7 @@ export class DataService {
     return this.http.get(url)
       .pipe(
         catchError((error) => {
-          console.log('Something has gone wrong', error, 'color: red;');
+          console.error(`Something has gone wrong while calling ${url}. The error details are ${error}`);
           return throwError(error);
         }));
   }
@@ -44,7 +44,7 @@ export class DataService {
       .post(url, formData)
       .pipe(
         catchError((error) => {
-          console.log('Error occured while adding your review', error, 'color: red;');
+          console.error(`Something has gone wrong while calling ${url}. The error details are ${error}`);
           return throwError(error);
         }));
   }
