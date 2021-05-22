@@ -1,9 +1,21 @@
 const express = require('express');
+const expressJwt = require('express-jwt');
 const router = express.Router();
 
 const ctrlLocations = require('../controllers/locations');
 const ctrlReviews = require('../controllers/reviews');
 const ctrlSecrets = require('../controllers/secrets');
+const ctrlAuth = require('../controllers/auth');
+
+const auth = expressJwt({
+    secret: process.env.JWT_SECRET,
+    userProperty: 'payload',
+    algorithms: ['sha512']
+});
+
+//auth
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
 // Locations
 router
@@ -20,12 +32,12 @@ router
 // Reviews
 router
     .route('/locations/:locationId/reviews')
-    .post(ctrlReviews.reviewsCreate);
+    .post(auth, ctrlReviews.reviewsCreate);
 router
     .route('/locations/:locationId/reviews/:reviewId')
     .get(ctrlReviews.reviewsReadOne)
-    .put(ctrlReviews.reviewsUpdateOne)
-    .delete(ctrlReviews.reviewsDeleteOne);
+    .put(auth, ctrlReviews.reviewsUpdateOne)
+    .delete(auth, ctrlReviews.reviewsDeleteOne);
 
 //secrets
 router

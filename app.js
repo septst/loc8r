@@ -10,10 +10,10 @@ const passport = require('passport');
 
 //load env
 require('dotenv').config();
-//passport config
-require('./app_api/configs/passport');
 //mongo connection script
 require('./app_api/models/db');
+//passport config
+require('./app_api/configs/passport');
 
 const apiRouter = require('./app_api/routes/index');
 
@@ -55,6 +55,13 @@ app.use('/api', apiRouter);
 // app.get(/(\/about)  | (\/location\/[A-Za-z0-9]{24})| (\/s+)/, function (req, res, next) {
 app.get("*", function (req, res, next) {
   res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+});
+
+app.use((err, req, res, next) => {
+  if (err?.name === 'UnauthorizedError') {
+    res.status(401)
+      .json({ "message": err.name + ": " + err.message });
+  }
 });
 
 // catch 404 and forward to error handler
