@@ -30,6 +30,6 @@ router
 //secrets
 router
     .route('/secrets/:key')
-    .get(ctrlReviews);
+    .get(ctrlSecrets.getSecretByKey);
 
 module.exports = router;
