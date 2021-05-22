@@ -83,3 +83,4 @@ process.on('SIGTERM', () => {
 connect(mainDbUri);
 
 require('./locations');
+require('./users');

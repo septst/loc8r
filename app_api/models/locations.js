@@ -7,7 +7,7 @@ const openingTimeSchema = new mongoose.Schema({
     },
     opening: String,
     closing: String,
-    closed:{
+    closed: {
         type: Boolean,
         required: true
     }
@@ -15,7 +15,7 @@ const openingTimeSchema = new mongoose.Schema({
 
 const reviewSchema = new mongoose.Schema({
     author: {
-        type:String,
+        type: String,
         required: true
     },
     rating: {
@@ -25,7 +25,7 @@ const reviewSchema = new mongoose.Schema({
         max: 5
     },
     reviewText: String,
-    createdOn:{
+    createdOn: {
         type: Date,
         'default': Date.now
     }
@@ -48,14 +48,14 @@ const locationSchema = new mongoose.Schema({
         max: 5
     },
     facilities: [String],
-    coords:{
-        type: {type: String},
-        coordinates:[Number]
+    coords: {
+        type: { type: String },
+        coordinates: [Number]
     },
     openingTimes: [openingTimeSchema],
     reviews: [reviewSchema]
 });
 
-locationSchema.index({coords:'2dsphere'});
+locationSchema.index({ coords: '2dsphere' });
 
 mongoose.model('Location', locationSchema);

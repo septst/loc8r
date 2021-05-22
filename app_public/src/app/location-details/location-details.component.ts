@@ -34,7 +34,6 @@ export class LocationDetailsComponent implements OnInit {
       .then(result => {
         if (!result.message) {
           this.gApiKey = result.secret;
-          console.log("Api key =>", this.gApiKey);          
         }
       });
   }

@@ -6,7 +6,12 @@ const logger = require('morgan');
 const dom = require('jsdom-global')();
 const favicon = require('favicons');
 const cors = require('cors');
+const passport = require('passport');
 
+//load env
+require('dotenv').config();
+//passport config
+require('./app_api/configs/passport');
 //mongo connection script
 require('./app_api/models/db');
 
@@ -30,8 +35,17 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/@popperjs/core
 app.use('/bootstrap', express.static(path.join(__dirname, '/node_modules/bootstrap/')));
 app.use('/static', express.static(path.join(__dirname, '/node_modules/@fortawesome/fontawesome-free')));
 
+//initialize passport config
+app.use(passport.initialize());
+
 //cors
-app.use(cors());
+// app.use(cors());
+
+app.use('/api', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 app.use('/api', apiRouter);
 // app.get(/(\/about)  | (\/location\/[A-Za-z0-9]{24})| (\/s+)/, function (req, res, next) {
