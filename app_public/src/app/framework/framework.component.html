@@ -16,6 +16,17 @@
                         <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a routerLink="login" class="nav-link" *ngIf="!isLoggedIn()">Sign in</a>
+                    </li>
+                    <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isLoggedIn()">
+                        <a class=" nav-link dropdown-toggle" data-toggle="dropdown">{{getCurrentUserName()}}</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" (click)="doLogout()">Logout</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -23,7 +34,6 @@
 
 <main class="container content" role="main">
     <router-outlet>
-        <app-loader *ngIf="showLoader"></app-loader>
     </router-outlet>
 </main>
 

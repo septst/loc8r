@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
 import { SecretsService } from '../secrets.service';
 import { Location, Review } from '../location';
+import { AuthService } from '../auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-location-details',
@@ -18,17 +20,23 @@ export class LocationDetailsComponent implements OnInit {
   public showForm: boolean = false;
   public formError: string;
   public addReviewSubscription: any;
-  public newReview: Review = {
-    author: "",
-    rating: 5,
-    reviewText: ""
-  };
-
+  public reviewForm: FormGroup;
+  public reviewSubmitted: boolean = false;
+  
   constructor(
+    private formBuilder: FormBuilder,
     private dataService: DataService,
-    private secretsService: SecretsService) { }
+    private secretsService: SecretsService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+
+    this.reviewForm = this.formBuilder.group({
+      rating: ["", Validators.required],
+      review: ["", Validators.required]
+    });
+
+    //get G API key
     this.secretsService
       .getSecretByKey("GOOGLE_API_KEY")
       .then(result => {
@@ -36,6 +44,10 @@ export class LocationDetailsComponent implements OnInit {
           this.gApiKey = result.secret;
         }
       });
+  }
+
+  get controls() {
+    return this.reviewForm.controls;
   }
 
   ngOnDestroy(): void {
@@ -46,35 +58,34 @@ export class LocationDetailsComponent implements OnInit {
 
   public onReviewSubmit(): void {
     this.formError = '';
-    if (this.isFormValid()) {
-      console.log(this.newReview);
-      this.addReviewSubscription =
-        this.dataService.addReviewById(this.location._id, this.newReview)
-          .subscribe((review: any) => {
-            console.log("Added your review successfully", "color:green");
-            let reviews = this.location.reviews.slice(0);
-            reviews.unshift(review);
-            this.location.reviews = reviews;
-            this.resetAndHideReviewForm();
-          });
-    } else {
-      this.formError = 'All fields required, please try again';
+    this.reviewSubmitted = true;
+
+    if (this.reviewForm.invalid) {
+      return;
     }
+
+    const newReview: Review = this.reviewForm.value as Review;
+    newReview.author = this.getUsername();
+
+    this.addReviewSubscription =
+      this.dataService.addReviewById(this.location._id, newReview)
+        .subscribe((review: any) => {
+          console.log("Added your review successfully");
+          let reviews = this.location.reviews.slice(0);
+          reviews.unshift(review);
+          this.location.reviews = reviews;
+          this.reviewSubmitted = false;
+          this.reviewForm.reset();
+        });
+
   }
 
-  private isFormValid(): boolean {
-    return (this.newReview.author
-      && this.newReview.rating
-      && this.newReview.reviewText) ?
-      true :
-      false;
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
-  private resetAndHideReviewForm(): void {
-    this.showForm = false;
-    this.formError = "";
-    this.newReview.author = "";
-    this.newReview.reviewText = "";
-    this.newReview.rating = 5;
+  public getUsername(): string {
+    const { name } = this.authService.getCurrentUser();
+    return name ? name : 'Guest';
   }
 }

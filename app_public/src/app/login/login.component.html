@@ -1,0 +1,35 @@
+<app-page-header [title]="title"></app-page-header>
+<div class="row">
+    <div class="col-12 col-md-8">
+
+        <p class="lead">Not a member? Please
+            <a routerLink="/register">register!</a>
+        </p>
+
+        <form [formGroup]="loginForm" (submit)="onLoginSubmit()">
+            <div *ngIf="formErrors" class="alert alert-danger" role="alert">
+                {{formErrors}}
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input class="form-control" formControlName="email" placeholder="Enter your email address"
+                    [ngClass]="{ 'is-invalid': submitted && controls.email.errors }">
+                <div *ngIf="submitted && controls.email.errors?.required" class="invalid-feedback">
+                    Please enter your email address
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" formControlName="password" placeholder="Enter your password"
+                    [ngClass]="{ 'is-invalid': submitted && controls.password.errors }">
+                <div *ngIf="submitted && controls.password.errors?.required" class="invalid-feedback">
+                    Please enter your password
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" role="button">Sign in</button>
+        </form>
+    </div>
+    <div class="col-12 col-md-4">
+        <app-sidebar></app-sidebar>
+    </div>
+</div>

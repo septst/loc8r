@@ -27,6 +27,8 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 import { MostRecentFirstPipe } from './most-recent-first.pipe';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader.service';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { LoaderService } from './loader.service';
     LocationDetailsComponent,
     DetailsPageComponent,
     MostRecentFirstPipe,
-    LoaderComponent
+    LoaderComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

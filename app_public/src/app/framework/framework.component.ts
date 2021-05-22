@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { LoaderService } from '../loader.service';
+import { AuthService } from '../auth.service';
+import { HistoryService } from '../history.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-framework',
@@ -9,20 +10,27 @@ import { LoaderService } from '../loader.service';
 })
 export class FrameworkComponent implements OnInit {
 
-  public showLoader: boolean;
-  private subscription: Subscription;
-  constructor(private loaderService: LoaderService) { }
+  constructor(
+    private authService: AuthService,
+    private historyService: HistoryService) { }
 
   ngOnInit(): void {
-    this.loaderService.status.subscribe((status: boolean) => {
-      this.showLoader = status;
-    });
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  }
+
+  public doLogout(): void {
+    this.authService.logout();
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  public getCurrentUserName(): string {
+    const user: User = this.authService.getCurrentUser();
+    return user.name || "Guest";
   }
 
 }

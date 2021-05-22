@@ -39,16 +39,16 @@ export class AuthService {
     const token: string = this.getToken();
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.expiry > (Date.now() / 1000);
+      return payload.exp > (Date.now() / 1000);
     } else {
       return false;
     }
   }
 
   public getCurrentUser(): any {
-    if(this.isLoggedIn()){
-      const {email, name} = JSON.parse(atob(this.getToken().split('.')[1]));
-      return {email, name} as User;
+    if (this.isLoggedIn()) {
+      const { email, name } = JSON.parse(atob(this.getToken().split('.')[1]));
+      return { email, name } as User;
     }
   }
 
@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log('Something has gone wrong in auth service', error);
-    return Promise.reject(error.message || error);
+    console.log('Something has gone wrong in auth service', error.error.message);
+    return Promise.reject(error.error.message || error);
   }
 }
