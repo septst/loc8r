@@ -49,7 +49,8 @@ mongorestore --archive="mongodump-test-db" --nsFrom='Loc8r.*' --nsTo='master-dev
 //set env as production
 $env:NODE_ENV="production"
 $env:MONGODB_URI='mongodb+srv://loc8ruser:Dostoevsky@loc8r.rfeuf.mongodb.net/'
-
+$env:GOOGLE_API_KEY="AIzaSyBQI3HH1w6dv7ihEcwdjYj65x_bScZT1IA"
+$env:JWT_SECRET="IamSoFreakingMeanThatYouWontBelieve"
 
 netstat -ano | findstr :3000
 
@@ -68,4 +69,8 @@ npm install npm@latest -g
 npm i -g npm-check-updates
 ncu -u
 npm install
+
+
+
+ng add @angular/material
 

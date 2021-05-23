@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //library
 import { faStar, faCheck, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -12,23 +13,22 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 //components
 import { HomeListComponent } from './home-list/home-list.component';
-
-//pipes
-import { DistancePipe } from './distance.pipe';
 import { FrameworkComponent } from './framework/framework.component';
 import { AboutComponent } from './about/about.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { AddLineBreaksPipe } from './add-line-breaks.pipe';
 import { AppRatingStarsComponent } from './app-rating-stars/app-rating-stars.component';
 import { LocationDetailsComponent } from './location-details/location-details.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
-import { MostRecentFirstPipe } from './most-recent-first.pipe';
 import { LoaderComponent } from './loader/loader.component';
-import { LoaderService } from './loader.service';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+
+//pipes
+import { DistancePipe } from './distance.pipe';
+import { AddLineBreaksPipe } from './add-line-breaks.pipe';
+import { MostRecentFirstPipe } from './most-recent-first.pipe';
 
 @NgModule({
   declarations: [
@@ -54,10 +54,11 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   exports:[LoaderComponent],
-  providers: [LoaderService],
+  providers: [],
   bootstrap: [FrameworkComponent]
 })
 export class AppModule {

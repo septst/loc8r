@@ -48,11 +48,18 @@
                     <div class="col-8">
                         <h2 class="card-title">Customer reviews</h2>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4" *ngIf="isLoggedIn(); else LogIn">
                         <button type="button" class="btn btn-primary float-end" (click)="showForm = true;">
                             Add review
                         </button>
                     </div>
+                    <ng-template #LogIn>
+                        <div class="col-4">
+                            <a routerLink="/login" class="btn btn-primary float-end">
+                                Log in to post review
+                            </a>
+                        </div>
+                    </ng-template>
                 </div>
                 <div *ngIf="showForm" class="mb-3">
                     <!-- <hr> -->
