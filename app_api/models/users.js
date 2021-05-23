@@ -20,13 +20,13 @@ userSchema.methods.setPassword = function (password) {
     console.log("setPassword =>", password);
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync
-        (password, this.salt, 10000, 64, 'sha512')
+        (password, this.salt, 10000, 64, 'sha1')
         .toString('hex');
 };
 
 userSchema.methods.validatePassword = function (password) {
     const hash = crypto.pbkdf2Sync
-        (password, this.salt, 10000, 64, 'sha512')
+        (password, this.salt, 10000, 64, 'sha1')
         .toString('hex');
     return this.hash == hash;
 };

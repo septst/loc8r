@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Location, Review } from './location';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { BROWSER_STORAGE } from './storage';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,11 @@ import { environment } from 'src/environments/environment';
 export class DataService {
 
   private apiBaseUrl = environment.apiBaseUrl;
+  private tokenName: string = "locator-token";
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(BROWSER_STORAGE) private storage: Storage
   ) { }
 
   public getLocations(lat: number, lng: number): Observable<any> {
@@ -23,7 +26,7 @@ export class DataService {
     return this.http.get(url)
       .pipe(
         catchError((error) => {
-          console.error(`Something has gone wrong while calling ${url}. The error details are ${error}`);
+          this.handleError(url, error);
           return throwError(error);
         }));
   }
@@ -33,24 +36,29 @@ export class DataService {
     return this.http.get(url)
       .pipe(
         catchError((error) => {
-          console.error(`Something has gone wrong while calling ${url}. The error details are ${error}`);
+          this.handleError(url, error);
           return throwError(error);
         }));
   }
 
   public addReviewById(locationId: string, formData: Review): Observable<any> {
     const url = `${this.apiBaseUrl}/locations/${locationId}/reviews`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.storage.getItem(this.tokenName)}`
+      })
+    };
     return this.http
-      .post(url, formData)
+      .post(url, formData, httpOptions)
       .pipe(
         catchError((error) => {
-          console.error(`Something has gone wrong while calling ${url}. The error details are ${error}`);
+          this.handleError(url, error);
           return throwError(error);
         }));
   }
 
-  public handleError(error: any): Promise<any> {
-    console.log('Something has gone wrong', error, 'color: red;');
+  public handleError(url: string, error: any): Promise<any> {
+    console.log(`Something has gone wrong while calling ${url}. The error details are`, JSON.stringify(error), 'color: red;');
     return Promise.reject(error.message || error);
   }
 }

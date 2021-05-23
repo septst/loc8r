@@ -10,7 +10,7 @@ const ctrlAuth = require('../controllers/auth');
 const auth = expressJwt({
     secret: process.env.JWT_SECRET,
     userProperty: 'payload',
-    algorithms: ['sha512']
+    algorithms: ['sha1', 'RS256', 'HS256']
 });
 
 //auth
