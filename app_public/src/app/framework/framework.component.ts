@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { HistoryService } from '../history.service';
 import { User } from '../user';
@@ -6,7 +6,8 @@ import { User } from '../user';
 @Component({
   selector: 'app-framework',
   templateUrl: './framework.component.html',
-  styleUrls: ['./framework.component.css']
+  styleUrls: ['./framework.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FrameworkComponent implements OnInit {
 
@@ -29,7 +30,7 @@ export class FrameworkComponent implements OnInit {
   }
 
   public getCurrentUserName(): string {
-    const user: User = this.authService.getCurrentUser();
+    const user: User = this.authService.getCurrentUser();    
     return user.name || "Guest";
   }
 

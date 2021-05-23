@@ -53,7 +53,7 @@ $env:GOOGLE_API_KEY="AIzaSyBQI3HH1w6dv7ihEcwdjYj65x_bScZT1IA"
 $env:JWT_SECRET="IamSoFreakingMeanThatYouWontBelieve"
 
 netstat -ano | findstr :3000
-
+tskill pid
 
 //create angular project
 $ ng new loc8r-public --skipGit=true –defaults=true –directory app_public
@@ -74,3 +74,6 @@ npm install
 
 ng add @angular/material
 
+npm install --global npm@6
+
+npm install @angular/flex-layout -save

@@ -1,0 +1,7 @@
+.facility:not(:first-child){
+    margin-left: 1vw;
+}
+
+.address{
+    margin-top: 2vh !important;
+}

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   public title: string = "Sign in to Loc8r";
   public loginForm: FormGroup;
   public submitted: boolean = false;
+  public hidePassword: boolean = true;
 
   constructor(
     private authService: AuthService,

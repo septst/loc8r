@@ -1,0 +1,58 @@
+@import "~@angular/material/theming";
+@import "./custom-theme.scss";
+
+.main-title {
+  font-family: "Lobster", cursive !important;
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.accent-color {
+  color: mat-color($accent) !important;
+}
+
+.primary-color {
+  color: mat-color($primary) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1 * {
+  font-family: "Lobster", cursive !important;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2em !important;
+}
+h2 {
+  font-size: 1.5em !important;
+}
+h3 {
+  font-size: 1.17em !important;
+}
+h4 {
+  font-size: 1em !important;
+}
+h5 {
+  font-size: 0.83em !important;
+}
+h6 {
+  font-size: 0.75em !important;
+}
+
+.legend {
+  font-family: "Lobster", cursive !important;
+  @extend .accent-color;
+}
+
+// To embed links with the texts
+.embedded-link {
+  padding: 0 !important;
+  text-align: left !important;
+  text-decoration: underline !important;
+}

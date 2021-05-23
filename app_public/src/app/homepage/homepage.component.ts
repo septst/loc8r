@@ -14,8 +14,7 @@ export class HomepageComponent implements OnInit {
 
   public pageContent = {
     header: {
-      title: 'New Loc8r',
-      strapline: 'Find places to work with wifi near you!'
+      title: 'Find places to work with wifi near you!'
     },
     sidebar: 'Looking for wifi and a seat? Loc8r helps you find places \
     to work when out and about. Perhaps with coffee, cake or a pint?\

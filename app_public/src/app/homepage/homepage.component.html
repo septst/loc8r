@@ -1,9 +1,10 @@
-<app-page-header [title]="pageContent.header.title" [strapline]="pageContent.header.strapline"></app-page-header>
-<div class="row">
-    <div class="col-12 col-md-8">
+<app-page-header [title]="pageContent.header.title"></app-page-header>
+<div fxLayout="row wrap" fxLayoutAlign="space-around start">
+    <div fxFlex.lg="60">
         <app-home-list>Loading...</app-home-list>
     </div>
-    <div class="col-12 col-md-4">
+    <div fxFlex.lg="1"></div>
+    <div fxFlex>
         <app-sidebar [content]="pageContent.sidebar"></app-sidebar>
     </div>
 </div>

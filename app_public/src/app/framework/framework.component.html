@@ -1,45 +1,50 @@
 <header>
-    <nav class="navbar navbar-light navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" routerLink="/home">New Loc8r</a>
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                <!-- <fa-icon [icon]="['fas', 'bars']"></fa-icon> -->
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <button mat-icon-button fxShow fxHide.gt-sm routerLink="/home">
+                <mat-icon>home</mat-icon>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" routerLinkActive="active">
-                        <a routerLink="login" class="nav-link" *ngIf="!isLoggedIn()">Sign in</a>
-                    </li>
-                    <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isLoggedIn()">
-                        <a class=" nav-link dropdown-toggle" data-toggle="dropdown">{{getCurrentUserName()}}</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" (click)="doLogout()">Logout</a>
-                        </div>
-                    </li>
-                </ul>
+            <a class="main-title" routerLink="/home" mat-button>Locator</a>
+            <div fxShow fxHide.lt-md>
+                <a routerLink="/home" mat-button>Home</a>
+                <a routerLink="/about" mat-button>About</a>
             </div>
-        </div>
-    </nav>
+            <span class="menu-spacer"></span>
+            <div fxShow fxHide.lt-md>
+                <a routerLink="/login" *ngIf="!isLoggedIn()" mat-button>Sign in</a>
+                <button mat-button *ngIf="isLoggedIn()" [matMenuTriggerFor]="menuUser">
+                    {{getCurrentUserName()}}
+                </button>
+                <mat-menu #menuUser="matMenu">
+                    <button mat-menu-item (click)="doLogout()">Logout</button>
+                </mat-menu>
+            </div>
+            <div fxShow fxHide.gt-sm>
+                <button mat-icon-button fxShow fxHide.gt-sm [matMenuTriggerFor]="menuSm">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <mat-menu #menuSm="matMenu">
+                    <mat-nav-list>
+                        <a routerLink="/login" *ngIf="!isLoggedIn()" mat-list-item>Sign in</a>
+                        <mat-divider *ngIf="!isLoggedIn()"></mat-divider>
+                        <a routerLink="/home" mat-list-item>Home</a>
+                        <mat-divider></mat-divider>
+                        <a routerLink="/about" mat-list-item>About</a>
+                    </mat-nav-list>
+                </mat-menu>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
 </header>
 
-<main class="container content" role="main">
+<main class="content" role="main">
     <router-outlet>
     </router-outlet>
 </main>
 
 <footer class="footer">
-    <div class="container">
-        <hr>
-        <span><small>&copy; Getting Mean - Parthiban Sekar 2021</small></span>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <small class="primary-color">&copy; Getting Mean - Parthiban Sekar 2021</small>
     </div>
 </footer>
