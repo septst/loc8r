@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log('Something has gone wrong in auth service', JSON.stringify(error));
+    console.error('Something has gone wrong in auth service', JSON.stringify(error));
     return Promise.reject(error.error.message || error);
   }
 }

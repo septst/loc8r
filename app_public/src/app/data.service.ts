@@ -58,7 +58,7 @@ export class DataService {
   }
 
   public handleError(url: string, error: any): Promise<any> {
-    console.log(`Something has gone wrong while calling ${url}. The error details are`, JSON.stringify(error), 'color: red;');
+    console.error(`Something has gone wrong while calling ${url}. The error details are`, JSON.stringify(error));
     return Promise.reject(error.message || error);
   }
 }

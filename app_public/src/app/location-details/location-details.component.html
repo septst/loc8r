@@ -81,10 +81,10 @@
                         <div class="form-group row">
                             <label for="review" class="col-sm-2 col-form-label">Review</label>
                             <div class="col-sm-10">
-                                <textarea formControlName="review" class="form-control" rows="5"
-                                    [ngClass]="{'is-invalid': reviewSubmitted && controls.review.errors}">
+                                <textarea formControlName="reviewText" class="form-control" rows="5"
+                                    [ngClass]="{'is-invalid': reviewSubmitted && controls.reviewText.errors}">
                                 </textarea>
-                                <div *ngIf="reviewSubmitted && controls.review.errors?.required"
+                                <div *ngIf="reviewSubmitted && controls.reviewText.errors?.required"
                                     class="invalid-feedback">
                                     Please write a review.
                                 </div>

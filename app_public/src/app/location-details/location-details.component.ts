@@ -33,7 +33,7 @@ export class LocationDetailsComponent implements OnInit {
 
     this.reviewForm = this.formBuilder.group({
       rating: ["", Validators.required],
-      review: ["", Validators.required]
+      reviewText: ["", Validators.required]
     });
 
     //get G API key

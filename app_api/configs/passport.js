@@ -1,6 +1,7 @@
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const mongoose = require('mongoose');
+const { json } = require('express');
 const user = mongoose.model('User');
 
 passport.use(new localStrategy(
@@ -12,6 +13,7 @@ passport.use(new localStrategy(
             (err, user) => {
 
                 if (err) {
+                    console.error("Passport error:", JSON.stringify(error));
                     return done(err);
                 }
 

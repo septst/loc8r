@@ -37,9 +37,10 @@ userSchema.methods.generateJwt = function () {
     return jwt.sign({
         _id: this.id,
         name: this.name,
-        email: this.email,
-        exp: parseInt(expiry.getTime() / 1000, 10)
-    }, process.env.JWT_SECRET)
+        email: this.email
+    }, process.env.JWT_SECRET, {
+        expiresIn: "120h"
+    })
 };
 
 mongoose.model('User', userSchema);

@@ -11,7 +11,7 @@ const getAuthor = (req, res, callback) => {
           return res
             .status(404)
             .json({ "message": "User not found" });
-        } else if (!err) {
+        } else if (err) {
           return res
             .status(500)
             .json(err);
