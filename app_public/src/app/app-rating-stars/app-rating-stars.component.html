@@ -1,6 +1,8 @@
-<span class="stars" *ngFor="let in of counter(rating); let i=index">
-    <mat-icon>star</mat-icon>
-</span>
-<span class="stars" *ngFor="let in of counter(5-rating); let i=index">
-    <mat-icon>star_half</mat-icon>
-</span>
+<div *ngIf="rating">
+    <span class="stars" *ngFor="let in of counter(rating); let i=index">
+        <mat-icon>star</mat-icon>
+    </span>
+    <span class="stars" *ngFor="let in of counter(5-rating); let i=index">
+        <mat-icon>star_border</mat-icon>
+    </span>
+</div>

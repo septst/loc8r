@@ -10,6 +10,7 @@
 @mixin html-theme($theme) {
   $accent: map-get($theme, accent);
   $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
 
   //Input element colour was not changing when switching themes
   .mat-input-element {
@@ -23,6 +24,10 @@
 
   .primary-color {
     color: mat-color($primary) !important;
+  }
+
+  .warn-color{
+    color: mat-color($warn) !important;
   }
 
   .legend {
@@ -49,8 +54,8 @@
 //define a light theme
 $light-primary: mat-palette($mat-indigo);
 $light-accent: mat-palette($mat-pink);
-$warn: mat-palette($mat-deep-orange);
-$light-theme: mat-light-theme($light-primary, $light-accent, $warn);
+$light-warn: mat-palette($mat-deep-orange);
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
 
 .light-theme {
   @include mat.all-component-themes($light-theme);
@@ -61,7 +66,7 @@ $light-theme: mat-light-theme($light-primary, $light-accent, $warn);
 $dark-primary: mat-palette($mat-blue-grey);
 $dark-accent: mat-palette($mat-amber, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange);
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $warn);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 .dark-theme {
   @include mat.all-component-themes($dark-theme);

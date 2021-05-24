@@ -1,49 +1,71 @@
-<div class="row">
-    <div class="col-12 col-md-6">
-        <div class="card card-primary">
-            <div class="card-block">
-                <h2 class="card-title">Address</h2>
-                <div *ngIf="location.address">
-                    {{location.address}}
-                </div>
+<div class="details">
+    <div fxLayout="row" fxLayoutGap="1vw">
+        <div fxLayout="column" fxLayoutGap="2vh">
+            <div>
+                <mat-card>
+                    <h2>Address</h2>
+                    <div *ngIf="location.address">
+                        {{location.address}}
+                    </div>
+                </mat-card>
             </div>
-        </div>
-        <div class="card card-primary">
-            <div class="card-block">
-                <h2 class="card-title">Opening hours</h2>
-                <div *ngFor="let openingTime of location.openingTimes" [ngSwitch]="openingTime.closed">
-                    <span *ngSwitchCase="true">
-                        closed
+            <div>
+                <mat-card>
+                    <h2>Opening hours</h2>
+                    <div *ngFor="let openingTime of location.openingTimes" [ngSwitch]="openingTime.closed">
+                        <span *ngSwitchCase="true">
+                            closed
+                        </span>
+                        <span *ngSwitchDefault>
+                            {{openingTime.days}}: {{openingTime.opening}} - {{openingTime.closing}}
+                        </span>
+                    </div>
+                </mat-card>
+            </div>
+            <div>
+                <mat-card>
+                    <h2>Facilities</h2>
+                    <span *ngFor="let facility of location.facilities" class="badge  badge-warning">
+                        <mat-icon>check</mat-icon> {{facility}}
                     </span>
-                    <span *ngSwitchDefault>
-                        {{openingTime.days}}: {{openingTime.opening}} - {{openingTime.closing}}
-                    </span>
-                </div>
+                </mat-card>
             </div>
+            <div fxFlexOffset="10vh"></div>
         </div>
-        <div class="card card-primary">
-            <div class="card-block">
-                <h2 class="card-title">Facilities</h2>
-                <span *ngFor="let facility of location.facilities" class="badge  badge-warning">
-                    <!-- <fa-icon [icon]="['fas', 'check']"></fa-icon> {{facility}} -->
-                </span>
-            </div>
+        <div>
+            <mat-card class="map">
+                <h2>Location map</h2>
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=17&size=300x240&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
+                    mat-card-image />
+            </mat-card>
         </div>
-    </div>
-    <div class="col-12 col-md-6 location-map">
-        <div class="card card-primary">
-            <div class="card-block">
-                <h2 class="card-title">Location map</h2>
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=17&size=400x310&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
-                    class="img-fluid rounded" />
-            </div>
+        <div fxFlex>
+            <mat-card>
+                <h2>Customer reviews</h2>
+                <mat-card-content>
+                    <div *ngIf="location.reviews.length">
+                        <div *ngFor="let review of location.reviews | mostRecentFirst" fxLayout="column" fxLayoutGap="1vh">
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                                <div class="reviewAuthor">{{ review.author }}</div>
+                                <div>
+                                    <app-rating-stars [rating]="review.rating">
+                                    </app-rating-stars>
+                                </div>
+                            </div>
+                            <div>
+                                <p [innerHTML]="review.reviewText | addLineBreaks"></p>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-12">
-        <div class="card card-primary review-card">
-            <div class="card-block">
+<!-- <div>
+    <div>
+        <mat-card>
+            <mat-card-content>
                 <div class="row mb-3">
                     <div class="col-8">
                         <h2 class="card-title">Customer reviews</h2>
@@ -62,7 +84,6 @@
                     </ng-template>
                 </div>
                 <div *ngIf="showForm" class="mb-3">
-                    <!-- <hr> -->
                     <div *ngIf="formError" class="alert alert-danger mt-2" role="alert">
                         {{formError}}
                     </div>
@@ -109,22 +130,8 @@
                         </div>
                     </form>
                 </div>
-                <div *ngIf="location.reviews.length">
-                    <div *ngFor="let review of location.reviews | mostRecentFirst" class="row review">
-                        <div class="col-12 no-gutters review-header">
-                            <app-rating-stars [rating]="review.rating">
-                            </app-rating-stars>
-                            <span class="reviewAuthor"> by {{ review.author }}</span>
-                            <span>
-                                <small class="reviewTimestamp"> on {{ review.createdOn | date : 'd MMMM yyyy' }}</small>
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <p [innerHTML]="review.reviewText | addLineBreaks"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                
+            </mat-card-content>
+        </mat-card>
     </div>
-</div>
+</div> -->

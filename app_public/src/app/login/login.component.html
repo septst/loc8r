@@ -1,9 +1,9 @@
 <app-page-header [title]="title"></app-page-header>
 <div>
     <div>
-        <p>Not a member? Please
+        <div class="sub-header">Not a member? Please
             <a routerLink="/register" class="embedded-link" mat-button>register!</a>
-        </p>
+        </div>
         <form [formGroup]="loginForm" (submit)="onLoginSubmit()">
             <mat-error *ngIf="formErrors" role="alert">
                 {{formErrors}}

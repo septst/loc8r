@@ -1,9 +1,14 @@
 @import "~@angular/material/theming";
 @import "./custom-theme.scss";
 
+$subheader-fs:14pt;
+
 .main-title {
   font-family: "Lobster", cursive !important;
   font-weight: 600;
   font-size: x-large;
 }
 
+.sub-header{
+  font-size: $subheader-fs;
+}

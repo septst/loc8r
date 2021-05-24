@@ -14,7 +14,7 @@
                 <div fxShow fxHide.lt-md>
                     <button routerLink="/login" *ngIf="!isLoggedIn()" mat-button>Sign in</button>
                     <button mat-button *ngIf="isLoggedIn()" [matMenuTriggerFor]="menuUser">
-                        {{getCurrentUserName()}}
+                        Hello, {{getCurrentUserName()}}
                     </button>
                     <mat-menu #menuUser="matMenu">
                         <button mat-menu-item (click)="doLogout()">Logout</button>

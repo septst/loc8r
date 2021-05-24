@@ -7,7 +7,8 @@
                 </div>
                 <div fxFlexAlign="center end">
                     <mat-chip-list>
-                        <mat-chip disableRipple="true" color="accent" selected>{{location.distance | distance}}</mat-chip>
+                        <mat-chip disableRipple="true" color="accent" selected>{{location.distance | distance}}
+                        </mat-chip>
                     </mat-chip-list>
                 </div>
             </div>
@@ -26,8 +27,10 @@
             </div>
         </mat-card>
     </div>
-    <ng-template #noLocationsFound>No locations found!</ng-template>
+    <ng-template #noLocationsFound>
+        <mat-card>No locations found!</mat-card>
+    </ng-template>
 </div>
 <ng-template #searching>
-    Searching for nearby places...
+    <mat-card>Searching for nearby places...</mat-card>
 </ng-template>

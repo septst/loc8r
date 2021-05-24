@@ -1,5 +1,5 @@
 <app-page-header [title]="pageContent.header.title"></app-page-header>
-<div fxLayout="row wrap" fxLayoutAlign="space-around start">
+<div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around start" >
     <div fxFlex.lg="60">
         <app-home-list>Loading...</app-home-list>
     </div>

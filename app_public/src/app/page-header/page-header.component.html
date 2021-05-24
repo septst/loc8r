@@ -1,14 +1,14 @@
 <div class="page-header">
     <div fxLayout="row" fxLayoutAlign="start">
         <div fxFlex="80">
-            <h2 class="accent-color">
+            <h1 class="accent-color">
                 {{title}}
-            </h2>
+            </h1>
         </div>
         <div fxFlex *ngIf="rating">
-            <h2>
+            <h1>
                 <app-rating-stars [rating]="rating"></app-rating-stars>
-            </h2>
+            </h1>
         </div>
     </div>
     <mat-divider></mat-divider>
