@@ -1,9 +1,8 @@
 /* .details{
-    height: 90vh;
-} */
+    max-height: 90vh;
+    overflow-y: scroll;
+}
 
 .map .mat-card-image{
     object-fit: contain;
-    /* max-width: 10vw;
-    max-height: 10vh; */
-}
+} */
