@@ -8,41 +8,64 @@
 
 //mixins
 @mixin html-theme($theme) {
-  & {
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
+  $accent: map-get($theme, accent);
+  $primary: map-get($theme, primary);
 
-    background-color: mat-color($background, background);
-    color: mat-color($foreground, text);
+  //Input element colour was not changing when switching themes
+  .mat-input-element {
+    color: mat-color($accent) !important;
+    font-weight: bold;
+  }
+
+  .accent-color {
+    color: mat-color($accent) !important;
+  }
+
+  .primary-color {
+    color: mat-color($primary) !important;
+  }
+
+  .legend {
+    font-family: "Lobster", cursive !important;
+    @extend .accent-color;
+  }
+
+  // To embed links with the texts
+  .embedded-link {
+    font: inherit;
+    padding: 0 !important;
+    text-align: left !important;
+    text-decoration: underline !important;
+
+    :hover {
+      color: mat-color($accent) !important;
+      text-decoration: underline !important;
+      text-decoration-color: mat-color($accent) !important;
+      font-weight: bold;
+    }
   }
 }
 
 //define a light theme
 $light-primary: mat-palette($mat-indigo);
-$light-accent:  mat-palette($mat-pink, A200, A100, A400);
-$light-theme: mat-light-theme($light-primary, $light-accent);
-
-$accent: $light-accent;
-$primary: $light-primary;
+$light-accent: mat-palette($mat-pink);
+$warn: mat-palette($mat-deep-orange);
+$light-theme: mat-light-theme($light-primary, $light-accent, $warn);
 
 .light-theme {
   @include mat.all-component-themes($light-theme);
-  // @include html-theme($light-theme);
-  $accent: $light-accent;
-  $primary: $light-primary;
+  @include html-theme($light-theme);
 }
 
 // Define a dark theme
 $dark-primary: mat-palette($mat-blue-grey);
 $dark-accent: mat-palette($mat-amber, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange);
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $warn);
 
 .dark-theme {
   @include mat.all-component-themes($dark-theme);
-  // @include html-theme($dark-theme);
-  $accent: $dark-accent;
-  $primary: $dark-primary;
+  @include html-theme($dark-theme);
 }
 
 //default global styles
@@ -68,8 +91,35 @@ main {
   height: 85vh !important;
 }
 
-.mat-form-field {
-  width: 100% !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1 * {
+  font-family: "Lobster", cursive !important;
+  font-weight: 400 !important;
+  margin-bottom: 2vh !important;
+}
+
+h1 {
+  font-size: 2em !important;
+}
+h2 {
+  font-size: 1.5em !important;
+}
+h3 {
+  font-size: 1.17em !important;
+}
+h4 {
+  font-size: 1em !important;
+}
+h5 {
+  font-size: 0.83em !important;
+}
+h6 {
+  font-size: 0.75em !important;
 }
 
 .mat-icon {

@@ -16,11 +16,10 @@ export class RegisterComponent implements OnInit {
   public formErrors: string = "";
   public registerForm: FormGroup;
   public submitted: boolean = false;
+  public hidePassword: boolean = true;
 
   public pageContent = {
-    title: "Create a new account",
-    strapline: "",
-    sidebar: ""
+    title: "Create a new account"
   };
 
   constructor(
@@ -33,8 +32,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(12)]],
     });
   }
@@ -58,6 +56,9 @@ export class RegisterComponent implements OnInit {
   private doRegister(newUser: User): void {
     this.authService.register(newUser)
       .then(() => this.router.navigateByUrl(this.historyService.getPreRegisterUrl()))
-      .catch((message) => this.formErrors = message);
+      .catch((message) => {
+        this.formErrors = message;
+        this.registerForm.enable();
+      });
   }
 }
