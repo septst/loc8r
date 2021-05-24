@@ -3,7 +3,9 @@
         <mat-card #contentBlock *ngFor="let location of locations">
             <div flexLayout="row">
                 <div fxFlex>
-                    <h1><a routerLink="/location/{{location._id}}" class="primary-color">{{location.name}}</a></h1>
+                    <h1>
+                        <a routerLink="/location/{{location._id}}" class="primary-color">{{location.name}}</a>
+                    </h1>
                 </div>
                 <div fxFlexAlign="center end">
                     <mat-chip-list>

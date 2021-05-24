@@ -1,64 +1,89 @@
 <div>
-    <div fxLayout="row" fxLayoutGap="1vw"  class="details">
+    <div fxLayout="row" fxLayoutGap="1vw" class="details">
         <div fxFlex="30" fxLayout="column" fxLayoutGap="2vh">
-            <div>
+            <div *ngIf="location.address">
                 <mat-card>
-                    <h2>Address</h2>
-                    <div *ngIf="location.address">
+                    <mat-card-header>
+                        <mat-card-title>Address</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="card-content">
                         {{location.address}}
-                    </div>
+                    </mat-card-content>
                 </mat-card>
             </div>
             <div>
                 <mat-card>
-                    <h2>Opening hours</h2>
-                    <div *ngFor="let openingTime of location.openingTimes" [ngSwitch]="openingTime.closed">
-                        <span *ngSwitchCase="true">
-                            closed
-                        </span>
-                        <span *ngSwitchDefault>
-                            {{openingTime.days}}: {{openingTime.opening}} - {{openingTime.closing}}
-                        </span>
-                    </div>
+                    <mat-card-header>
+                        <mat-card-title>Opening hours</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="card-content">
+                        <div *ngFor="let openingTime of location.openingTimes" [ngSwitch]="openingTime.closed">
+                            <span *ngSwitchCase="true">
+                                closed
+                            </span>
+                            <span *ngSwitchDefault>
+                                {{openingTime.days}}: {{openingTime.opening}} - {{openingTime.closing}}
+                            </span>
+                        </div>
+                    </mat-card-content>
                 </mat-card>
             </div>
             <div>
                 <mat-card>
-                    <h2>Facilities</h2>
-                    <span *ngFor="let facility of location.facilities" class="badge  badge-warning">
-                        <mat-icon>check</mat-icon> {{facility}}
-                    </span>
+                    <mat-card-header>
+                        <mat-card-title>Facilities</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="card-content">
+                        <span *ngFor="let facility of location.facilities" class="badge  badge-warning">
+                            <mat-icon>check</mat-icon> {{facility}}
+                        </span>
+                    </mat-card-content>
                 </mat-card>
             </div>
         </div>
         <div fxFlex="40" fxLayoutAlign="start start">
             <mat-card class="map">
-                <h2>Location map</h2>
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=17&size=300x240&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
-                    mat-card-image />
+                <mat-card-header>
+                    <mat-card-title>Location Map</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="card-content">
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=17&size=300x240&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
+                        mat-card-image />
+                </mat-card-content>
             </mat-card>
         </div>
         <div fxFlex="30">
-            <mat-card>
-                <h2>Customer reviews</h2>
-                <mat-card-content>
-                    <div *ngIf="location.reviews.length">
-                        <div *ngFor="let review of location.reviews | mostRecentFirst" fxLayout="column"
-                            fxLayoutGap="1vh">
-                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
-                                <div class="reviewAuthor">{{ review.author }}</div>
-                                <div>
-                                    <app-rating-stars [rating]="review.rating">
-                                    </app-rating-stars>
+            <div fxFlexLayout="column">
+                <div fxFlexLayout="row">
+                    <app-rating-stars [rating]="location.rating" [displayRating]="true"
+                        [reviewsCount]="location.reviews.length">
+                    </app-rating-stars>
+                </div>
+                <div>
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Customer reviews</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content class="card-content">
+                            <div *ngIf="location.reviews.length">
+                                <div *ngFor="let review of location.reviews | mostRecentFirst" fxLayout="column"
+                                    fxLayoutGap="1vh">
+                                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                                        <div class="reviewAuthor">{{ review.author }}</div>
+                                        <div>
+                                            <app-rating-stars [rating]="review.rating">
+                                            </app-rating-stars>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p [innerHTML]="review.reviewText | addLineBreaks" class="reviewText"></p>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <p [innerHTML]="review.reviewText | addLineBreaks" class="reviewText"></p>
-                            </div>
-                        </div>
-                    </div>
-                </mat-card-content>
-            </mat-card>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
         </div>
     </div>
 </div>

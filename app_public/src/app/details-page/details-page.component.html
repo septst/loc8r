@@ -1,5 +1,5 @@
 <div *ngIf="location$ | async as location; else noDetailsFound">
-    <app-page-header [title]="location.name" [rating]="location.rating"></app-page-header>
+    <app-page-header [title]="location.name"></app-page-header>
     <div>
         <app-location-details [location]="location"></app-location-details>
     </div>

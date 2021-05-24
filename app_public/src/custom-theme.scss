@@ -29,6 +29,11 @@
   .warn-color{
     color: mat-color($warn) !important;
   }
+  
+  .mat-card-header .mat-card-title  {
+    font-family: "Lobster", cursive !important;
+    @extend .accent-color;
+  }
 
   .legend {
     font-family: "Lobster", cursive !important;
