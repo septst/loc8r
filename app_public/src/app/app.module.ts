@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -57,6 +58,7 @@ import { MostRecentFirstPipe } from './most-recent-first.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,

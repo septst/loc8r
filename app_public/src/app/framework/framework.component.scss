@@ -1,38 +1,71 @@
 mat-form-field {
-    &.ng-valid {
-      .mat-form-field-wrapper {
-        padding-bottom: 1.25em;
-        color: yellow;
-      }
-    }
-  
-    &.ng-invalid,
-    &.mat-form-field-invalid {
-      .mat-form-field-wrapper {
-        padding-bottom: 7px;
-      }
-    }
-  
-    &.ng-untouched {
-      .mat-form-field-wrapper {
-        padding-bottom: 1.25em;
-      }
-    }
-  
-    .mat-form-field {
-      &-underline {
-        position: static;
-      }
-  
-      &-subscript-wrapper {
-        position: static;
-      }
+  &.ng-valid {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.25em;
+      color: yellow;
     }
   }
 
-  .menu-spacer {
-    flex: 1 1 auto;
+  &.ng-invalid,
+  &.mat-form-field-invalid {
+    .mat-form-field-wrapper {
+      padding-bottom: 7px;
+    }
   }
 
+  &.ng-untouched {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.25em;
+    }
+  }
 
-  
+  .mat-form-field {
+    &-underline {
+      position: static;
+    }
+
+    &-subscript-wrapper {
+      position: static;
+    }
+  }
+}
+
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+// Theme toggler
+.toggle {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+}
+
+.sun,
+.moon {
+  left: 0;
+  width: 100%;
+  height: auto;
+  transition: top 0.3s;
+}
+
+.theme-svg {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.sun {
+  @extend .theme-svg;
+  top: 0;
+}
+
+.moon {
+  @extend .theme-svg;
+  top: -150%;
+}

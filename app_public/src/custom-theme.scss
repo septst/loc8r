@@ -6,10 +6,31 @@
 
 @include mat.core();
 
+//mixins
+@mixin html-theme($theme) {
+  & {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, text);
+  }
+}
+
 //define a light theme
-$light-primary: mat-palette($mat-teal);
-$light-accent: mat-palette($mat-pink, A200, A100, A400);
+$light-primary: mat-palette($mat-indigo);
+$light-accent:  mat-palette($mat-pink, A200, A100, A400);
 $light-theme: mat-light-theme($light-primary, $light-accent);
+
+$accent: $light-accent;
+$primary: $light-primary;
+
+.light-theme {
+  @include mat.all-component-themes($light-theme);
+  // @include html-theme($light-theme);
+  $accent: $light-accent;
+  $primary: $light-primary;
+}
 
 // Define a dark theme
 $dark-primary: mat-palette($mat-blue-grey);
@@ -17,20 +38,11 @@ $dark-accent: mat-palette($mat-amber, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange);
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($dark-theme);
-
-$accent: $dark-accent;
-$primary: $dark-primary;
-
-// Apply the light theme only when the `.light-theme` CSS class is applied
-// to an ancestor element of the components (such as `body`).
-.light-mode {
-  @include mat.all-component-themes($light-theme);
-  $accent: $light-accent;
-  $primary: $light-primary;
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  // @include html-theme($dark-theme);
+  $accent: $dark-accent;
+  $primary: $dark-primary;
 }
 
 //default global styles
@@ -43,7 +55,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
 mat-toolbar mat-toolbar-row,
 main,
 footer {
@@ -51,9 +62,10 @@ footer {
   padding-left: 2.5% !important;
 }
 
-main{
-  margin-top: 2%;
-  margin-bottom: 2%;
+main {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  height: 85vh !important;
 }
 
 .mat-form-field {
