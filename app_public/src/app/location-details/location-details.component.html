@@ -1,6 +1,6 @@
-<div class="details">
-    <div fxLayout="row" fxLayoutGap="1vw">
-        <div fxFlex="50" fxLayout="column" fxLayoutGap="2vh">
+<div>
+    <div fxLayout="row" fxLayoutGap="1vw"  class="details">
+        <div fxFlex="30" fxLayout="column" fxLayoutGap="2vh">
             <div>
                 <mat-card>
                     <h2>Address</h2>
@@ -30,33 +30,34 @@
                     </span>
                 </mat-card>
             </div>
-            <div fxFlex>
-                <mat-card>
-                    <h2>Customer reviews</h2>
-                    <mat-card-content>
-                        <div *ngIf="location.reviews.length">
-                            <div *ngFor="let review of location.reviews | mostRecentFirst" fxLayout="column" fxLayoutGap="1vh">
-                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
-                                    <div class="reviewAuthor">{{ review.author }}</div>
-                                    <div>
-                                        <app-rating-stars [rating]="review.rating">
-                                        </app-rating-stars>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p [innerHTML]="review.reviewText | addLineBreaks"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-            </div>
         </div>
-        <div fxFlex fxLayoutAlign="start start">
+        <div fxFlex="40" fxLayoutAlign="start start">
             <mat-card class="map">
                 <h2>Location map</h2>
                 <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=17&size=300x240&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
                     mat-card-image />
+            </mat-card>
+        </div>
+        <div fxFlex="30">
+            <mat-card>
+                <h2>Customer reviews</h2>
+                <mat-card-content>
+                    <div *ngIf="location.reviews.length">
+                        <div *ngFor="let review of location.reviews | mostRecentFirst" fxLayout="column"
+                            fxLayoutGap="1vh">
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                                <div class="reviewAuthor">{{ review.author }}</div>
+                                <div>
+                                    <app-rating-stars [rating]="review.rating">
+                                    </app-rating-stars>
+                                </div>
+                            </div>
+                            <div>
+                                <p [innerHTML]="review.reviewText | addLineBreaks" class="reviewText"></p>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
             </mat-card>
         </div>
     </div>
