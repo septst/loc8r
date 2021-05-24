@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(user)
       .then(() => this.router.navigateByUrl("/"))
       .catch((message) => {
-        console.log(message);
+        this.loginForm.enable();
         this.formErrors = message;
       });
   }
