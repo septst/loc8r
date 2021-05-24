@@ -11,6 +11,13 @@
   $accent: map-get($theme, accent);
   $primary: map-get($theme, primary);
   $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  html {
+    height: 100vh;
+    background-color: mat-color($background);
+  }
 
   //Input element colour was not changing when switching themes
   .mat-input-element {
@@ -26,11 +33,11 @@
     color: mat-color($primary) !important;
   }
 
-  .warn-color{
+  .warn-color {
     color: mat-color($warn) !important;
   }
-  
-  .mat-card-header .mat-card-title  {
+
+  .mat-card-header .mat-card-title {
     font-family: "Lobster", cursive !important;
     @extend .accent-color;
   }
@@ -78,27 +85,25 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   @include html-theme($dark-theme);
 }
 
-//default global styles
-html {
-  height: 100%;
-}
-
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 mat-toolbar mat-toolbar-row,
-main,
-footer {
+main {
   padding-right: 2.5% !important;
   padding-left: 2.5% !important;
+}
+
+.footer mat-toolbar mat-toolbar-row {
+  height: 3vh;
 }
 
 main {
   margin-top: 1vh;
   margin-bottom: 1vh;
-  height: 85vh !important;
+  min-height: 86vh !important;
 }
 
 h1,
