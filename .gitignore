@@ -62,3 +62,4 @@ typings/
 
 #ignore angular build folder
 app_public/build/
+app_public/src/environments/environment.ts
