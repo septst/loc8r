@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthResponse } from './auth-response';
-import { BROWSER_STORAGE } from './storage';
+import { StorageService } from './storage.service';
 import { User } from './user';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class AuthService {
   private apiBaseUrl = environment.apiBaseUrl;
 
   constructor(
-    @Inject(BROWSER_STORAGE) private storage: Storage,
+    private storageService: StorageService,
     private http: HttpClient) {
     this.tokenName = "locator-token";
   }
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.storage.removeItem(this.tokenName);
+    this.storageService.removeItemByKey(this.tokenName);
   }
 
   public isLoggedIn(): boolean {
@@ -62,11 +62,11 @@ export class AuthService {
   }
 
   private getToken(): any {
-    return this.storage.getItem(this.tokenName);
+    return this.storageService.getItemByKey(this.tokenName);
   }
 
   private saveToken(token: string): void {
-    this.storage.setItem(this.tokenName, token)
+    this.storageService.setItemByKey(this.tokenName, token)
   }
 
   private handleError(error: any): Promise<any> {

@@ -12,9 +12,10 @@ import { User } from '../user';
 export class LoginComponent implements OnInit {
 
   public formErrors: string = "";
-  public title: string = "Sign in to Loc8r";
+  public title: string = "Sign in to Locator";
   public loginForm: FormGroup;
   public submitted: boolean = false;
+  public hidePassword: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(user)
       .then(() => this.router.navigateByUrl("/"))
       .catch((message) => {
-        console.log(message);
+        this.loginForm.enable();
         this.formErrors = message;
       });
   }

@@ -1,13 +1,16 @@
-<div *ngIf="location$ | async as location; else noDetailsFound">
-    <app-page-header [title]="location.name" [rating]="location.rating"></app-page-header>
-    <div class="row">
-        <div class="col-12 col-md-8">
-            <app-location-details [location]="location"></app-location-details>
-        </div>
-        <app-sidebar class="col-12 col-md-4" [content]="location.name + sidebar">
-        </app-sidebar>
+<div *ngIf="location$ | async as location; else fetchingDetails">
+    <app-page-header [title]="location.name"></app-page-header>
+    <div *ngIf="location?.name; else noDetailsFound">
+        <app-location-details [location]="location"></app-location-details>
     </div>
+    <ng-template #noDetailsFound>
+        <mat-card color="warn">
+            <p class="warn-color">No details found!</p>
+        </mat-card>
+    </ng-template>
 </div>
-<ng-template #noDetailsFound>
-    No detais found!
+<ng-template #fetchingDetails>
+    <mat-card color="warn">
+        <p class="accent-color">Fetching details...</p>
+    </mat-card>
 </ng-template>

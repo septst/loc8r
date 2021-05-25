@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+//materials
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 //library
 import { faStar, faCheck, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 
 //components
 import { HomeListComponent } from './home-list/home-list.component';
@@ -51,14 +58,19 @@ import { MostRecentFirstPipe } from './most-recent-first.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
-  exports:[LoaderComponent],
-  providers: [],
+  exports: [LoaderComponent],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }
+  ],
   bootstrap: [FrameworkComponent]
 })
 export class AppModule {

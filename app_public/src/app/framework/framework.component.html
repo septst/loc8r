@@ -1,45 +1,72 @@
-<header>
-    <nav class="navbar navbar-light navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" routerLink="/home">New Loc8r</a>
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                <!-- <fa-icon [icon]="['fas', 'bars']"></fa-icon> -->
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" routerLinkActive="active">
-                        <a routerLink="login" class="nav-link" *ngIf="!isLoggedIn()">Sign in</a>
-                    </li>
-                    <li class="nav-item dropdown" routerLinkActive="active" *ngIf="isLoggedIn()">
-                        <a class=" nav-link dropdown-toggle" data-toggle="dropdown">{{getCurrentUserName()}}</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" (click)="doLogout()">Logout</a>
-                        </div>
-                    </li>
-                </ul>
+<div class="app mat-app-background">
+    <header>
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <button mat-icon-button fxShow fxHide.gt-sm routerLink="/home">
+                    <mat-icon>home</mat-icon>
+                </button>
+                <a class="main-title" routerLink="/home" mat-button>Locator</a>
+                <div fxShow fxHide.lt-md>
+                    <button routerLink="/home" mat-button>Home</button>
+                    <button routerLink="/about" mat-button>About</button>
+                </div>
+                <span class="menu-spacer"></span>
+                <div fxShow fxHide.lt-md>
+                    <button routerLink="/login" *ngIf="!isLoggedIn()" mat-button>Sign in</button>
+                    <button mat-button *ngIf="isLoggedIn()" [matMenuTriggerFor]="menuUser">
+                        Hello, {{getCurrentUserName()}}
+                    </button>
+                    <mat-menu #menuUser="matMenu">
+                        <button mat-menu-item (click)="doLogout()">Logout</button>
+                    </mat-menu>
+                    <button mat-button (click)="changeTheme('dark-theme')" class="btn-moon" *ngIf="!darkModeOn">
+                        <img src="../../assets/icons/moon.svg" class="moon">
+                    </button>
+                    <button mat-button (click)="changeTheme('light-theme')" class="btn-sun" *ngIf="darkModeOn">
+                        <img src="../../assets/icons/sun.svg" class="sun">
+                    </button>
+                </div>
+                <div fxShow fxHide.gt-sm>
+                    <button mat-icon-button fxShow fxHide.gt-sm [matMenuTriggerFor]="menuSm">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    <mat-menu #menuSm="matMenu">
+                        <mat-nav-list>
+                            <button routerLink="/login" *ngIf="!isLoggedIn()" color="primary" mat-button>Sign
+                                in</button>
+                            <mat-divider *ngIf="!isLoggedIn()"></mat-divider>
+                            <button routerLink="/home" color="primary" mat-button>Home</button>
+                            <mat-divider></mat-divider>
+                            <button routerLink="/about" color="primary" mat-button>About</button>
+                        </mat-nav-list>
+                    </mat-menu>
+                </div>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </header>
+
+    <main class="content" role="main">
+        <router-outlet>
+        </router-outlet>
+    </main>
+
+    <footer class="footer">
+        <mat-divider></mat-divider>
+        <div fxLayout="row">
+            <div fxLayoutAlign="start" class="accent-color">
+                <button fxShow fxHide.gt-sm color="primary" (click)="changeTheme('dark-theme')" *ngIf="!darkModeOn"
+                    mat-button>
+                    <img src="../../assets/icons/moon.svg" class="moon">
+                </button>
+                <button fxShow fxHide.gt-sm color="primary" (click)="changeTheme('light-theme')" *ngIf="darkModeOn"
+                    mat-button>
+                    <img src="../../assets/icons/sun.svg" class="sun">
+                </button>
+            </div>
+            <span class="menu-spacer"></span>
+            <div fxLayoutAlign="end center" class="accent-color">
+                <span>&copy; Getting Mean - Parthiban Sekar 2021</span>
             </div>
         </div>
-    </nav>
-</header>
-
-<main class="container content" role="main">
-    <router-outlet>
-    </router-outlet>
-</main>
-
-<footer class="footer">
-    <div class="container">
-        <hr>
-        <span><small>&copy; Getting Mean - Parthiban Sekar 2021</small></span>
-    </div>
-</footer>
+    </footer>
+</div>
