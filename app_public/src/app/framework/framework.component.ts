@@ -2,6 +2,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { StorageService } from '../storage.service';
 import { ThemingService } from '../theming.service';
 import { User } from '../user';
 
@@ -16,19 +17,23 @@ export class FrameworkComponent implements OnInit {
   public themes: string[];
   public darkModeOn: boolean = true;
   public themingSubscription: Subscription;
+  private darkModeKey: string = "dark-mode";
 
   constructor(
     private authService: AuthService,
     private themingService: ThemingService,
+    private storageService: StorageService,
     private overlayContainer: OverlayContainer) { }
 
   @HostBinding('class') public cssClass: string;
 
   ngOnInit(): void {
     this.themes = this.themingService.themes;
+    this.applyDefaultTheme();
     this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
       this.darkModeOn = theme.includes("dark");
-      console.log(`Dark mode ${this.darkModeOn ? 'enabled' : 'disabled'}`);     
+      console.log(`Dark mode ${this.darkModeOn ? 'enabled' : 'disabled'}`);
+      this.storageService.setItemByKey(this.darkModeKey, this.darkModeOn ? "enabled" : "");
       this.cssClass = theme;
       this.applyThemeOnOverlays();
     });
@@ -38,12 +43,16 @@ export class FrameworkComponent implements OnInit {
     this.themingSubscription.unsubscribe();
   }
 
-  /**
-   * Apply the current theme on components with overlay (e.g. Dropdowns, Dialogs)
-   */
-   private applyThemeOnOverlays() {
-    // remove old theme class and add new theme class
-    // we're removing any css class that contains '-theme' string but your theme classes can follow any pattern
+  private applyDefaultTheme(){
+    console.log("Applying theme selection");      
+    if(this.storageService.getItemByKey(this.darkModeKey)){
+      this.themingService.theme.next("dark-theme");
+    }else{
+      this.themingService.theme.next("light-theme");
+    }
+  }
+  
+  private applyThemeOnOverlays() {
     const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
     const themeClassesToRemove = Array.from(this.themingService.themes);
     if (themeClassesToRemove.length) {
