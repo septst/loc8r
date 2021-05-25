@@ -23,10 +23,19 @@ $subheader-fs:14pt;
   font-weight: bold;
 }
 
-.card-content{
+.rating-summary{
   margin: 0 1vw !important;
 }
-.mat-card-image{
-  margin-top: 1vh !important;
-  margin-right: 1vw !important;
+
+.rating-summary-divider{
+  width: 10vw !important;
+  margin-bottom: 2vh !important;
+}
+
+.card-content{
+  margin: 0 1vw!important;
+}
+
+.map .card-content{
+  margin-top: 1.5vh !important;
 }

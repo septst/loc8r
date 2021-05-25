@@ -54,13 +54,15 @@
         </div>
         <div fxFlex="30">
             <div fxFlexLayout="column">
-                <div fxFlexLayout="row">
-                    <app-rating-stars [rating]="location.rating" [displayRating]="true"
-                        [reviewsCount]="location.reviews.length">
-                    </app-rating-stars>
-                </div>
                 <div>
                     <mat-card>
+                        <div class="rating-summary" fxFlexLayout="column" fxLayoutAlign="center center">
+                            <div>
+                                <app-rating-stars [rating]="location.rating" [displayRating]="true"
+                                    [reviewsCount]="location.reviews.length">
+                                </app-rating-stars>
+                            </div>
+                        </div>
                         <mat-card-header>
                             <mat-card-title>Customer reviews</mat-card-title>
                         </mat-card-header>
