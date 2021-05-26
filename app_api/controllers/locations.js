@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const objectId = mongoose.Types.ObjectId;
 const { AppBadRequestError, AppNotFoundError, AppError } = require('../utils/errors');
 const locationModel = mongoose.model('Location');
 
@@ -77,7 +78,8 @@ const locationsCreate = (req, res, next) => {
             ]
         }, (err, location) => {
             if (err) {
-                return next(new AppBadRequestError(err.message));
+                console.log("Bad request");
+                return next(new AppNotFoundError(err.message));
 
             } else {
                 res
@@ -90,20 +92,24 @@ const locationsCreate = (req, res, next) => {
 
 const locationsReadOne = (req, res, next) => {
 
-    locationModel
-        .findById(req.params.locationId)
-        .exec((err, location) => {
-            if (err) {
-                return next(new AppNotFoundError(err.message));
-            } else if (!location) {
-                console.log("return error");
-                return next(new AppNotFoundError("location not found"));
-            } else {
-                return res
-                    .status(200)
-                    .json(location);
-            }
-        });
+    if (objectId.isValid(locationId)) {
+        locationModel
+            .findById(req.params.locationId)
+            .exec((err, location) => {
+                if (err) {
+                    return next(new AppNotFoundError(err.message));
+                } else if (!location) {
+                    console.log("return error");
+                    return next(new AppNotFoundError("location not found"));
+                } else {
+                    return res
+                        .status(200)
+                        .json(location);
+                }
+            });
+    } else {
+        return next(new AppBadRequestError ("Please pass a valid location id."));
+    }
 };
 
 const locationsUpdateOne = (req, res, next) => {
@@ -148,7 +154,7 @@ const locationsUpdateOne = (req, res, next) => {
 
 const locationsDeleteOne = (req, res, next) => {
     const locationId = req.params.locationId;
-    if (locationId.length > 10) {
+    if (objectId.isValid(locationId)) {
         console.log("try deleting locationId =>", locationId);
         locationModel
             .findByIdAndRemove(locationId)
@@ -162,7 +168,7 @@ const locationsDeleteOne = (req, res, next) => {
                 }
             });
     } else {
-        return next(new AppBadRequestError("Location Id is required."));
+        return next(new AppBadRequestError("Please pass a valid Location Id."));
     }
 };
 

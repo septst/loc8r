@@ -55,7 +55,7 @@ app.use('/api', (req, res, next) => {
 });
 
 //configure http calls logging
-app.use(logger.httpInfoLogger);
+// app.use(logger.httpInfoLogger);
 
 app.use('/api', apiRouter);
 
