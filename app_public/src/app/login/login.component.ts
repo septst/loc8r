@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       .then(() => this.router.navigateByUrl("/"))
       .catch((err) => {       
         this.loginForm.enable();
-        this.formErrors = err.message;
+        this.formErrors = err;
       });
   }
 
