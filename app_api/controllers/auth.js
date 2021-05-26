@@ -27,7 +27,7 @@ const register = (req, res, next) => {
 };
 const login = (req, res, next) => {
     if (!req.body.email || !req.body.password) {
-        return next(new AppBadRequestError("The user already exists."));
+        return next(new AppBadRequestError("All fields are required."));
     }
 
     passport.authenticate("local",
@@ -40,7 +40,7 @@ const login = (req, res, next) => {
                 let token = authUser.generateJwt();
                 res.status(200).json({ token });
             } else {
-                return next(new AppUnauthorizedError(info));
+                return next(new AppUnauthorizedError(info.message));
             }
         })(req, res);
 };
