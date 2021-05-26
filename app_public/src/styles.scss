@@ -2,7 +2,7 @@
 @import "./custom-theme.scss";
 @import url("//fonts.googleapis.com/css?family=Lobster");
 
-$subheader-fs:14pt;
+$subheader-fs: 14pt;
 
 .main-title {
   font-family: "Lobster", cursive !important;
@@ -10,32 +10,37 @@ $subheader-fs:14pt;
   font-size: x-large;
 }
 
-.sub-header{
+.sub-header {
   font-size: $subheader-fs;
 }
 
-.reviewText{
+.reviewText {
   font-style: italic;
   font-weight: 300;
 }
 
-.reviewAuthor{
+.reviewAuthor {
   font-weight: bold;
 }
 
-.rating-summary{
+.rating-summary {
   margin: 0 1vw !important;
 }
 
-.rating-summary-divider{
+.rating-summary-divider {
   width: 10vw !important;
   margin-bottom: 2vh !important;
 }
 
-.card-content{
-  margin: 0 1vw!important;
+.card-content {
+  margin: 0 1vw !important;
 }
 
-.map .card-content{
+.map .card-content {
   margin-top: 1.5vh !important;
 }
+
+// .access-card {
+//   margin-top: 10vh;
+//   width: 50vw !important;
+// }

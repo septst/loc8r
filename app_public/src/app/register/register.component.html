@@ -1,61 +1,67 @@
 <app-page-header [title]="pageContent.title"></app-page-header>
-<div>
+<div fxLayout="column" fxLayoutGap="5vh">
     <div class="sub-header">Already a member? Please
         <a routerLink="/login" class="embedded-link" mat-button>log in!</a>
     </div>
-
-    <form [formGroup]="registerForm" (submit)="onRegisterSubmit()">
-        <mat-error *ngIf="formErrors" class="alert alert-danger" role="alert">
-            {{formErrors}}
-        </mat-error>
-        <div>
-            <mat-form-field appearance="standard" fxFlex.lg="40" fxFlex="90">
-                <mat-label>Enter your full name</mat-label>
-                <input matInput formControlName="name" autocomplete="off"
-                    [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
-                <mat-error *ngIf="submitted && controls.name.errors" class="invalid-feedback">
-                    <div *ngIf="controls.password.errors?.required">
-                        Name is required
+    <div *ngIf="formErrors" class="sub-header warn-color" role="alert">
+        {{formErrors}}
+    </div>
+    <div>
+        <mat-card fxFlex.lg="50" fxFlex="100">
+            <mat-card-content>
+                <form [formGroup]="registerForm" (submit)="onRegisterSubmit()">
+                    <div>
+                        <mat-form-field appearance="standard" fxFlex="90">
+                            <mat-label>Enter your full name</mat-label>
+                            <input matInput formControlName="name" autocomplete="off"
+                                [ngClass]="{ 'is-invalid': submitted && controls.name.errors }">
+                            <mat-error *ngIf="submitted && controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="controls.password.errors?.required">
+                                    Name is required
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field appearance="standard" fxFlex.lg="40" fxFlex="90">
-                <mat-label>Enter your email address</mat-label>
-                <input matInput formControlName="email" autocomplete="off"
-                    [ngClass]="{ 'is-invalid': submitted && controls.email.errors }">
-                <mat-error *ngIf="submitted && controls.email.errors" class="invalid-feedback">
-                    <div *ngIf="controls.email.errors?.required">
-                        Email is required
+                    <div class="form-group">
+                        <mat-form-field appearance="standard" fxFlex="90">
+                            <mat-label>Enter your email address</mat-label>
+                            <input matInput formControlName="email" autocomplete="off"
+                                [ngClass]="{ 'is-invalid': submitted && controls.email.errors }">
+                            <mat-error *ngIf="submitted && controls.email.errors" class="invalid-feedback">
+                                <div *ngIf="controls.email.errors?.required">
+                                    Email is required
+                                </div>
+                                <div *ngIf="controls.email.errors?.email">
+                                    Please enter a valid email address
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                    <div *ngIf="controls.email.errors?.email">
-                        Please enter a valid email address
+                    <div class="form-group">
+                        <mat-form-field appearance="standard" fxFlex="90">
+                            <mat-label>Please enter your password</mat-label>
+                            <input matInput formControlName="password" autocomplete="new-password"
+                                [type]="hidePassword ? 'password' : 'text'"
+                                [ngClass]="{ 'is-invalid': submitted && controls.password.errors }">
+                            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="accent"
+                                type="button">
+                                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="submitted && controls.password.errors" class="invalid-feedback">
+                                <div *ngIf="controls.password.errors?.required">
+                                    Password is required
+                                </div>
+                                <div *ngIf="controls.password.errors?.minlength">
+                                    Password must be at least 12 characters long
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field appearance="standard" fxFlex.lg="40" fxFlex="90">
-                <mat-label>Please enter your password</mat-label>
-                <input matInput formControlName="password" autocomplete="new-password"
-                    [type]="hidePassword ? 'password' : 'text'"
-                    [ngClass]="{ 'is-invalid': submitted && controls.password.errors }">
-                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" color="accent" type="button">
-                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-                <mat-error *ngIf="submitted && controls.password.errors" class="invalid-feedback">
-                    <div *ngIf="controls.password.errors?.required">
-                        Password is required
+                    <div>
+                        <button mat-raised-button type="submit" color="primary">Register</button>
                     </div>
-                    <div *ngIf="controls.password.errors?.minlength">
-                        Password must be at least 12 characters long
-                    </div>
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div>
-            <button mat-raised-button type="submit" color="primary">Register</button>
-        </div>
-    </form>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

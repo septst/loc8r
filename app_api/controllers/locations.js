@@ -92,7 +92,7 @@ const locationsCreate = (req, res, next) => {
 
 const locationsReadOne = (req, res, next) => {
 
-    if (objectId.isValid(locationId)) {
+    if (objectId.isValid(req.params.locationId)) {
         locationModel
             .findById(req.params.locationId)
             .exec((err, location) => {

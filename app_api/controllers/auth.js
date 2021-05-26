@@ -25,7 +25,7 @@ const register = (req, res, next) => {
     })
 
 };
-const login = (req, res) => {
+const login = (req, res, next) => {
     if (!req.body.email || !req.body.password) {
         return next(new AppBadRequestError("The user already exists."));
     }

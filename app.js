@@ -59,8 +59,8 @@ app.use('/api', (req, res, next) => {
 
 app.use('/api', apiRouter);
 
-// configure error logging
-app.use(logger.httpErrorLogger);
+// // configure error logging
+// app.use(logger.httpErrorLogger);
 
 
 // app.get(/(\/about)  | (\/location\/[A-Za-z0-9]{24})| (\/s+)/, function (req, res, next) {
