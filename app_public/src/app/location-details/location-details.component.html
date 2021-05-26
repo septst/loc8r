@@ -41,26 +41,28 @@
                 </mat-card>
             </div>
         </div>
-        <div fxFlex="40" fxLayoutAlign="start start">
+        <div fxFlex="40">
             <mat-card class="map">
                 <mat-card-header>
                     <mat-card-title>Location Map</mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="card-content">
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=17&size=300x240&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=14&size=250x200&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
                         mat-card-image />
                 </mat-card-content>
             </mat-card>
         </div>
         <div fxFlex="30">
             <div fxFlexLayout="column">
-                <div fxFlexLayout="row">
-                    <app-rating-stars [rating]="location.rating" [displayRating]="true"
-                        [reviewsCount]="location.reviews.length">
-                    </app-rating-stars>
-                </div>
                 <div>
                     <mat-card>
+                        <div class="rating-summary" fxFlexLayout="column" fxLayoutAlign="center center">
+                            <div>
+                                <app-rating-stars [rating]="location.rating" [displayRating]="true"
+                                    [reviewsCount]="location.reviews.length">
+                                </app-rating-stars>
+                            </div>
+                        </div>
                         <mat-card-header>
                             <mat-card-title>Customer reviews</mat-card-title>
                         </mat-card-header>

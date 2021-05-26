@@ -2,21 +2,11 @@
 /* Commands */
 /***************************************************/
 
-//install bootstrap
-npm install --save bootstrap 
-
-//install fontawesome
-npm install --save @fortawesome/fontawesome-free
-
 //install jquery
 npm install --save jquery
 
 //install jquery dom
 npm install --save-dev --save-exact jsdom jsdom-global
-
-//use the scrips and css from node modules
-https://stackoverflow.com/questions/26773767/purpose-of-installing-twitter-bootstrap-through-npm
-
 
 git add --all
 
@@ -31,36 +21,12 @@ npm i mongoose
 //to install readline for windows
 npm install --save readline
 
-//navigate to 
-C:\Users\Parthiban.Sekar\Downloads\mongodb-database-tools-windows-x86_64-100.3.1\mongodb-database-tools-windows-x86_64-100.3.1\bin
 
-//dump data
-mongodump -d Loc8r -o C:\MEAN\momgo_dump
-
-//restore data
-mongorestore --uri mongodb+srv://loc8ruser:Dostoevsky@loc8r.rfeuf.mongodb.net/master-dev C:\MEAN\momgo_dump\Loc8r
-
-//copy db
-mongodump --archive="mongodump-test-db" --db=Loc8r
-
-mongorestore --archive="mongodump-test-db" --nsFrom='Loc8r.*' --nsTo='master-dev.*'
-
-
-//set env as production
-$env:NODE_ENV="production"
-$env:MONGODB_URI='mongodb+srv://loc8ruser:Dostoevsky@loc8r.rfeuf.mongodb.net/'
-$env:GOOGLE_API_KEY="AIzaSyBQI3HH1w6dv7ihEcwdjYj65x_bScZT1IA"
-$env:JWT_SECRET="IamSoFreakingMeanThatYouWontBelieve"
-
-netstat -ano | findstr :3000
-tskill pid
 
 //create angular project
 $ ng new loc8r-public --skipGit=true –defaults=true –directory app_public
 
 npm install --save-dev @angular-devkit/build-angular
-
-
 
 ng update --all --force
 
@@ -70,10 +36,15 @@ npm i -g npm-check-updates
 ncu -u
 npm install
 
-
-
 ng add @angular/material
 
 npm install --global npm@6
 
 npm install @angular/flex-layout -save
+
+
+ $ npm install winston --save
+ $ npm install winston-mongodb --save
+npm install winston express-winston --save
+
+npm install express-async-errors --save
