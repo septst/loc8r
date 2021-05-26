@@ -1,20 +1,19 @@
-const { AppError } = require("../utils/errors")
+const { AppError } = require("../utils/errors");
+const logger = require("./logger");
 
 const handleErrors = (err, req, res, next) => {
-
-    if (err instanceof AppError) {
-        return res
-            .status(err.getCode())
-            .json({
-                message: err.message
-            });
+    const statusCode = err.getCode();
+    if (statusCode < 500) {
+        logger.warn(`${err.message}`);
     } else {
-        return res
-            .status(500)
-            .json({
-                message: err.message
-            });
+        logger.error(`${err.message} ${err.stack}`);
     }
+
+    return res
+        .status(statusCode)
+        .json({
+            message: err.message
+        });
 }
 
 module.exports = handleErrors;

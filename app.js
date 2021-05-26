@@ -4,11 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const dom = require('jsdom-global')();
 const favicon = require('favicons');
-const cors = require('cors');
 const passport = require('passport');
-const logger = require('./logger');
 const AppError = require('./app_api/utils/errors');
-
+const config = require('./app_api/configs/config');
+const morgan = require('morgan');
 //handle async errors
 require('express-async-errors');
 //load env
@@ -17,11 +16,18 @@ require('dotenv').config();
 require('./app_api/models/db');
 //passport config
 require('./app_api/configs/passport');
+//create logger
+const logger = require('./app_api/middlewares/logger');
+
 
 const apiRouter = require('./app_api/routes/index');
 const handleErrors = require('./app_api/middlewares/handleErrors');
+const winston = require('winston');
 
 const app = express();
+
+app.use(morgan(":method :url :status :res[content-length] - :response-time ms", { "stream": logger.stream}));
+// app.use(logger);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
@@ -40,9 +46,6 @@ app.use('/static', express.static(path.join(__dirname, '/node_modules/@fortaweso
 
 //initialize passport config
 app.use(passport.initialize());
-
-//cors
-// app.use(cors());
 
 app.use('/api', (req, res, next) => {
   const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000'];
