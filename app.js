@@ -16,7 +16,7 @@ require('dotenv').config();
 //mongo connection script
 require('./app_api/models/db');
 //passport config
-require('./app_api/utils/passport');
+require('./app_api/configs/passport');
 
 const apiRouter = require('./app_api/routes/index');
 const handleErrors = require('./app_api/middlewares/handleErrors');
