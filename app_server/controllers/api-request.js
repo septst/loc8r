@@ -8,8 +8,8 @@ class apiOptionsBuilder{
         this.apiOptions.method = "GET";
     }
 
-    server = process.env.NODE_ENV === 'production' ? 
-        'https://ps-loc8r.herokuapp.com':
+    server = process.env.APPLICATION_ENV === 'production' ? 
+        'https://newlocator.herokuapp.com':
         'http://localhost:3000';
     
     // server = 'http://localhost:3000';

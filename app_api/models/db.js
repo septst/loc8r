@@ -6,7 +6,7 @@ const log = console.log;
 let mainDbUri = 'mongodb://127.0.0.1:27017/loc8r';
 let logDbUri = 'mongodb://127.0.0.1:27017/loc8r-log';
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.APPLICATION_ENV === 'production') {
     log(chalk.red('Running in production environment'));
     const mongoUri = process.env.MONGODB_URI;
     mainDbUri = mongoUri + 'master-dev';
