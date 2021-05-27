@@ -1,0 +1,10 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div fxFlex="100" fxLayout.lt-md="50">
+        <app-log-config (loggerLevelChange)="handleLogLevelChange($event)"
+            (disableFileDetails)="handleDisableFileDetails($event)" (serverLogging)="serverLogging($event)">
+        </app-log-config>
+    </div>
+    <div>
+
+    </div>
+</div>

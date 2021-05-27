@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { StorageService } from '../storage.service';
 import { ThemingService } from '../theming.service';
+
+import { LogEvent } from '../log-event';
 import { User } from '../user';
 
 @Component({
@@ -43,15 +45,15 @@ export class FrameworkComponent implements OnInit {
     this.themingSubscription.unsubscribe();
   }
 
-  private applyDefaultTheme(){
-    console.log("Applying theme selection");      
-    if(this.storageService.getItemByKey(this.darkModeKey)){
+  private applyDefaultTheme() {
+    console.log("Applying theme selection");
+    if (this.storageService.getItemByKey(this.darkModeKey)) {
       this.themingService.theme.next("dark-theme");
-    }else{
+    } else {
       this.themingService.theme.next("light-theme");
     }
   }
-  
+
   private applyThemeOnOverlays() {
     const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
     const themeClassesToRemove = Array.from(this.themingService.themes);
@@ -77,5 +79,4 @@ export class FrameworkComponent implements OnInit {
     const user: User = this.authService.getCurrentUser();
     return user.name || "Guest";
   }
-
 }
