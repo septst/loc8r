@@ -5,7 +5,7 @@ import { NgxLoggerLevel } from 'ngx-logger';
 @Component({
   selector: 'app-log-config',
   templateUrl: './log-config.component.html',
-  styleUrls: ['./log-config.component.scss']
+  styleUrls: ['./log-config.component.css']
 })
 
 export class LogConfigComponent {
@@ -21,9 +21,6 @@ export class LogConfigComponent {
   @Output()
   serverLogging: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  /**
-   * Get the chip color based on the current logger level configuration
-   */
   get loggerColor(): string {
     switch (this.currentLogLevel) {
       case NgxLoggerLevel.TRACE:
@@ -44,17 +41,12 @@ export class LogConfigComponent {
     }
   }
 
-  /**
-   * Sets the current log level of the components then emits the new level to the parent component
-   * @param newLevel The new logger level value that will be emitted
-   */
   handleButtonClick(newLevel: NgxLoggerLevel) {
     this.currentLogLevel = newLevel;
-
     this.loggerLevelChange.emit(this.currentLogLevel);
   }
 
-  disableFileDetailsChange(change: MatSlideToggleChange) {
+  disableFileDetailsChange(change: MatSlideToggleChange) {    
     this.disableFileDetails.emit(change.checked);
   }
 

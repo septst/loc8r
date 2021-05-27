@@ -1,0 +1,11 @@
+.log-levels{
+    margin-top: 1vw !important;
+}
+
+.log-levels *{
+    margin-top: 1vw !important;
+}
+
+.log-slides *{
+    margin-top: 2vh;
+}

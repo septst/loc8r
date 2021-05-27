@@ -22,7 +22,8 @@
                         *ngIf="!darkModeOn">
                         <mat-icon>dark_mode</mat-icon>
                     </button>
-                    <button mat-button (click)="changeTheme('light-theme')" matTooltip="Light mode" class="btn-tool-icon" *ngIf="darkModeOn">
+                    <button mat-button (click)="changeTheme('light-theme')" matTooltip="Light mode"
+                        class="btn-tool-icon" *ngIf="darkModeOn">
                         <mat-icon>light_mode</mat-icon>
                     </button>
                     <button mat-button class="btn-tool-icon" matTooltip="Settings" routerLink="/settings">
@@ -30,6 +31,12 @@
                     </button>
                 </div>
                 <div fxShow fxHide.gt-sm>
+                    <button fxShow fxHide.gt-sm (click)="changeTheme('dark-theme')" *ngIf="!darkModeOn" mat-button>
+                        <mat-icon>dark_mode</mat-icon>
+                    </button>
+                    <button fxShow fxHide.gt-sm (click)="changeTheme('light-theme')" *ngIf="darkModeOn" mat-button>
+                        <mat-icon>light_mode</mat-icon>
+                    </button>
                     <button mat-icon-button fxShow fxHide.gt-sm [matMenuTriggerFor]="menuSm">
                         <mat-icon>menu</mat-icon>
                     </button>
@@ -41,6 +48,8 @@
                             <button routerLink="/home" color="primary" mat-button>Home</button>
                             <mat-divider></mat-divider>
                             <button routerLink="/about" color="primary" mat-button>About</button>
+                            <mat-divider></mat-divider>
+                            <button routerLink="/settings" color="primary" mat-button>Settings</button>
                         </mat-nav-list>
                     </mat-menu>
                 </div>
@@ -52,13 +61,6 @@
         <div *ngIf="isLoggedIn()" class="accent-color">
             Hello, you are now logged in as {{getCurrentUserName()}}.
         </div>
-        <!-- <div class="controls">
-            <h3>Please open your console to see the output of the demo</h3>
-            <app-logger (logToConsole)="handleLog($event)"></app-logger>
-            <app-log-config (loggerLevelChange)="handleLogLevelChange($event)"
-                (disableFileDetails)="handleDisableFileDetails($event)" (serverLogging)="serverLogging($event)">
-            </app-log-config>
-        </div> -->
         <router-outlet>
         </router-outlet>
     </main>
@@ -67,18 +69,11 @@
         <mat-divider></mat-divider>
         <div fxLayout="row">
             <div fxLayoutAlign="start" class="accent-color">
-                <button fxShow fxHide.gt-sm color="primary" (click)="changeTheme('dark-theme')" *ngIf="!darkModeOn"
-                    mat-button>
-                    <img src="../../assets/icons/moon.svg" class="moon">
-                </button>
-                <button fxShow fxHide.gt-sm color="primary" (click)="changeTheme('light-theme')" *ngIf="darkModeOn"
-                    mat-button>
-                    <img src="../../assets/icons/sun.svg" class="sun">
-                </button>
+                &nbsp;
             </div>
             <span class="menu-spacer"></span>
             <div fxLayoutAlign="end center" class="accent-color">
-                <span>&copy; Getting Mean - Parthiban Sekar 2021</span>
+                <span>&copy; Mean demo - Parthiban Sekar 2021</span>
             </div>
         </div>
     </footer>
