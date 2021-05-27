@@ -34,7 +34,7 @@ mat-form-field {
   flex: 1 1 auto;
 }
 
-.mat-form-field-wrapper .ng-star-inserted{
+.mat-form-field-wrapper .ng-star-inserted {
   font-size: 14pt !important;
 }
 
@@ -43,8 +43,15 @@ mat-form-field {
   font-size: 14pt !important;
 }
 
-.mat-error{
+.mat-error {
   font-weight: normal;
+}
+
+.btn-tool-icon {
+  margin-right: 1vw !important;
+  padding: 0 !important;
+  min-width: 2rem !important;
+  min-height: 2rem !important;
 }
 
 .sun,

@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 //materials
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -36,6 +37,9 @@ import { LoginComponent } from './login/login.component';
 import { DistancePipe } from './distance.pipe';
 import { AddLineBreaksPipe } from './add-line-breaks.pipe';
 import { MostRecentFirstPipe } from './most-recent-first.pipe';
+import { LogConfigComponent } from './log-config/log-config.component';
+import { LoggerFormComponent } from './logger-form/logger-form.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import { MostRecentFirstPipe } from './most-recent-first.pipe';
     MostRecentFirstPipe,
     LoaderComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LogConfigComponent,
+    LoggerFormComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +72,11 @@ import { MostRecentFirstPipe } from './most-recent-first.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.DEBUG,
+    })
   ],
   exports: [LoaderComponent],
   providers: [

@@ -4,6 +4,9 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { StorageService } from '../storage.service';
 import { ThemingService } from '../theming.service';
+import { NgxLoggerLevel, NGXLogger } from 'ngx-logger';
+
+import { LogEvent } from '../log-event';
 import { User } from '../user';
 
 @Component({
@@ -23,7 +26,8 @@ export class FrameworkComponent implements OnInit {
     private authService: AuthService,
     private themingService: ThemingService,
     private storageService: StorageService,
-    private overlayContainer: OverlayContainer) { }
+    private overlayContainer: OverlayContainer,
+    private logger: NGXLogger) { }
 
   @HostBinding('class') public cssClass: string;
 
@@ -43,15 +47,15 @@ export class FrameworkComponent implements OnInit {
     this.themingSubscription.unsubscribe();
   }
 
-  private applyDefaultTheme(){
-    console.log("Applying theme selection");      
-    if(this.storageService.getItemByKey(this.darkModeKey)){
+  private applyDefaultTheme() {
+    console.log("Applying theme selection");
+    if (this.storageService.getItemByKey(this.darkModeKey)) {
       this.themingService.theme.next("dark-theme");
-    }else{
+    } else {
       this.themingService.theme.next("light-theme");
     }
   }
-  
+
   private applyThemeOnOverlays() {
     const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
     const themeClassesToRemove = Array.from(this.themingService.themes);
@@ -76,6 +80,60 @@ export class FrameworkComponent implements OnInit {
   public getCurrentUserName(): string {
     const user: User = this.authService.getCurrentUser();
     return user.name || "Guest";
+  }
+
+  //logging methods
+  /**
+   * Updates the logger config to the new log level
+   * @param newLevel
+   */
+  handleLogLevelChange(newLevel: NgxLoggerLevel) {
+    const updatedConfig = this.logger.getConfigSnapshot();
+    updatedConfig.level = newLevel;
+    updatedConfig.serverLogLevel = newLevel;
+    this.logger.updateConfig(updatedConfig);
+  }
+
+  /**
+   * Logs the user input using NGXLogger
+   * @param log
+   */
+  handleLog(log: LogEvent) {
+    switch (log.logType) {
+      case NgxLoggerLevel.TRACE:
+        this.logger.trace(log.logMessage);
+        break;
+      case NgxLoggerLevel.DEBUG:
+        this.logger.debug(log.logMessage);
+        break;
+      case NgxLoggerLevel.INFO:
+        this.logger.info(log.logMessage);
+        break;
+      case NgxLoggerLevel.LOG:
+        this.logger.log(log.logMessage);
+        break;
+      case NgxLoggerLevel.WARN:
+        this.logger.warn(log.logMessage);
+        break;
+      case NgxLoggerLevel.ERROR:
+        this.logger.error(log.logMessage);
+        break;
+      case NgxLoggerLevel.FATAL:
+        this.logger.fatal(log.logMessage);
+        break;
+    }
+  }
+
+  handleDisableFileDetails(disableFileDetails: boolean) {
+    const updatedConfig = this.logger.getConfigSnapshot();
+    updatedConfig.disableFileDetails = disableFileDetails;
+    this.logger.updateConfig(updatedConfig);
+  }
+
+  serverLogging(enabled: boolean) {
+    const updatedConfig = this.logger.getConfigSnapshot();
+    updatedConfig.serverLoggingUrl = enabled ? '/dummyURL' : '';
+    this.logger.updateConfig(updatedConfig);
   }
 
 }
