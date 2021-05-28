@@ -12,15 +12,11 @@
             </div>
         </div>
     </mat-card-header>
-    <mat-card-content class="card-content" fxLayout="column" fxLayoutGap="2vh" fxLayoutAlign="start space-around">
+    <mat-card-content class="card-content" fxLayout="column" fxLayoutGap="2vh" fxLayoutAlign.lt-sm="start center">
         <div fxLayout="row wrap" fxLayoutGap="1vw" class="log-levels">
-            <button mat-flat-button color="primary" (click)="handleButtonClick(NgxLoggerLevel.TRACE)">Trace</button>
-            <button mat-flat-button color="primary" (click)="handleButtonClick(NgxLoggerLevel.DEBUG)">Debug</button>
-            <button mat-flat-button color="accent" (click)="handleButtonClick(NgxLoggerLevel.INFO)">Info</button>
-            <button mat-flat-button color="accent" (click)="handleButtonClick(NgxLoggerLevel.LOG)">Log</button>
-            <button mat-flat-button color="warn" (click)="handleButtonClick(NgxLoggerLevel.WARN)">Warn</button>
-            <button mat-flat-button color="warn" (click)="handleButtonClick(NgxLoggerLevel.ERROR)">Error</button>
             <button mat-stroked-button (click)="handleButtonClick(NgxLoggerLevel.OFF)">Off</button>
+            <button mat-flat-button color="accent" (click)="handleButtonClick(NgxLoggerLevel.INFO)">Info</button>
+            <button mat-flat-button color="warn" (click)="handleButtonClick(NgxLoggerLevel.ERROR)">Error</button>
         </div>
         <div fxLayout="column" class="log-slides">
             <mat-slide-toggle (change)="disableFileDetailsChange($event)" color="primary"
