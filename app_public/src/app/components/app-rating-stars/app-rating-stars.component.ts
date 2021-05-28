@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CounterService } from '../services/counter.service';
+import { CounterService } from '../../services/counter.service';
 @Component({
   selector: 'app-rating-stars',
   templateUrl: './app-rating-stars.component.html',

@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {NGXLogger, NgxLoggerLevel} from 'ngx-logger';
 
-import {LogEvent} from '../models/log-event';
+import {LogEvent} from '../../models/log-event';
 
 export interface LoggerSelectionOption {
   value: NgxLoggerLevel;

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { DetailsPageComponent } from './details-page/details-page.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { SettingsComponent } from './settings/settings.component';
+import { AboutComponent } from '../components/about/about.component';
+import { DetailsPageComponent } from '../components/details-page/details-page.component';
+import { HomepageComponent } from '../components/homepage/homepage.component';
+import { LoginComponent } from '../components/login/login.component';
+import { RegisterComponent } from '../components/register/register.component';
+import { SettingsComponent } from '../components/settings/settings.component';
 
 const routes: Route[] = [
   { path: "", redirectTo: "/home", pathMatch: "full" },

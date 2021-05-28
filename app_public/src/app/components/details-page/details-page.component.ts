@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { DataService } from '../services/data.service';
-import { Location } from '../models/location';
+import { DataService } from '../../services/data.service';
+import { Location } from '../../models/location';
 
 @Component({
   selector: 'app-details-page',

@@ -2,9 +2,9 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { HistoryService } from '../services/history.service';
-import { User } from '../models/user';
+import { AuthService } from '../../services/auth.service';
+import { HistoryService } from '../../services/history.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-register',

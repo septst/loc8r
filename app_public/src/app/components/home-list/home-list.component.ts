@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { DataService } from '../services/data.service';
-import { GeolocationService } from '../services/geolocation.service';
-import { Location } from '../models/location';
+import { DataService } from '../../services/data.service';
+import { GeolocationService } from '../../services/geolocation.service';
+import { Location } from '../../models/location';
 
 @Component({
   selector: 'app-home-list',
