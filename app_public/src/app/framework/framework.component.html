@@ -61,6 +61,13 @@
         <div *ngIf="isLoggedIn()" class="accent-color">
             Hello, you are now logged in as {{getCurrentUserName()}}.
         </div>
+        <div class="controls">
+            <!-- <h3>Please open your console to see the output of the demo</h3>
+            <app-logger (logToConsole)="handleLog($event)"></app-logger>
+            <app-log-config (loggerLevelChange)="handleLogLevelChange($event)"
+                (disableFileDetails)="handleDisableFileDetails($event)" (serverLogging)="serverLogging($event)">
+            </app-log-config> -->
+        </div>
         <router-outlet>
         </router-outlet>
     </main>

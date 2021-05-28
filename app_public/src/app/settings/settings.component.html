@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div fxFlex="100" fxLayout.lt-md="50">
+    <div fxFlex="100" fxLayout.lt-md="50" fxLayoutAlign.lt-sm="center center">
         <app-log-config (loggerLevelChange)="handleLogLevelChange($event)"
             (disableFileDetails)="handleDisableFileDetails($event)" (serverLogging)="serverLogging($event)">
         </app-log-config>
