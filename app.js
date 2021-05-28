@@ -22,11 +22,11 @@ const logger = require('./app_api/middlewares/logger');
 
 const apiRouter = require('./app_api/routes/index');
 const handleErrors = require('./app_api/middlewares/handleErrors');
-const winston = require('winston');
-
+const { AppNotFoundError } = require('./app_api/utils/errors');
 const app = express();
 
-app.use(morgan(":method :url :status :res[content-length] - :response-time ms", { "stream": logger.stream}));
+app.use(morgan(":method :url :status :res[content-length] - :response-time ms",
+  { "stream": logger.stream }));
 // app.use(logger);
 
 // view engine setup
@@ -57,18 +57,25 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
-//configure http calls logging
-// app.use(logger.httpInfoLogger);
 
 app.use('/api', apiRouter);
 
-// // configure error logging
-// app.use(logger.httpErrorLogger);
-
-
-// app.get(/(\/about)  | (\/location\/[A-Za-z0-9]{24})| (\/s+)/, function (req, res, next) {
-app.get("*", function (req, res, next) {
+let allowedPaths = [
+  "/home",
+  "/login",
+  "/register",
+  "/about",
+  "/settings",
+  "/location/[a-z0-9]{24}"
+]
+let allowedRoutes = new RegExp("(" + allowedPaths.join(")|(\\") + ")", "i");
+app.get(allowedRoutes, function (req, res, next) {
   res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+});
+
+//everything else goes to error
+app.get("*", function (req, res, next) {
+  return next(new AppNotFoundError("Invalid route"));
 });
 
 app.use(handleErrors);

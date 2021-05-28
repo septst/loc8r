@@ -48,3 +48,7 @@ npm install @angular/flex-layout -save
 npm install winston express-winston --save
 
 npm install express-async-errors --save
+
+netstat -ano | findstr :3000
+
+askkill /PID xxx /F

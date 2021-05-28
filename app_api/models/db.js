@@ -83,5 +83,8 @@ process.on('SIGTERM', () => {
 
 connect(mainDbUri);
 
+//add models
 require('./locations');
 require('./users');
+require('./logs');
+require('./audits');
