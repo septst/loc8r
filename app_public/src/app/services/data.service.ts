@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Location, Review } from './location';
+import { Location, Review } from '../models/location';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { BROWSER_STORAGE } from './storage';
+import { BROWSER_STORAGE } from '../utils/storage';
 
 @Injectable({
   providedIn: 'root'

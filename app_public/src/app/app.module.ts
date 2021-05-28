@@ -29,14 +29,13 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AppRatingStarsComponent } from './app-rating-stars/app-rating-stars.component';
 import { LocationDetailsComponent } from './location-details/location-details.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
-import { LoaderComponent } from './loader/loader.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 
 //pipes
-import { DistancePipe } from './distance.pipe';
-import { AddLineBreaksPipe } from './add-line-breaks.pipe';
-import { MostRecentFirstPipe } from './most-recent-first.pipe';
+import { DistancePipe } from './pipes/distance.pipe';
+import { AddLineBreaksPipe } from './pipes/add-line-breaks.pipe';
+import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
 import { LogConfigComponent } from './log-config/log-config.component';
 import { LoggerFormComponent } from './logger-form/logger-form.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -55,7 +54,6 @@ import { SettingsComponent } from './settings/settings.component';
     LocationDetailsComponent,
     DetailsPageComponent,
     MostRecentFirstPipe,
-    LoaderComponent,
     RegisterComponent,
     LoginComponent,
     LogConfigComponent,
@@ -78,7 +76,6 @@ import { SettingsComponent } from './settings/settings.component';
       serverLogLevel: NgxLoggerLevel.DEBUG,
     })
   ],
-  exports: [LoaderComponent],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }
   ],

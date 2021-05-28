@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { BROWSER_STORAGE } from './storage';
+import { BROWSER_STORAGE } from '../utils/storage';
 
 @Injectable({
   providedIn: 'root'

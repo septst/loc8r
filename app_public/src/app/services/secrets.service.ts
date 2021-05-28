@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { KeySecret } from './location';
+import { KeySecret } from '../models/location';
 
 @Injectable({
   providedIn: 'root'

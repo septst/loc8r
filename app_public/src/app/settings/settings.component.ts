@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { NGXLogger, NgxLoggerLevel } from 'ngx-logger';
-import { LogEvent } from '../log-event';
+import { LogEvent } from '../models/log-event';
 
 @Component({
   selector: 'app-settings',

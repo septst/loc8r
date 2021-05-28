@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { DataService } from '../data.service';
-import { GeolocationService } from '../geolocation.service';
-import { LoaderService } from '../loader.service';
-import { Location } from '../location';
+import { DataService } from '../services/data.service';
+import { GeolocationService } from '../services/geolocation.service';
+import { Location } from '../models/location';
 
 @Component({
   selector: 'app-home-list',
@@ -15,8 +14,7 @@ export class HomeListComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private geolocationService: GeolocationService,
-    private loaderService: LoaderService) { }
+    private geolocationService: GeolocationService) { }
 
   public locations$: Observable<Location[]>;
 

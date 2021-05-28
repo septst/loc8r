@@ -1,12 +1,11 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../auth.service';
-import { StorageService } from '../storage.service';
-import { ThemingService } from '../theming.service';
+import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
+import { ThemingService } from '../services/theming.service';
 
-import { LogEvent } from '../log-event';
-import { User } from '../user';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-framework',

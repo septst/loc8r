@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-import { DataService } from '../data.service';
-import { SecretsService } from '../secrets.service';
-import { Location, Review } from '../location';
-import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { DataService } from '../services/data.service';
+import { SecretsService } from '../services/secrets.service';
+import { Location, Review } from '../models/location';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-location-details',
