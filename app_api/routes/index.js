@@ -6,6 +6,7 @@ const ctrlLocations = require('../controllers/locations');
 const ctrlReviews = require('../controllers/reviews');
 const ctrlSecrets = require('../controllers/secrets');
 const ctrlAuth = require('../controllers/auth');
+const ctrlLog = require('../controllers/log');
 
 const auth = expressJwt({
     secret: process.env.JWT_SECRET,
@@ -43,5 +44,10 @@ router
 router
     .route('/secrets/:key')
     .get(ctrlSecrets.getSecretByKey);
+
+//log
+router
+    .route('/log')
+    .post(ctrlLog.logWrite);
 
 module.exports = router;

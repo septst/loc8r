@@ -9,11 +9,20 @@ const auditSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    LoginSuccess: {
+    loginSuccess: {
         type: Boolean,
         required: true
     },
-    Errors: String
+    loginErrors: String,
+    // active: Boolean, needa new service called logout
+    attempts: Number,
+    sessionDuration: Number
 })
 
-mongoose.model("Aduit", auditSchema);
+auditSchema.methods.addLoginErrors = function(loginErrors){
+    if(loginErrors){
+        this.loginErrors = loginErrors;
+    }
+}
+
+mongoose.model("Audit", auditSchema);
