@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BROWSER_STORAGE } from '../utils/storage';
+import { LoggingService } from './logging.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class DataService {
 
   constructor(
     private http: HttpClient,
+    private loggingService: LoggingService,
     @Inject(BROWSER_STORAGE) private storage: Storage
   ) { }
 
@@ -57,8 +59,9 @@ export class DataService {
         }));
   }
 
-  public handleError(url: string, error: any): Promise<any> {
-    console.error(`Something has gone wrong while calling ${url}. The error details are`, JSON.stringify(error));
-    return Promise.reject(error.message || error);
+  private handleError(url:string, error: any): Promise<any> {
+    this.loggingService.error(
+      `Something has gone wrong while calling ${url}. The error details are ${JSON.stringify(error)}`);
+    return Promise.reject(error.error.message || error);
   }
 }

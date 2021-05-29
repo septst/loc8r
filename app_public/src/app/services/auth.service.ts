@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { AuthResponse } from '../models/auth-response';
 import { StorageService } from './storage.service';
 import { User } from '../models/user';
+import { LoggingService } from './logging.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
 
   constructor(
     private storageService: StorageService,
+    private loggingService: LoggingService,
     private http: HttpClient) {
     this.tokenName = "locator-token";
   }
@@ -70,7 +72,8 @@ export class AuthService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('Something has gone wrong in auth service', JSON.stringify(error));
+    this.loggingService.error(
+      `Something has gone wrong in auth service. The error details are ${JSON.stringify(error)}`);
     return Promise.reject(error.error.message || error);
   }
 }

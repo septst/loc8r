@@ -55,4 +55,12 @@ export class LoggingService {
     currentConfig.serverLoggingUrl = enabled ? this.url : '';
     this.logger.updateConfig(currentConfig);
   }
+
+  info(message: string) {
+    this.logger.info(message);
+  }
+
+  error(errorMessage: string) {
+    this.logger.error(errorMessage);
+  }
 }
