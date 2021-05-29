@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -65,7 +64,6 @@ import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -81,8 +79,4 @@ import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
   ],
   bootstrap: [FrameworkComponent]
 })
-export class AppModule {
-  constructor(private library: FaIconLibrary) {
-    library.addIcons(faStar, farStar, faCheck, faBars, faGithub);
-  }
-}
+export class AppModule {}
