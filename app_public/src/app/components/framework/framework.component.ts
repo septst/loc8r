@@ -36,7 +36,7 @@ export class FrameworkComponent implements OnInit {
       console.log(`Dark mode ${this.darkModeOn ? 'enabled' : 'disabled'}`);
       this.storageService.setItemByKey(this.darkModeKey, this.darkModeOn ? "enabled" : "");
       this.cssClass = theme;
-      this.applyThemeOnOverlays();
+      this.applyThemeOnOverlays(theme);
     });
   }
 
@@ -53,13 +53,13 @@ export class FrameworkComponent implements OnInit {
     }
   }
 
-  private applyThemeOnOverlays() {
+  private applyThemeOnOverlays(theme: string) {
     const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
     const themeClassesToRemove = Array.from(this.themingService.themes);
     if (themeClassesToRemove.length) {
       overlayContainerClasses.remove(...themeClassesToRemove);
     }
-    overlayContainerClasses.add(this.cssClass);
+    overlayContainerClasses.add(theme);
   }
 
   changeTheme(theme: string) {
