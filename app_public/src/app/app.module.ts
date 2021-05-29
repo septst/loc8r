@@ -30,6 +30,9 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { DistancePipe } from './pipes/distance.pipe';
 import { AddLineBreaksPipe } from './pipes/add-line-breaks.pipe';
 import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ReviewsNewComponent } from './components/reviews-new/reviews-new.component';
+import { AppRatingStarsInputComponent } from './components/app-rating-stars-input/app-rating-stars-input.component';
 
 
 @NgModule({
@@ -49,7 +52,10 @@ import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
     RegisterComponent,
     LoginComponent,
     LogConfigComponent,
-    SettingsComponent
+    SettingsComponent,
+    ReviewsComponent,
+    ReviewsNewComponent,
+    AppRatingStarsInputComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+<form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()">
+    <h1 mat-dialog-title class="accent-color">Write a review</h1>
+    <div mat-dialog-content>
+        <small class="warn-color">
+            Please note that all reviews will be screened for detecting
+            any offensive content and spams.</small>
+
+        <div fxLayout="column">
+            <app-app-rating-stars-input [starCount]="5" [rating]="1" (ratingUpdated)="addRating($event)">
+            </app-app-rating-stars-input>
+            <mat-form-field appearance="standard" fxFlex="90" fxLayoutGap="1vh">
+                <mat-label>Review</mat-label>
+                <textarea matInput formControlName="reviewText" rows="2"
+                    [ngClass]="{'is-invalid': reviewSubmitted && controls.reviewText.errors}">
+                </textarea>
+                <mat-hint color="primary" align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+                <mat-hint color="primary" align="end">{{controls.reviewText.value.length}} / 4000</mat-hint>
+                <mat-error *ngIf="reviewSubmitted && controls.reviewText.errors?.required" class="invalid-feedback">
+                    Please write a review.
+                </mat-error>
+                <mat-error *ngIf="reviewSubmitted && controls.reviewText.errors?.maxlength" class="invalid-feedback">
+                    Your review shouldn't exceed 4000 characters.
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-dialog-close color="primary" type="submit" mat-raised-button>Post</button>
+        <button mat-dialog-close color="primary" mat-raised-button>Close</button>
+    </div>
+</form>

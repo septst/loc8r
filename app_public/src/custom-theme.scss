@@ -1,6 +1,7 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '~@angular/material' as mat;
+
+@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+@import url( 'https://fonts.googleapis.com/icon?family=Material+Icons');
 
 @import "~@angular/material/theming";
 
@@ -35,6 +36,10 @@
 
   .warn-color {
     color: mat-color($warn) !important;
+  }
+
+  .hint-icon{
+    color: mat-color($primary);
   }
   
   //log levels

@@ -17,25 +17,13 @@ export class LocationDetailsComponent implements OnInit {
 
   public hasDetails: boolean;
   public gApiKey: string = "";
-  public showForm: boolean = false;
-  public formError: string;
-  public addReviewSubscription: any;
-  public reviewForm: FormGroup;
-  public reviewSubmitted: boolean = false;
-  
+    
   constructor(
-    private formBuilder: FormBuilder,
     private dataService: DataService,
     private secretsService: SecretsService,
     private authService: AuthService) { }
 
   ngOnInit(): void {
-
-    this.reviewForm = this.formBuilder.group({
-      rating: ["", Validators.required],
-      reviewText: ["", Validators.required]
-    });
-
     //get G API key
     this.secretsService
       .getSecretByKey("GOOGLE_API_KEY")
@@ -46,46 +34,6 @@ export class LocationDetailsComponent implements OnInit {
       });
   }
 
-  get controls() {
-    return this.reviewForm.controls;
-  }
-
   ngOnDestroy(): void {
-    if (this.addReviewSubscription) {
-      this.addReviewSubscription.unsubscribe();
-    }
-  }
-
-  public onReviewSubmit(): void {
-    this.formError = '';
-    this.reviewSubmitted = true;
-
-    if (this.reviewForm.invalid) {
-      return;
-    }
-
-    const newReview: Review = this.reviewForm.value as Review;
-    newReview.author = this.getUsername();
-
-    this.addReviewSubscription =
-      this.dataService.addReviewById(this.location._id, newReview)
-        .subscribe((review: any) => {
-          console.log("Added your review successfully");
-          let reviews = this.location.reviews.slice(0);
-          reviews.unshift(review);
-          this.location.reviews = reviews;
-          this.reviewSubmitted = false;
-          this.reviewForm.reset();
-        });
-
-  }
-
-  public isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
-
-  public getUsername(): string {
-    const { name } = this.authService.getCurrentUser();
-    return name ? name : 'Guest';
-  }
+  }  
 }
