@@ -12,12 +12,6 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 //materials
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
-//library
-import { faStar, faCheck, faBars } from '@fortawesome/free-solid-svg-icons';
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-
-
 //components
 import { HomeListComponent } from './components/home-list/home-list.component';
 import { FrameworkComponent } from './components/framework/framework.component';
