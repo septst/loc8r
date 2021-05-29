@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-header>
+        <div>
+            <h2 class="accent-color">
+                Logger Configuration
+            </h2>
+        </div>
+    </mat-card-header>
+    <mat-card-content class="card-content" fxLayout="column" fxLayoutGap="2vh" fxLayoutAlign.lt-sm="start start">
+        <div>
+            <mat-button-toggle-group #btnGroupLogLevels="matButtonToggleGroup" [value]="currentLogLevel"
+                (change)="changeLogLevel(btnGroupLogLevels.value)" appearance="legacy" class="log-levels">
+                <mat-button-toggle [value]="NgxLoggerLevel.OFF" class="off">Off</mat-button-toggle>
+                <mat-button-toggle [value]="NgxLoggerLevel.INFO" class="info">Info</mat-button-toggle>
+                <mat-button-toggle [value]="NgxLoggerLevel.ERROR" class="warn">Error</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div fxLayout="column" class="log-slides">
+            <mat-slide-toggle (change)="disableFileDetailsChange($event)" color="primary">Disable file details
+            </mat-slide-toggle>
+        </div>
+        <div>
+            <mat-slide-toggle class="server-logging" (change)="serverLoggingChange($event)" olor="primary"
+                [(ngModel)]="enableServerLogging">Server logging</mat-slide-toggle>
+        </div>
+    </mat-card-content>
+</mat-card>

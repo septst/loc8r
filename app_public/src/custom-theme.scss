@@ -36,6 +36,18 @@
   .warn-color {
     color: mat-color($warn) !important;
   }
+  
+  //log levels
+  .mat-button-toggle-checked {
+   &.info {
+      background-color: mat-color($accent);
+      color: mat-color($accent, default-contrast);
+    }
+    &.warn {
+      background-color: mat-color($warn);
+      color: mat-color($warn, default-contrast);
+    }
+  }
 
   .mat-card-header .mat-card-title {
     font-family: "Lobster", cursive !important;

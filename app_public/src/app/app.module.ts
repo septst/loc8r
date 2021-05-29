@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './materials/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
@@ -20,26 +20,25 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 
 //components
-import { HomeListComponent } from './home-list/home-list.component';
-import { FrameworkComponent } from './framework/framework.component';
-import { AboutComponent } from './about/about.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { PageHeaderComponent } from './page-header/page-header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { AppRatingStarsComponent } from './app-rating-stars/app-rating-stars.component';
-import { LocationDetailsComponent } from './location-details/location-details.component';
-import { DetailsPageComponent } from './details-page/details-page.component';
-import { LoaderComponent } from './loader/loader.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-
+import { HomeListComponent } from './components/home-list/home-list.component';
+import { FrameworkComponent } from './components/framework/framework.component';
+import { AboutComponent } from './components/about/about.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AppRatingStarsComponent } from './components/app-rating-stars/app-rating-stars.component';
+import { LocationDetailsComponent } from './components/location-details/location-details.component';
+import { DetailsPageComponent } from './components/details-page/details-page.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogConfigComponent } from './components/log-config/log-config.component';
+import { LoggerFormComponent } from './components/logger-form/logger-form.component';
+import { SettingsComponent } from './components/settings/settings.component';
 //pipes
-import { DistancePipe } from './distance.pipe';
-import { AddLineBreaksPipe } from './add-line-breaks.pipe';
-import { MostRecentFirstPipe } from './most-recent-first.pipe';
-import { LogConfigComponent } from './log-config/log-config.component';
-import { LoggerFormComponent } from './logger-form/logger-form.component';
-import { SettingsComponent } from './settings/settings.component';
+import { DistancePipe } from './pipes/distance.pipe';
+import { AddLineBreaksPipe } from './pipes/add-line-breaks.pipe';
+import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { SettingsComponent } from './settings/settings.component';
     LocationDetailsComponent,
     DetailsPageComponent,
     MostRecentFirstPipe,
-    LoaderComponent,
     RegisterComponent,
     LoginComponent,
     LogConfigComponent,
@@ -78,7 +76,6 @@ import { SettingsComponent } from './settings/settings.component';
       serverLogLevel: NgxLoggerLevel.DEBUG,
     })
   ],
-  exports: [LoaderComponent],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }
   ],
