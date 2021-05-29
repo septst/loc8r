@@ -1,8 +1,4 @@
-.log-levels{
-    margin-top: 1vw !important;
-}
-
-.log-levels *{
+.log-levels.mat-button-toggle-group{
     margin-top: 1vw !important;
 }
 

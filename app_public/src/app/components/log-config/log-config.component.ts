@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { NgxLoggerLevel } from 'ngx-logger';
+import { LoggingService } from 'src/app/services/logging.service';
 
 @Component({
   selector: 'app-log-config',
@@ -9,48 +10,46 @@ import { NgxLoggerLevel } from 'ngx-logger';
 })
 
 export class LogConfigComponent {
-  @Output()
-  loggerLevelChange: EventEmitter<NgxLoggerLevel> = new EventEmitter();
-  public currentLogLevel: NgxLoggerLevel = NgxLoggerLevel.DEBUG;
 
-  NgxLoggerLevel = NgxLoggerLevel;
+  constructor(
+    private loggingService: LoggingService
+  ) { }
 
-  @Output()
-  disableFileDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
+  ngOnInit(): void {
+    this.getCurrentLogLevel();
+  }
 
-  @Output()
-  serverLogging: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public currentLogLevel: NgxLoggerLevel;
+  public NgxLoggerLevel = NgxLoggerLevel;
+  public enableServerLogging: boolean;
 
   get loggerColor(): string {
     switch (this.currentLogLevel) {
-      case NgxLoggerLevel.TRACE:
-      case NgxLoggerLevel.DEBUG:
-        return 'primary';
-
       case NgxLoggerLevel.INFO:
-      case NgxLoggerLevel.LOG:
         return 'accent';
-
-      case NgxLoggerLevel.WARN:
       case NgxLoggerLevel.ERROR:
-      case NgxLoggerLevel.FATAL:
         return 'warn';
-
       default:
         return '';
     }
   }
 
-  handleButtonClick(newLevel: NgxLoggerLevel) {
+  changeLogLevel(newLevel: NgxLoggerLevel) {
     this.currentLogLevel = newLevel;
-    this.loggerLevelChange.emit(this.currentLogLevel);
+    this.loggingService.changeLogLevel(newLevel);
   }
 
-  disableFileDetailsChange(change: MatSlideToggleChange) {    
-    this.disableFileDetails.emit(change.checked);
+  disableFileDetailsChange(change: MatSlideToggleChange) {
+    this.loggingService.disableFileDetails(change.checked);
   }
 
   serverLoggingChange(change: MatSlideToggleChange) {
-    this.serverLogging.emit(change.checked);
+    this.loggingService.serverLogging(change.checked);
+  }
+
+  getCurrentLogLevel() {
+    const currentLogConfig = this.loggingService.getCurrentLogConfig();
+    this.currentLogLevel = currentLogConfig.level ? currentLogConfig.level : NgxLoggerLevel.INFO;
+    this.enableServerLogging = (currentLogConfig.serverLoggingUrl !== undefined);
   }
 }
