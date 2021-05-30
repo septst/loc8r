@@ -14,7 +14,7 @@
     </mat-card-header>
     <mat-card-content class="card-content">
         <div *ngIf="location.reviews.length">
-            <div *ngFor="let review of location.reviews | mostRecentFirst" fxLayout="column" fxLayoutGap="1vh">
+            <div *ngFor="let review of location.reviews | mostRecentFirst:5" fxLayout="column" fxLayoutGap="1vh">
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
                     <div class="reviewAuthor">{{ review.author }}</div>
                     <div>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div>
-                    <p [innerHTML]="review.reviewText | addLineBreaks" class="reviewText"></p>
+                    <p [innerHTML]="review.reviewText | addLineBreaks | trimText:50" class="reviewText"></p>
                 </div>
             </div>
         </div>

@@ -21,11 +21,17 @@ export class ReviewsComponent implements OnInit {
   }
 
   OpenNewReviewDialog(): void {
-    this.dialog.open(ReviewsNewComponent,
+    const dialogRef = this.dialog.open(
+      ReviewsNewComponent,
       {
         "disableClose": true,
         "data": { "locationId": this.location._id }
       });
+
+      dialogRef.afterClosed().subscribe( data =>
+        //do somehting here later. Need to retrieve reviews as observables.
+        {}
+      );
   }
 
   public isLoggedIn(): boolean {

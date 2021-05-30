@@ -33,6 +33,7 @@ import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewsNewComponent } from './components/reviews-new/reviews-new.component';
 import { AppRatingStarsInputComponent } from './components/app-rating-stars-input/app-rating-stars-input.component';
+import { TrimTextPipe } from './pipes/trim-text.pipe';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { AppRatingStarsInputComponent } from './components/app-rating-stars-inpu
     SettingsComponent,
     ReviewsComponent,
     ReviewsNewComponent,
-    AppRatingStarsInputComponent
+    AppRatingStarsInputComponent,
+    TrimTextPipe
   ],
   imports: [
     BrowserModule,
@@ -77,4 +79,4 @@ import { AppRatingStarsInputComponent } from './components/app-rating-stars-inpu
   ],
   bootstrap: [FrameworkComponent]
 })
-export class AppModule {}
+export class AppModule { }

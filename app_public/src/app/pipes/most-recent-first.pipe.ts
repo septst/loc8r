@@ -5,9 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MostRecentFirstPipe implements PipeTransform {
 
-  transform(reviews: any[]): any[] {
+  transform(reviews: any[], limit: number): any[] {
     if (reviews && reviews.length) {
-      return reviews.sort(this.compare);
+      return reviews.length > limit ?
+        reviews.sort(this.compare).slice(0, limit) :
+        reviews.sort(this.compare);
     }
     return [];
   }
