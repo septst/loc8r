@@ -86,7 +86,7 @@ export class ReviewsNewComponent implements OnInit {
   }
 
   public getUsername(): string {
-    const { name } = this.authService.getCurrentUser();
+    const name = this.authService.getCurrentUser()?.name;
     return name ? name : 'Guest';
   }
 
