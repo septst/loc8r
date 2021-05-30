@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -51,11 +51,10 @@ export class LoginComponent implements OnInit {
 
   private doLogin(user: User): void {
     this.authService.login(user)
-      .then(() => { 
-        console.log("Redirect to =>", this.historyService.getPreLoginUrl());
-        
+      .then(() => {        
         this.router.navigateByUrl(this.historyService.getPreLoginUrl());
         this.quickMessageService.push(`Sign in successful.`);
+        this.authService.changes.next(true);
        })
       .catch((err) => {
         this.loginForm.enable();

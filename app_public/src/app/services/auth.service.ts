@@ -5,6 +5,7 @@ import { AuthResponse } from '../models/auth-response';
 import { StorageService } from './storage.service';
 import { User } from '../models/user';
 import { LoggingService } from './logging.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,14 @@ export class AuthService {
   private tokenName: string = "locator-token";
   private apiBaseUrl = environment.apiBaseUrl;
 
+  public changes: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(
     private storageService: StorageService,
     private loggingService: LoggingService,
     private http: HttpClient) {
     this.tokenName = "locator-token";
+    this.changes = new BehaviorSubject<boolean>(this.isLoggedIn());    
   }
 
   public register(user: User): Promise<any> {
@@ -49,8 +53,8 @@ export class AuthService {
 
   public getCurrentUser(): any {
     if (this.isLoggedIn()) {
-      const { email, name } = JSON.parse(atob(this.getToken().split('.')[1]));
-      return { email, name } as User;
+      const { email, name, isAdmin } = JSON.parse(atob(this.getToken().split('.')[1]));
+      return { email, name, isAdmin } as User;
     }
   }
 
@@ -63,7 +67,7 @@ export class AuthService {
       .catch(this.handleError);
   }
 
-  private getToken(): any {
+  public getToken(): any {
     return this.storageService.getItemByKey(this.tokenName);
   }
 

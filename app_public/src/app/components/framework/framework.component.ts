@@ -7,6 +7,8 @@ import { ThemingService } from '../../services/theming.service';
 
 import { User } from '../../models/user';
 import { QuickMessageService } from 'src/app/services/quick-message.service';
+import { Router } from '@angular/router';
+import { HistoryService } from 'src/app/services/history.service';
 
 @Component({
   selector: 'app-framework',
@@ -16,21 +18,30 @@ import { QuickMessageService } from 'src/app/services/quick-message.service';
 })
 export class FrameworkComponent implements OnInit {
 
+  //private members
   public themes: string[];
   public darkModeOn: boolean = true;
   public themingSubscription: Subscription;
   private darkModeKey: string = "dark-mode";
+
+  //public memebers
+  public currentUser: User;
+  public isLoggedIn: boolean;
+  public isAdmin: boolean;
 
   constructor(
     private authService: AuthService,
     private themingService: ThemingService,
     private storageService: StorageService,
     private quickMessageService: QuickMessageService,
-    private overlayContainer: OverlayContainer) { }
+    private historyService: HistoryService,
+    private overlayContainer: OverlayContainer,
+    private router: Router) { }
 
   @HostBinding('class') public cssClass: string;
 
   ngOnInit(): void {
+    this.GetCurrentUser();
     this.themes = this.themingService.themes;
     this.applyDefaultTheme();
     this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
@@ -40,10 +51,39 @@ export class FrameworkComponent implements OnInit {
       this.cssClass = theme;
       this.applyThemeOnOverlays(theme);
     });
+
+    window.addEventListener("storage", event => {
+
+      if (event.storageArea == localStorage) {
+        if (event.key === 'locator-token') {
+          let token = this.authService.getToken();
+
+          //logged out successfully from other tabs
+          if (token === null) {
+            this.quickMessageService.push("Sign out successful from another tab.");
+            this.authService.changes.next(false);
+          } else if (event.oldValue === null && event.newValue === token) { //Login in other tabs
+            this.quickMessageService.push("Sign in successful from another tab.");
+            this.authService.changes.next(true);
+          }
+          let currentUrl = this.router.url;
+          this.router.navigateByUrl(this.historyService.getPreLoginUrl(), { skipLocationChange: true });
+        }
+      }
+    })
   }
 
   ngOnDestroy() {
     this.themingSubscription.unsubscribe();
+  }
+
+  private GetCurrentUser() {
+    this.authService.changes.subscribe(
+      (status) => {
+        this.currentUser = this.authService.getCurrentUser();
+        this.isLoggedIn = status;
+        this.isAdmin = (this.currentUser?.isAdmin !== undefined && this.currentUser?.isAdmin === true);
+      });
   }
 
   private applyDefaultTheme() {
@@ -70,15 +110,7 @@ export class FrameworkComponent implements OnInit {
 
   public doLogout(): void {
     this.authService.logout();
-    this.quickMessageService.push(`Logout successful.`)
-  }
-
-  public isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
-
-  public getCurrentUserName(): string {
-    const user: User = this.authService.getCurrentUser();
-    return user.name || "Guest";
+    this.quickMessageService.push(`Sign out successful.`)
+    this.authService.changes.next(false);
   }
 }

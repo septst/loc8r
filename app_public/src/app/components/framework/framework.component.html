@@ -12,10 +12,10 @@
                 </div>
                 <span class="menu-spacer"></span>
                 <div fxShow fxHide.lt-md>
-                    <button routerLink="/login" *ngIf="!isLoggedIn()" matTooltip="Sign in" mat-button>
+                    <button routerLink="/login" *ngIf="!isLoggedIn" matTooltip="Sign in" mat-button>
                         <mat-icon>login</mat-icon>
                     </button>
-                    <button *ngIf="isLoggedIn()" (click)="doLogout()" matTooltip="Sign out" mat-button>
+                    <button *ngIf="isLoggedIn" (click)="doLogout()" matTooltip="Sign out" mat-button>
                         <mat-icon>logout</mat-icon>
                     </button>
                     <button mat-button (click)="changeTheme('dark-theme')" matTooltip="Dark mode" class="btn-tool-icon"
@@ -26,7 +26,8 @@
                         class="btn-tool-icon" *ngIf="darkModeOn">
                         <mat-icon>light_mode</mat-icon>
                     </button>
-                    <button mat-button class="btn-tool-icon" matTooltip="Settings" routerLink="/settings">
+                    <button *ngIf="isAdmin" mat-button class="btn-tool-icon" matTooltip="Settings"
+                        routerLink="/settings">
                         <mat-icon>settings</mat-icon>
                     </button>
                 </div>
@@ -42,14 +43,17 @@
                     </button>
                     <mat-menu #menuSm="matMenu">
                         <mat-nav-list>
-                            <button routerLink="/login" *ngIf="!isLoggedIn()" color="primary" mat-button>Sign
+                            <button routerLink="/login" *ngIf="!isLoggedIn" color="primary" mat-button>Sign
                                 in</button>
-                            <mat-divider *ngIf="!isLoggedIn()"></mat-divider>
+                            <mat-divider *ngIf="!isLoggedIn"></mat-divider>
                             <button routerLink="/home" color="primary" mat-button>Home</button>
                             <mat-divider></mat-divider>
                             <button routerLink="/about" color="primary" mat-button>About</button>
-                            <mat-divider></mat-divider>
-                            <button routerLink="/settings" color="primary" mat-button>Settings</button>
+                            <mat-divider *ngIf="isLoggedIn"></mat-divider>
+                            <button *ngIf="isLoggedIn" (click)="doLogout()" color="primary" mat-button>Sign off</button>
+                            <mat-divider *ngIf="isAdmin"></mat-divider>
+                            <button *ngIf="isAdmin" routerLink="/settings" color="primary"
+                                mat-button>Settings</button>
                         </mat-nav-list>
                     </mat-menu>
                 </div>
@@ -58,15 +62,8 @@
     </header>
 
     <main class="content" role="main" fxLayout="column" fxLayoutGap="1vh">
-        <div *ngIf="isLoggedIn()" class="accent-color">
-            Hello, you are now logged in as {{getCurrentUserName()}}.
-        </div>
-        <div class="controls">
-            <!-- <h3>Please open your console to see the output of the demo</h3>
-            <app-logger (logToConsole)="handleLog($event)"></app-logger>
-            <app-log-config (loggerLevelChange)="handleLogLevelChange($event)"
-                (disableFileDetails)="handleDisableFileDetails($event)" (serverLogging)="serverLogging($event)">
-            </app-log-config> -->
+        <div *ngIf="isLoggedIn" class="accent-color">
+            Hello, you are now logged in as {{currentUser.name}}.
         </div>
         <router-outlet>
         </router-outlet>

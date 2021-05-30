@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     hash: String,
-    salt: String
+    salt: String,
+    isAdmin:{
+        type: false,
+        default: false
+    }
 });
 
 userSchema.methods.setPassword = function (password) {
@@ -36,7 +40,8 @@ userSchema.methods.generateJwt = function () {
     return jwt.sign({
         _id: this.id,
         name: this.name,
-        email: this.email
+        email: this.email,
+        isAdmin: this.isAdmin
     }, process.env.JWT_SECRET, {
         expiresIn: "120h"
     })

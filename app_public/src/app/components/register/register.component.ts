@@ -1,5 +1,5 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -60,6 +60,7 @@ export class RegisterComponent implements OnInit {
       .then(() => {
         this.router.navigateByUrl(this.historyService.getPreRegisterUrl());
         this.quickMessageService.push(`Registration successful.`);
+        this.authService.changes.next(true);
       })
       .catch((message) => {
         this.formErrors = message;
