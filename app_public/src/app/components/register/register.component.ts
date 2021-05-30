@@ -1,10 +1,11 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HistoryService } from '../../services/history.service';
 import { User } from '../../models/user';
+import { QuickMessageService } from 'src/app/services/quick-message.service';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private historyService: HistoryService,
+    private quickMessageService: QuickMessageService,
     private router: Router
   ) { }
 
@@ -55,7 +57,11 @@ export class RegisterComponent implements OnInit {
 
   private doRegister(newUser: User): void {
     this.authService.register(newUser)
-      .then(() => this.router.navigateByUrl(this.historyService.getPreRegisterUrl()))
+      .then(() => {
+        this.router.navigateByUrl(this.historyService.getPreRegisterUrl());
+        this.quickMessageService.push(`Registration successful.`);
+        this.authService.changes.next(true);
+      })
       .catch((message) => {
         this.formErrors = message;
         this.registerForm.enable();

@@ -25,12 +25,15 @@ import { DetailsPageComponent } from './components/details-page/details-page.com
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogConfigComponent } from './components/log-config/log-config.component';
-import { LoggerFormComponent } from './components/logger-form/logger-form.component';
 import { SettingsComponent } from './components/settings/settings.component';
 //pipes
 import { DistancePipe } from './pipes/distance.pipe';
 import { AddLineBreaksPipe } from './pipes/add-line-breaks.pipe';
 import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ReviewsNewComponent } from './components/reviews-new/reviews-new.component';
+import { AppRatingStarsInputComponent } from './components/app-rating-stars-input/app-rating-stars-input.component';
+import { TrimTextPipe } from './pipes/trim-text.pipe';
 
 
 @NgModule({
@@ -50,8 +53,11 @@ import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
     RegisterComponent,
     LoginComponent,
     LogConfigComponent,
-    LoggerFormComponent,
-    SettingsComponent
+    SettingsComponent,
+    ReviewsComponent,
+    ReviewsNewComponent,
+    AppRatingStarsInputComponent,
+    TrimTextPipe
   ],
   imports: [
     BrowserModule,
@@ -73,4 +79,4 @@ import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
   ],
   bootstrap: [FrameworkComponent]
 })
-export class AppModule {}
+export class AppModule { }

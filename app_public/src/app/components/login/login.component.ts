@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { QuickMessageService } from 'src/app/services/quick-message.service';
+import { HistoryService } from 'src/app/services/history.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
+    private quickMessageService: QuickMessageService,
+    private historyService: HistoryService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -36,7 +41,7 @@ export class LoginComponent implements OnInit {
   public onLoginSubmit(): void {
     this.formErrors = "";
     this.submitted = true;
-    
+
     if (this.loginForm.invalid) {
       return;
     }
@@ -46,8 +51,12 @@ export class LoginComponent implements OnInit {
 
   private doLogin(user: User): void {
     this.authService.login(user)
-      .then(() => this.router.navigateByUrl("/"))
-      .catch((err) => {       
+      .then(() => {        
+        this.router.navigateByUrl(this.historyService.getPreLoginUrl());
+        this.quickMessageService.push(`Sign in successful.`);
+        this.authService.changes.next(true);
+       })
+      .catch((err) => {
         this.loginForm.enable();
         this.formErrors = err;
       });

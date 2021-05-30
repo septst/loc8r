@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { AppNotFoundError, AppError, AppBadRequestError } = require('../utils/errors');
 const locationModel = mongoose.model('Location');
 const userModel = mongoose.model('User');
+const logger = require('../middlewares/logger');
 
 const getAuthor = (req, res, next, callback) => {
   if (req.payload?.email) {
@@ -13,7 +14,7 @@ const getAuthor = (req, res, next, callback) => {
         } else if (err) {
           return next(new AppError("err.message"));
         }
-        callback(req, res, user.name);
+        callback(req, res, next, user.name);
       });
   } else {
     return next(new AppNotFoundError("User not found"));
@@ -30,9 +31,9 @@ const doSetAverageRating = (location) => {
     location.rating = parseInt(total / count, 10);
     location.save(err => {
       if (err) {
-        console.log(err);
+        logger.error(err);
       } else {
-        console.log(`Average rating updated to ${location.rating}`);
+        logger.log(`Average rating updated to ${location.rating}`);
       }
     });
   }
@@ -51,7 +52,7 @@ const updateAverageRating = (locationId) => {
 
 const doAddReview = (req, res, next, location, author) => {
   if (!location) {
-    throw new AppNotFoundError("Location not found");
+    return next(new AppNotFoundError("Location not found"));
   } else {
     const { rating, reviewText } = req.body;
     location.reviews.push({
@@ -61,7 +62,7 @@ const doAddReview = (req, res, next, location, author) => {
     });
     location.save((err, location) => {
       if (err) {
-        return next(new AppError("err.message"));
+        return next(new AppError(err.message));
       } else {
         updateAverageRating(location._id);
         const newReview = location.reviews.slice(-1).pop();
@@ -86,6 +87,7 @@ const reviewsCreate = (req, res, next) => {
               .status(400)
               .json(err);
           } else {
+            console.log("username -", username);
             doAddReview(req, res, next, location, username);
           }
         });

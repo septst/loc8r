@@ -68,11 +68,19 @@ mat-form-field {
   top: -150%;
 }
 
-// // .mat-form-field-wrapper .ng-star-inserted,
-// .mat-form-field-infix .mat-input-element {
-//     font-size: 14pt !important;
-// }
+.stars {
+  color:#FFD700 !important;
+}
 
-// .mat-form-field-wrapper .ng-star-inserted .mat-error{
-//   font-size: 12pt !important;
-// }
+.big-stars *{
+  font-size: 28px !important;
+}
+
+.star-buttons {
+  @extend .stars;
+  border-radius: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  min-width: 2vw !important;
+  min-height: 2vw !important;
+}

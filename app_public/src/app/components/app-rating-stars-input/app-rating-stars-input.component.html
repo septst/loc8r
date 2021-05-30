@@ -1,0 +1,6 @@
+<div fxLayout="row">
+    <button mat-button *ngFor="let ratingId of counter(starCount); let i=index"
+    class="star-buttons" (click)="onClick(i+1)">
+        <mat-icon>{{showIcon(i)}}</mat-icon>
+    </button>
+</div>

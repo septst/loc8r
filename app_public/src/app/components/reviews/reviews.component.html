@@ -1,0 +1,39 @@
+<mat-card>
+    <div class="rating-summary" fxFlexLayout="column" fxLayoutAlign="center center">
+        <div>
+            <app-rating-stars [rating]="location.rating" [displayRating]="true"
+                [reviewsCount]="location.reviews.length">
+            </app-rating-stars>
+        </div>
+    </div>
+    <mat-card-header>
+        <mat-card-title>Customer reviews
+            <mat-icon matTooltip="Reviews are checked routinely to detect any offensive content and spam."
+                class="hint-icon">help_outline</mat-icon>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+        <div *ngIf="location.reviews.length">
+            <div *ngFor="let review of location.reviews | mostRecentFirst:5" fxLayout="column" fxLayoutGap="1vh">
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                    <div class="reviewAuthor">{{ review.author }}</div>
+                    <div>
+                        <app-rating-stars [rating]="review.rating">
+                        </app-rating-stars>
+                    </div>
+                </div>
+                <div>
+                    <p [innerHTML]="review.reviewText | addLineBreaks | trimText:50" class="reviewText"></p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isLoggedIn();else loginToPost">
+            <button type="button" color="primary" (click)="OpenNewReviewDialog()" mat-raised-button>
+                Write a review
+            </button>
+        </div>
+        <ng-template #loginToPost>
+            <a routerLink="/login" class="embedded-link" mat-button>Sign in to post a review!</a>
+        </ng-template>
+    </mat-card-content>
+</mat-card>

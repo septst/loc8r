@@ -28,7 +28,7 @@ export class HistoryService {
     const excludedUrls = ["/register", "/login"];
     const filtered = this.urls.filter(url => !excludedUrls.includes(url));
     const length = filtered.length;
-    return length > 1 ? filtered[length - 1] : "/";
+    return length > 0 ? filtered[length - 1] : "/";
   }
 
   public getPreRegisterUrl(): string {

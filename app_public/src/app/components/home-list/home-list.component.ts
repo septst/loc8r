@@ -39,7 +39,8 @@ export class HomeListComponent implements OnInit {
     this.message = 'Searching for nearby places...';
     const lat: number = position.coords.latitude;
     const lng: number = position.coords.longitude;
-    this.loggingService.info(`The currest position is ${lat}, ${lng}`);
+    //log this against user logs later
+    console.log(`The currest position is ${lat}, ${lng}`);
 
     this.locations$ = this.dataService.getLocations(lat, lng);
   }

@@ -40,7 +40,6 @@ const login = (req, res, next) => {
             }
 
             if (authUser) {
-                console.log("add al", authUser.email);
                 addAuditLog(req.body.email, true)
                 let token = authUser.generateJwt();
                 res.status(200).json({ token });
@@ -52,7 +51,6 @@ const login = (req, res, next) => {
 };
 
 const addAuditLog = (email, success, errors) =>{
-    console.log("add al");
     var auditLog = new auditModel();
     auditLog.date = new Date();
     auditLog.userEmail = email;
