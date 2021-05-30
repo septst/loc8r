@@ -6,6 +6,7 @@ import { StorageService } from '../../services/storage.service';
 import { ThemingService } from '../../services/theming.service';
 
 import { User } from '../../models/user';
+import { QuickMessageService } from 'src/app/services/quick-message.service';
 
 @Component({
   selector: 'app-framework',
@@ -24,6 +25,7 @@ export class FrameworkComponent implements OnInit {
     private authService: AuthService,
     private themingService: ThemingService,
     private storageService: StorageService,
+    private quickMessageService: QuickMessageService,
     private overlayContainer: OverlayContainer) { }
 
   @HostBinding('class') public cssClass: string;
@@ -68,6 +70,7 @@ export class FrameworkComponent implements OnInit {
 
   public doLogout(): void {
     this.authService.logout();
+    this.quickMessageService.push(`Logout successful.`)
   }
 
   public isLoggedIn(): boolean {
