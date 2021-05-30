@@ -27,8 +27,13 @@
                 </div>
             </div>
         </div>
-        <div>
-            <button type="button" color="primary" (click)="OpenNewReviewDialog()" mat-raised-button>Write a review</button>
+        <div *ngIf="isLoggedIn();else loginToPost">
+            <button type="button" color="primary" (click)="OpenNewReviewDialog()" mat-raised-button>
+                Write a review
+            </button>
         </div>
+        <ng-template #loginToPost>
+            <a routerLink="/login" class="embedded-link" mat-button>Sign in to post a review!</a>
+        </ng-template>
     </mat-card-content>
 </mat-card>

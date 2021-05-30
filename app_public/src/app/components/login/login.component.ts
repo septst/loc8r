@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { QuickMessageService } from 'src/app/services/quick-message.service';
+import { HistoryService } from 'src/app/services/history.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private quickMessageService: QuickMessageService,
+    private historyService: HistoryService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -50,7 +52,9 @@ export class LoginComponent implements OnInit {
   private doLogin(user: User): void {
     this.authService.login(user)
       .then(() => { 
-        this.router.navigateByUrl("/");
+        console.log("Redirect to =>", this.historyService.getPreLoginUrl());
+        
+        this.router.navigateByUrl(this.historyService.getPreLoginUrl());
         this.quickMessageService.push(`Sign in successful.`);
        })
       .catch((err) => {

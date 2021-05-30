@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Location } from 'src/app/models/location';
+import { AuthService } from 'src/app/services/auth.service';
 import { ReviewsNewComponent } from '../reviews-new/reviews-new.component';
 
 @Component({
@@ -12,7 +13,9 @@ export class ReviewsComponent implements OnInit {
 
   @Input() location: Location;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +26,10 @@ export class ReviewsComponent implements OnInit {
         "disableClose": true,
         "data": { "locationId": this.location._id }
       });
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
 }
