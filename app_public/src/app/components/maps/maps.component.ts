@@ -42,9 +42,9 @@ export class MapsComponent implements OnInit {
     this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
       this.setMapOptions();
     });
-    debugger;
-    this.defaultHeight = this.customHeight > 0 ? this.customHeight : this.defaultHeight;
-    this.defaultWidth = this.customWidth > 0 ? this.customWidth : this.defaultWidth;
+
+    this.customHeight = this.customHeight > 0 ? this.customHeight : this.defaultHeight;
+    this.customWidth = this.customWidth > 0 ? this.customWidth : this.defaultWidth;
   }
 
   private setMapOptions() {

@@ -17,6 +17,7 @@ export class LocationDetailsComponent implements OnInit {
 
   public hasDetails: boolean;
   public gApiKey: string = "";
+  public locations: Location[];
     
   constructor(
     private dataService: DataService,
@@ -32,7 +33,12 @@ export class LocationDetailsComponent implements OnInit {
           this.gApiKey = result.secret;
         }
       });
+
+      this.locations = [this.location];
+      console.log("locations =>", this.locations);
+      
   }
+
 
   ngOnDestroy(): void {
   }  
