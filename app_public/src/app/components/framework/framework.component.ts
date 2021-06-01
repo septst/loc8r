@@ -1,5 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
@@ -9,6 +9,8 @@ import { User } from '../../models/user';
 import { QuickMessageService } from 'src/app/services/quick-message.service';
 import { Router } from '@angular/router';
 import { HistoryService } from 'src/app/services/history.service';
+import { ProgressBarService } from 'src/app/services/progress-bar.service';
+import { SecretsService } from 'src/app/services/secrets.service';
 
 @Component({
   selector: 'app-framework',
@@ -21,10 +23,11 @@ export class FrameworkComponent implements OnInit {
   //private members
   public themes: string[];
   public darkModeOn: boolean = true;
+  public showProgress: boolean = true;
   public themingSubscription: Subscription;
   private darkModeKey: string = "dark-mode";
+  public gApiKey: string = "";
 
-  //public memebers
   public currentUser: User;
   public isLoggedIn: boolean;
   public isAdmin: boolean;
@@ -35,13 +38,27 @@ export class FrameworkComponent implements OnInit {
     private storageService: StorageService,
     private quickMessageService: QuickMessageService,
     private historyService: HistoryService,
+    private progressBarService: ProgressBarService,
+    private secretsService: SecretsService,
     private overlayContainer: OverlayContainer,
+    private cdRef: ChangeDetectorRef,
     private router: Router) { }
 
   @HostBinding('class') public cssClass: string;
 
   ngOnInit(): void {
+    //get G API key
+    this.secretsService
+      .getSecretByKey("GOOGLE_API_KEY")
+      .then(result => {
+        if (!result.message) {
+          this.gApiKey = result.secret;
+          this.loadGoogleApiScript();
+        }
+      });
+
     this.GetCurrentUser();
+    //themes
     this.themes = this.themingService.themes;
     this.applyDefaultTheme();
     this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
@@ -51,6 +68,8 @@ export class FrameworkComponent implements OnInit {
       this.cssClass = theme;
       this.applyThemeOnOverlays(theme);
     });
+
+
 
     window.addEventListener("storage", event => {
 
@@ -75,6 +94,15 @@ export class FrameworkComponent implements OnInit {
 
   ngOnDestroy() {
     this.themingSubscription.unsubscribe();
+  }
+
+  ngAfterViewInit() {
+
+    this.progressBarService.show.subscribe((show) => {
+      this.showProgress = show;
+      this.cdRef.detectChanges();
+    });
+
   }
 
   private GetCurrentUser() {
@@ -104,7 +132,7 @@ export class FrameworkComponent implements OnInit {
     overlayContainerClasses.add(theme);
   }
 
-  changeTheme(theme: string) {
+  public changeTheme(theme: string) {
     this.themingService.theme.next(theme);
   }
 
@@ -112,5 +140,13 @@ export class FrameworkComponent implements OnInit {
     this.authService.logout();
     this.quickMessageService.push(`Sign out successful.`)
     this.authService.changes.next(false);
+  }
+
+  private loadGoogleApiScript() {
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.gApiKey}`;
+    document.getElementsByTagName('head')[0].appendChild(script);
+    console.log("Loaded google API script.");
   }
 }

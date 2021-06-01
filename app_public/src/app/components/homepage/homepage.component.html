@@ -1,10 +1,10 @@
 <app-page-header [title]="pageContent.header.title"></app-page-header>
-<div fxLayout.gt-sm="row" fxLayoutGap="1vw" fxLayout="column" fxLayoutGap.lt-sm="1vh"
-    fxLayoutAlign="space-around start">
-    <div fxFlex.lg="60">
-        <app-home-list>Loading...</app-home-list>
+<div fxLayout.gt-sm="row" fxLayoutGap="1vw" fxLayout="column" fxLayoutGap.lt-sm="1vh" fxLayoutAlign="space-around start"
+    *ngIf="locations$ | async as locations">
+    <div fxFlex.lg="50" fxFlexOrder="1" fxFlexOrder.lt-md="2">
+        <app-home-list [locations]="locations">Loading...</app-home-list>
     </div>
-    <div fxFlex>
-        <app-sidebar [content]="pageContent.sidebar"></app-sidebar>
+    <div fxFlex fxFlexOrder="2" fxFlexOrder.lt-md="1" *ngIf="position$ | async as position">
+        <app-maps [position]="position" [locations]="locations"></app-maps>
     </div>
 </div>
