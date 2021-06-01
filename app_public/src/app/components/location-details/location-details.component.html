@@ -1,6 +1,6 @@
 <div>
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="1vw" class="details">
-        <div fxFlex="30" fxLayout="column" fxLayoutGap="2vh">
+        <div fxFlex="30" fxLayout="column" fxLayoutGap="2vh" fxFlexOrder="1" fxFlexOrder.lt-md="2">
             <div *ngIf="location.address">
                 <mat-card>
                     <mat-card-header>
@@ -41,18 +41,20 @@
                 </mat-card>
             </div>
         </div>
-        <div fxFlex="40">
+        <div fxFlex="40" fxFlexOrder="2" fxFlexOrder.lt-md="1">
             <mat-card class="map">
                 <mat-card-header>
                     <mat-card-title>Location Map</mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="card-content">
-                    <app-maps [latitude]="location.coords.coordinates[1]" [longitude]="location.coords.coordinates[0]"
-                    [customHeight]="500" [customWidth]="500" [locations]="locations"></app-maps>
+                    <app-maps fxHide.lt-md [latitude]="location.coords.coordinates[1]" [longitude]="location.coords.coordinates[0]"
+                        [customHeight]="500" [customWidth]="500" [locations]="locations"></app-maps>
+                    <app-maps fxShow.lt-md [latitude]="location.coords.coordinates[1]" [longitude]="location.coords.coordinates[0]"
+                        [customHeight]="500" [customWidth]="350" [locations]="locations"></app-maps>
                 </mat-card-content>
             </mat-card>
         </div>
-        <div fxFlex="30">
+        <div fxFlex="30" fxFlexOrder="3">
             <div fxFlexLayout="column">
                 <div>
                     <app-reviews [location]="location"></app-reviews>
