@@ -47,8 +47,10 @@
                     <mat-card-title>Location Map</mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="card-content">
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&zoom=14&size=250x200&sensor=false&markers={{location.coords.coordinates[1]}},{{location.coords.coordinates[0]}}&key={{gApiKey}}&scale=2"
-                        mat-card-image />
+                    <app-maps fxHide.lt-md fxShow [latitude]="location.coords.coordinates[1]" [longitude]="location.coords.coordinates[0]"
+                        [customHeight]="500" [customWidth]="500" [locations]="locations"></app-maps>
+                    <app-maps fxHide fxShow.lt-md [latitude]="location.coords.coordinates[1]" [longitude]="location.coords.coordinates[0]"
+                        [customHeight]="500" [customWidth]="350" [locations]="locations"></app-maps>
                 </mat-card-content>
             </mat-card>
         </div>
