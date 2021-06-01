@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './materials/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 //materials
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -34,6 +35,7 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewsNewComponent } from './components/reviews-new/reviews-new.component';
 import { AppRatingStarsInputComponent } from './components/app-rating-stars-input/app-rating-stars-input.component';
 import { TrimTextPipe } from './pipes/trim-text.pipe';
+import { MapsComponent } from './components/maps/maps.component';
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import { TrimTextPipe } from './pipes/trim-text.pipe';
     ReviewsComponent,
     ReviewsNewComponent,
     AppRatingStarsInputComponent,
-    TrimTextPipe
+    TrimTextPipe,
+    MapsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { TrimTextPipe } from './pipes/trim-text.pipe';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
+    GoogleMapsModule,
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.DEBUG,
