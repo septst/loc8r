@@ -52,3 +52,5 @@ npm install express-async-errors --save
 netstat -ano | findstr :3000
 
 askkill /PID xxx /F
+
+npm install @angular/google-maps --save

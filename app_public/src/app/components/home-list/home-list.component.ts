@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DataService } from '../../services/data.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { Location } from '../../models/location';
 import { LoggingService } from 'src/app/services/logging.service';
+import { ProgressBarService } from 'src/app/services/progress-bar.service';
 
 @Component({
   selector: 'app-home-list',
@@ -13,47 +14,19 @@ import { LoggingService } from 'src/app/services/logging.service';
 })
 export class HomeListComponent implements OnInit {
 
+  @Input() locations: Location[];
+
   constructor(
     private loggingService: LoggingService,
     private dataService: DataService,
-    private geolocationService: GeolocationService) { }
-
-  public locations$: Observable<Location[]>;
+    private progessbarService: ProgressBarService) { }
 
   public message: string = "";
 
   ngOnInit(): void {
-    this.getPosition();
   }
 
-  private getPosition(): void {
-    this.message = "Getting your location...";
-    this.geolocationService.getPosition(
-      this.getLocations.bind(this),
-      this.showError.bind(this),
-      this.noGeo.bind(this)
-    );
+  ngAfterViewInit(){
+    this.progessbarService.show.next(false);
   }
-
-  private getLocations(position: any): void {
-    this.message = 'Searching for nearby places...';
-    const lat: number = position.coords.latitude;
-    const lng: number = position.coords.longitude;
-    //log this against user logs later
-    console.log(`The currest position is ${lat}, ${lng}`);
-
-    this.locations$ = this.dataService.getLocations(lat, lng);
-  }
-
-  private noGeo(): void {
-    this.loggingService.error('Geolocation not supported by this browser.');
-    this.message = 'Geolocation not supported by this browser.';
-  };
-
-  private showError(error: any): void {
-    this.loggingService.error(
-      `Error occured in geolocation service. The details are ${error.message}`);
-    this.message = error.message;
-  };
-
 }
