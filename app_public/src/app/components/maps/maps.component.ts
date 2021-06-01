@@ -5,6 +5,7 @@ import { Location } from 'src/app/models/location';
 import { SecretsService } from 'src/app/services/secrets.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ThemingService } from 'src/app/services/theming.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-maps',
@@ -55,8 +56,8 @@ export class MapsComponent implements OnInit {
       },
       zoom: 14,
       mapId: this.storageService.getItemByKey(this.darkModeKey) ?
-        "673c16b597ccd272" :
-        "89c318d8d1c614fb",
+        environment.darkMapId :
+        environment.lightMapId,
       maxZoom: 30,
       minZoom: 5,
     } as google.maps.MapOptions;
@@ -71,6 +72,7 @@ export class MapsComponent implements OnInit {
             lng: loc.coords.coordinates[0]
           },
           label: {
+            color: this.storageService.getItemByKey(this.darkModeKey) ? "white" : "blue",
             text: loc.name
           },
           options: {

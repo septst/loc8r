@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "http://localhost:3000/api"
+  apiBaseUrl: "http://localhost:3000/api",
+  lightMapId: "89c318d8d1c614fb",
+  darkMapId: "673c16b597ccd272"
 };
 
 /*
