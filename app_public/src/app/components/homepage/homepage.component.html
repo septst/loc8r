@@ -5,6 +5,7 @@
         <app-home-list [locations]="locations">Loading...</app-home-list>
     </div>
     <div fxFlex fxFlexOrder="2" fxFlexOrder.lt-md="1" *ngIf="position$ | async as position">
-        <app-maps [position]="position" [locations]="locations"></app-maps>
+        <app-maps [latitude]="position.coords.latitude" [longitude]="position.coords.longitude" [locations]="locations">
+        </app-maps>
     </div>
 </div>

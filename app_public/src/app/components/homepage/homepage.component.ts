@@ -5,6 +5,7 @@ import { Location } from 'src/app/models/location';
 import { DataService } from 'src/app/services/data.service';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { LoggingService } from 'src/app/services/logging.service';
+import { ProgressBarService } from 'src/app/services/progress-bar.service';
 
 @Component({
   selector: 'app-homepage',
@@ -20,9 +21,11 @@ export class HomepageComponent implements OnInit {
   constructor(
     private loggingService: LoggingService,
     private dataService: DataService,
-    private geolocationService: GeolocationService) { }
+    private geolocationService: GeolocationService,
+    private progessbarService: ProgressBarService) { }
 
   ngOnInit(): void {
+    this.progessbarService.show.next(true);
     this.getPosition();
   }
 

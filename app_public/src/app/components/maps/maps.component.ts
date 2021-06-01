@@ -10,23 +10,26 @@ import { ThemingService } from 'src/app/services/theming.service';
   selector: 'app-maps',
   templateUrl: './maps.component.html',
   styleUrls: ['./maps.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush    
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapsComponent implements OnInit {
 
-  @Input() position: GeolocationPosition;
+  @Input() latitude: number;
+  @Input() longitude: number;
   @Input() locations: Location[];
+  @Input() customWidth: number;
+  @Input() customHeight: number;
 
   public markers: any[] = [];
   public options: google.maps.MapOptions;
   public mapId: string;
 
-  private darkModeKey: string = "dark-mode";
+  public darkModeKey: string = "dark-mode";
   public themingSubscription: Subscription;
+  public defaultWidth: number = 700;
+  public defaultHeight: number = 500;
 
   constructor(
-    private httpClient: HttpClient,
-    private secretsService: SecretsService,
     private themingService: ThemingService,
     private storageService: StorageService,
   ) { }
@@ -39,14 +42,16 @@ export class MapsComponent implements OnInit {
     this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
       this.setMapOptions();
     });
+    debugger;
+    this.defaultHeight = this.customHeight > 0 ? this.customHeight : this.defaultHeight;
+    this.defaultWidth = this.customWidth > 0 ? this.customWidth : this.defaultWidth;
   }
 
-  private setMapOptions()
-  {        
+  private setMapOptions() {
     this.options = {
       center: {
-        lat: this.position.coords.latitude,
-        lng: this.position.coords.longitude
+        lat: this.latitude,
+        lng: this.longitude
       },
       zoom: 14,
       mapId: this.storageService.getItemByKey(this.darkModeKey) ?
@@ -58,7 +63,7 @@ export class MapsComponent implements OnInit {
   }
 
   private loadMarkers() {
-    if (this.locations.length > 0) {
+    if (this.locations && this.locations.length > 0) {
       this.locations.forEach(loc => {
         this.markers.push({
           position: {

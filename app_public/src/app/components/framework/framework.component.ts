@@ -69,8 +69,6 @@ export class FrameworkComponent implements OnInit {
       this.applyThemeOnOverlays(theme);
     });
 
-
-
     window.addEventListener("storage", event => {
 
       if (event.storageArea == localStorage) {

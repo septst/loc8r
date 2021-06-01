@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProgressBarService {
 
-  public show: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public show: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 }
