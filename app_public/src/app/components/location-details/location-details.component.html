@@ -47,10 +47,18 @@
                     <mat-card-title>Location Map</mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="card-content">
-                    <app-maps fxHide.lt-md fxShow [latitude]="location.coords.coordinates[1]" [longitude]="location.coords.coordinates[0]"
-                        [customHeight]="500" [customWidth]="500" [locations]="locations"></app-maps>
-                    <app-maps fxShow.lt-md fxHide [latitude]="location.coords.coordinates[1]" [longitude]="location.coords.coordinates[0]"
-                        [customHeight]="500" [customWidth]="350" [locations]="locations"></app-maps>
+                    <!-- large devices -->
+                    <app-maps fxHide.lt-md fxShow [latitude]="location.coords.coordinates[1]"
+                        [longitude]="location.coords.coordinates[0]" [customHeight]="500" [customWidth]="500"
+                        [locations]="locations"></app-maps>
+                    <!-- medium devices -->
+                    <app-maps fxShow.lt-md fxHide.lt-sm fxHide [latitude]="location.coords.coordinates[1]"
+                        [longitude]="location.coords.coordinates[0]" [customHeight]="500" [customWidth]="650"
+                        [locations]="locations"></app-maps>
+                    <!-- small devices -->
+                    <app-maps fxShow.lt-sm fxHide [latitude]="location.coords.coordinates[1]"
+                        [longitude]="location.coords.coordinates[0]" [customHeight]="350" [customWidth]="350"
+                        [locations]="locations"></app-maps>
                 </mat-card-content>
             </mat-card>
         </div>
