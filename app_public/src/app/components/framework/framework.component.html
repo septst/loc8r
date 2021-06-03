@@ -70,17 +70,10 @@
     </main>
 
     <footer class="footer">
-        <mat-divider></mat-divider>
-        <div class="footer-content">
-            <div fxLayout="row">
-                <div fxLayoutAlign="start" class="accent-color">
-                    <span *ngIf="currentLocation.length > 0">{{currentLocation}}</span>
-                </div>
-                <span class="menu-spacer"></span>
-                <div fxLayoutAlign="end center" class="accent-color">
-                    <span>&copy; Mean demo - Parthiban Sekar 2021</span>
-                </div>
+        <mat-toolbar color="primary">
+            <div class="footer-content" fxLayout="row">
+                <small>&copy; Mean demo - Parthiban Sekar 2021</small>
             </div>
-        </div>
+        </mat-toolbar>
     </footer>
 </div>
