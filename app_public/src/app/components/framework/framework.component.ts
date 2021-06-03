@@ -24,6 +24,7 @@ export class FrameworkComponent implements OnInit {
   public themes: string[];
   public darkModeOn: boolean = true;
   public showProgress: boolean = true;
+  public currentLocation: string = "";
   public themingSubscription: Subscription;
   private darkModeKey: string = "dark-mode";
   public gApiKey: string = "";
@@ -49,47 +50,11 @@ export class FrameworkComponent implements OnInit {
   ngOnInit(): void {
 
     this.frameworkService.showProgress.next(true);
-    //get G API key
-    this.secretsService
-      .getSecretByKey("GOOGLE_API_KEY")
-      .then(result => {
-        if (!result.message) {
-          this.gApiKey = result.secret;
-          this.loadGoogleApiScript();
-        }
-      });
 
+    this.loadGoogleApiScript();
     this.GetCurrentUser();
-    //themes
-    this.themes = this.themingService.themes;
-    this.applyDefaultTheme();
-    this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
-      this.darkModeOn = theme.includes("dark");
-      console.log(`Dark mode ${this.darkModeOn ? 'enabled' : 'disabled'}`);
-      this.storageService.setItemByKey(this.darkModeKey, this.darkModeOn ? "enabled" : "");
-      this.cssClass = theme;
-      this.applyThemeOnOverlays(theme);
-    });
-
-    window.addEventListener("storage", event => {
-
-      if (event.storageArea == localStorage) {
-        if (event.key === 'locator-token') {
-          let token = this.authService.getToken();
-
-          //logged out successfully from other tabs
-          if (token === null) {
-            this.quickMessageService.push("Sign out successful from another tab.");
-            this.authService.changes.next(false);
-          } else if (event.oldValue === null && event.newValue === token) { //Login in other tabs
-            this.quickMessageService.push("Sign in successful from another tab.");
-            this.authService.changes.next(true);
-          }
-          let currentUrl = this.router.url;
-          this.router.navigateByUrl(this.historyService.getPreLoginUrl(), { skipLocationChange: true });
-        }
-      }
-    })
+    this.watchThemeSwitch();
+    this.watchLogins();
   }
 
   ngOnDestroy() {
@@ -103,6 +68,23 @@ export class FrameworkComponent implements OnInit {
       this.cdRef.detectChanges();
     });
 
+    this.frameworkService.currentLocation.subscribe((show) => {
+      this.currentLocation = show;
+      this.cdRef.detectChanges();
+    });
+
+  }
+
+  private watchThemeSwitch() {
+    this.themes = this.themingService.themes;
+    this.applyDefaultTheme();
+    this.themingSubscription = this.themingService.theme.subscribe((theme: string) => {
+      this.darkModeOn = theme.includes("dark");
+      console.log(`Dark mode ${this.darkModeOn ? 'enabled' : 'disabled'}`);
+      this.storageService.setItemByKey(this.darkModeKey, this.darkModeOn ? "enabled" : "");
+      this.cssClass = theme;
+      this.applyThemeOnOverlays(theme);
+    });
   }
 
   private GetCurrentUser() {
@@ -143,10 +125,38 @@ export class FrameworkComponent implements OnInit {
   }
 
   private loadGoogleApiScript() {
-    let script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.gApiKey}`;
-    document.getElementsByTagName('head')[0].appendChild(script);
-    console.log("Loaded google API script.");
+    this.secretsService
+      .getSecretByKey("GOOGLE_API_KEY")
+      .then(result => {
+        if (!result.message) {
+          this.gApiKey = result.secret;
+          let script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${this.gApiKey}`;
+          document.getElementsByTagName('head')[0].appendChild(script);
+          console.log("Loaded google API script.");
+        }
+      });
+  }
+
+  private watchLogins() {
+    window.addEventListener("storage", event => {
+
+      if (event.storageArea == localStorage) {
+        if (event.key === 'locator-token') {
+          let token = this.authService.getToken();
+
+          //logged out successfully from other tabs
+          if (token === null) {
+            this.quickMessageService.push("Sign out successful from another tab.");
+            this.authService.changes.next(false);
+          } else if (event.oldValue === null && event.newValue === token) { //Login in other tabs
+            this.quickMessageService.push("Sign in successful from another tab.");
+            this.authService.changes.next(true);
+          }
+          this.router.navigateByUrl(this.historyService.getPreLoginUrl(), { skipLocationChange: true });
+        }
+      }
+    });
   }
 }

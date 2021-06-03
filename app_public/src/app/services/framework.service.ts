@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class FrameworkService {
 
   public showProgress: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public currentLocation: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
   constructor() { }
 }

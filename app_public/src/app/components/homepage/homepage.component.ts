@@ -27,7 +27,6 @@ export class HomepageComponent implements OnInit {
     private frameworkService: FrameworkService) { }
 
   ngOnInit(): void {
-    this.frameworkService.showProgress.next(false);
     this.getPosition();
   }
 
@@ -63,11 +62,12 @@ export class HomepageComponent implements OnInit {
       geocoder.geocode({ location: { lat, lng } },
         (result, status) => {
           if (result.length > 0 && status === "OK") {
-            console.log(result[0].formatted_address);
+            this.frameworkService.currentLocation.next(result[0].formatted_address);
           }
         }
       );
-    }, 3);
+      this.frameworkService.showProgress.next(false);
+    }, 3000);
   }
 
   private noGeo(): void {
