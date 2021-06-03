@@ -9,8 +9,8 @@ import { User } from '../../models/user';
 import { QuickMessageService } from 'src/app/services/quick-message.service';
 import { Router } from '@angular/router';
 import { HistoryService } from 'src/app/services/history.service';
-import { ProgressBarService } from 'src/app/services/progress-bar.service';
 import { SecretsService } from 'src/app/services/secrets.service';
+import { FrameworkService } from 'src/app/services/framework.service';
 
 @Component({
   selector: 'app-framework',
@@ -38,7 +38,7 @@ export class FrameworkComponent implements OnInit {
     private storageService: StorageService,
     private quickMessageService: QuickMessageService,
     private historyService: HistoryService,
-    private progressBarService: ProgressBarService,
+    private frameworkService: FrameworkService,
     private secretsService: SecretsService,
     private overlayContainer: OverlayContainer,
     private cdRef: ChangeDetectorRef,
@@ -47,6 +47,8 @@ export class FrameworkComponent implements OnInit {
   @HostBinding('class') public cssClass: string;
 
   ngOnInit(): void {
+
+    this.frameworkService.showProgress.next(true);
     //get G API key
     this.secretsService
       .getSecretByKey("GOOGLE_API_KEY")
@@ -96,7 +98,7 @@ export class FrameworkComponent implements OnInit {
 
   ngAfterViewInit() {
 
-    this.progressBarService.show.subscribe((show) => {
+    this.frameworkService.showProgress.subscribe((show) => {
       this.showProgress = show;
       this.cdRef.detectChanges();
     });

@@ -4,9 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProgressBarService {
+export class FrameworkService {
 
-  public show: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public showProgress: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 }

@@ -3,9 +3,9 @@ import { MapMarker } from '@angular/google-maps';
 import { Observable, of } from 'rxjs';
 import { Location } from 'src/app/models/location';
 import { DataService } from 'src/app/services/data.service';
+import { FrameworkService } from 'src/app/services/framework.service';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { LoggingService } from 'src/app/services/logging.service';
-import { ProgressBarService } from 'src/app/services/progress-bar.service';
 
 @Component({
   selector: 'app-homepage',
@@ -18,14 +18,16 @@ export class HomepageComponent implements OnInit {
   public position$: Observable<GeolocationPosition>;
   public locations$: Observable<Location[]>;
 
+  private retry: number = 1;
+
   constructor(
     private loggingService: LoggingService,
     private dataService: DataService,
     private geolocationService: GeolocationService,
-    private progessbarService: ProgressBarService) { }
+    private frameworkService: FrameworkService) { }
 
   ngOnInit(): void {
-    this.progessbarService.show.next(true);
+    this.frameworkService.showProgress.next(false);
     this.getPosition();
   }
 
@@ -47,7 +49,7 @@ export class HomepageComponent implements OnInit {
     Let Loc8r help you find the place you\'re looking for.'
   };
 
-  private updatePosition(position: GeolocationPosition){
+  private updatePosition(position: GeolocationPosition) {
     this.position$ = of(position);
     const lat: number = position.coords.latitude;
     const lng: number = position.coords.longitude;
@@ -55,8 +57,19 @@ export class HomepageComponent implements OnInit {
     console.log(`The currest position is ${lat}, ${lng}`);
 
     this.locations$ = this.dataService.getLocations(lat, lng);
+
+    setTimeout(() => {
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ location: { lat, lng } },
+        (result, status) => {
+          if (result.length > 0 && status === "OK") {
+            console.log(result[0].formatted_address);
+          }
+        }
+      );
+    }, 3);
   }
-  
+
   private noGeo(): void {
     this.loggingService.error('Geolocation not supported by this browser.');
     this.message = 'Geolocation not supported by this browser.';
@@ -64,8 +77,16 @@ export class HomepageComponent implements OnInit {
 
   private showError(error: any): void {
     this.loggingService.error(
-      `Error occured in geolocation service. The details are ${error.message}`);
+      `Error occured in geolocation service during attempt ${this.retry}. The details are ${error.message}`);
     this.message = error.message;
+    this.retryGetPosition();
   };
+
+  private retryGetPosition() {
+    if (this.retry < 4) {
+      this.getPosition();
+    }
+    this.retry++;
+  }
 
 }
