@@ -108,7 +108,8 @@ body {
 }
 
 mat-toolbar mat-toolbar-row,
-main {
+main,
+.footer-content {
   padding-right: 2.5% !important;
   padding-left: 2.5% !important;
 }

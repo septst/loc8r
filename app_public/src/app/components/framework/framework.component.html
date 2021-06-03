@@ -52,8 +52,7 @@
                             <mat-divider *ngIf="isLoggedIn"></mat-divider>
                             <button *ngIf="isLoggedIn" (click)="doLogout()" color="primary" mat-button>Sign off</button>
                             <mat-divider *ngIf="isAdmin"></mat-divider>
-                            <button *ngIf="isAdmin" routerLink="/settings" color="primary"
-                                mat-button>Settings</button>
+                            <button *ngIf="isAdmin" routerLink="/settings" color="primary" mat-button>Settings</button>
                         </mat-nav-list>
                     </mat-menu>
                 </div>
@@ -72,13 +71,15 @@
 
     <footer class="footer">
         <mat-divider></mat-divider>
-        <div fxLayout="row">
-            <div fxLayoutAlign="start" class="accent-color">
-                <span *ngIf="currentLocation.length > 0" >{{currentLocation}}</span>
-            </div>
-            <span class="menu-spacer"></span>
-            <div fxLayoutAlign="end center" class="accent-color">
-                <span>&copy; Mean demo - Parthiban Sekar 2021</span>
+        <div class="footer-content">
+            <div fxLayout="row">
+                <div fxLayoutAlign="start" class="accent-color">
+                    <span *ngIf="currentLocation.length > 0">{{currentLocation}}</span>
+                </div>
+                <span class="menu-spacer"></span>
+                <div fxLayoutAlign="end center" class="accent-color">
+                    <span>&copy; Mean demo - Parthiban Sekar 2021</span>
+                </div>
             </div>
         </div>
     </footer>
