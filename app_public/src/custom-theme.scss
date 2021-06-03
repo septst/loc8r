@@ -1,7 +1,7 @@
 @use '~@angular/material' as mat;
 
-@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
-@import url( 'https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 @import "~@angular/material/theming";
 
@@ -38,13 +38,13 @@
     color: mat-color($warn) !important;
   }
 
-  .hint-icon{
+  .hint-icon {
     color: mat-color($primary);
   }
-  
+
   //log levels
   .mat-button-toggle-checked {
-   &.info {
+    &.info {
       background-color: mat-color($accent);
       color: mat-color($accent, default-contrast);
     }
@@ -108,13 +108,21 @@ body {
 }
 
 mat-toolbar mat-toolbar-row,
-main {
+main,
+.footer-content {
   padding-right: 2.5% !important;
   padding-left: 2.5% !important;
 }
 
-.footer mat-toolbar mat-toolbar-row {
-  height: 3vh;
+.footer {
+  position: fixed;
+  bottom: 0;
+  min-height: 1vh;
+  min-width: 100vw;
+}
+
+.footer *  {
+  height: 5vh !important;
 }
 
 main {
