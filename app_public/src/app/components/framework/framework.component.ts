@@ -1,5 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, HostBinding, Inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { HistoryService } from 'src/app/services/history.service';
 import { SecretsService } from 'src/app/services/secrets.service';
 import { FrameworkService } from 'src/app/services/framework.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-framework',
@@ -34,6 +35,8 @@ export class FrameworkComponent implements OnInit {
   public isAdmin: boolean;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
     private authService: AuthService,
     private themingService: ThemingService,
     private storageService: StorageService,
@@ -83,6 +86,8 @@ export class FrameworkComponent implements OnInit {
       console.log(`Dark mode ${this.darkModeOn ? 'enabled' : 'disabled'}`);
       this.storageService.setItemByKey(this.darkModeKey, this.darkModeOn ? "enabled" : "");
       this.cssClass = theme;
+      this.themes.forEach(t => this.renderer.removeClass(this.document.body,t));
+      this.renderer.addClass(this.document.body, theme);
       this.applyThemeOnOverlays(theme);
     });
   }
@@ -97,7 +102,6 @@ export class FrameworkComponent implements OnInit {
   }
 
   private applyDefaultTheme() {
-    console.log("Applying theme selection");
     if (this.storageService.getItemByKey(this.darkModeKey)) {
       this.themingService.theme.next("dark-theme");
     } else {
