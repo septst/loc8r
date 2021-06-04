@@ -17,6 +17,7 @@ export class HomepageComponent implements OnInit {
   public message: string = "";
   public position$: Observable<GeolocationPosition>;
   public locations$: Observable<Location[]>;
+  public currentLocation: string = "";
 
   private retry: number = 1;
 
@@ -62,7 +63,8 @@ export class HomepageComponent implements OnInit {
       geocoder.geocode({ location: { lat, lng } },
         (result, status) => {
           if (result.length > 0 && status === "OK") {
-            this.frameworkService.currentLocation.next(result[0].formatted_address);
+            this.currentLocation = result[0].formatted_address;
+            this.frameworkService.currentLocation.next(this.currentLocation);
           }
         }
       );

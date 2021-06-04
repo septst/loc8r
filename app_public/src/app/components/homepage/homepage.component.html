@@ -4,19 +4,24 @@
     <div fxFlex.lg="50" fxFill fxFlexOrder="1" fxFlexOrder.lt-md="2">
         <app-home-list [locations]="locations">Loading...</app-home-list>
     </div>
-    <div fxFlex fxFlexOrder="2" fxFlexOrder.lt-md="1" *ngIf="position$ | async as position">
-        <!-- large devices -->
-        <app-maps fxHide.lt-md fxShow [latitude]="position.coords.latitude" [longitude]="position.coords.longitude"
-            [locations]="locations" [customWidth]="700" [customHeight]="500">
-        </app-maps>
-        <!-- medium devices -->
-        <app-maps fxShow.lt-md fxHide.lt-sm fxHide [latitude]="position.coords.latitude"
-            [longitude]="position.coords.longitude" [locations]="locations" 
-            [customWidth]="730" [customHeight]="600">
-        </app-maps>
-        <!-- small devices -->
-        <app-maps fxShow.lt-sm fxHide [latitude]="position.coords.latitude" [longitude]="position.coords.longitude"
-            [locations]="locations" [customWidth]="350" [customHeight]="350">
-        </app-maps>
+    <div fxFlex fxFlexOrder="2" fxFlexOrder.lt-md="1" *ngIf="position$ | async as position" fxLayout="column">
+        <div>
+            <!-- large devices -->
+            <app-maps fxHide.lt-md fxShow [latitude]="position.coords.latitude" [longitude]="position.coords.longitude"
+                [locations]="locations" [customWidth]="700" [customHeight]="500">
+            </app-maps>
+            <!-- medium devices -->
+            <app-maps fxShow.lt-md fxHide.lt-sm fxHide [latitude]="position.coords.latitude"
+                [longitude]="position.coords.longitude" [locations]="locations" [customWidth]="730"
+                [customHeight]="600">
+            </app-maps>
+            <!-- small devices -->
+            <app-maps fxShow.lt-sm fxHide [latitude]="position.coords.latitude" [longitude]="position.coords.longitude"
+                [locations]="locations" [customWidth]="350" [customHeight]="350">
+            </app-maps>
+        </div>
+        <div *ngIf="currentLocation.length">
+            <small><span class="accent-color">Your location:</span> {{currentLocation}}</small>
+        </div>
     </div>
 </div>
