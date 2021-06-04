@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CounterService } from '../../services/counter.service';
 @Component({
   selector: 'app-rating-stars',
@@ -7,17 +7,23 @@ import { CounterService } from '../../services/counter.service';
 })
 export class AppRatingStarsComponent implements OnInit {
 
-  @Input() rating:number = 0;
-  @Input() reviewsCount:number = 0;
-  @Input() displayRating:boolean = false;
-  
-  constructor(private counterService:CounterService) { }
+  @Input() rating: number = 0;
+  @Input() reviewsCount: number = 0;
+  @Input() displayRating: boolean = false;
+
+  @Output() showReviewsClick = new EventEmitter<boolean>();
+
+  constructor(private counterService: CounterService) { }
 
   ngOnInit(): void {
   }
-  
+
   public counter(i: number): Array<number> {
     return this.counterService.counter(i);
+  }
+
+  public showReviews() {
+    this.showReviewsClick.next(true);
   }
 
 }

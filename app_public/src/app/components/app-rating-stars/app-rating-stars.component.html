@@ -11,6 +11,6 @@
         </span>
     </div>
     <div *ngIf="reviewsCount">
-        <h3>{{reviewsCount}} reviews</h3>
+        <h3><a class="embedded-link" (click)="showReviews()">{{reviewsCount}} reviews</a></h3>
     </div>
 </div>

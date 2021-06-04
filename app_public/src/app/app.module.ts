@@ -33,6 +33,7 @@ import { AddLineBreaksPipe } from './pipes/add-line-breaks.pipe';
 import { MostRecentFirstPipe } from './pipes/most-recent-first.pipe';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ReviewsNewComponent } from './components/reviews-new/reviews-new.component';
+import { ReviewsAllComponent } from './components/reviews-all/reviews-all.component';
 import { AppRatingStarsInputComponent } from './components/app-rating-stars-input/app-rating-stars-input.component';
 import { TrimTextPipe } from './pipes/trim-text.pipe';
 import { MapsComponent } from './components/maps/maps.component';
@@ -58,6 +59,7 @@ import { MapsComponent } from './components/maps/maps.component';
     SettingsComponent,
     ReviewsComponent,
     ReviewsNewComponent,
+    ReviewsAllComponent,
     AppRatingStarsInputComponent,
     TrimTextPipe,
     MapsComponent
