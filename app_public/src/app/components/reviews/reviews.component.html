@@ -2,7 +2,7 @@
     <div class="rating-summary" fxFlexLayout="column" fxLayoutAlign="center center">
         <div>
             <app-rating-stars [rating]="location.rating" [displayRating]="true"
-                [reviewsCount]="location.reviews.length">
+                [reviewsCount]="location.reviews.length" (showReviewsClick)="showAllReviews()">
             </app-rating-stars>
         </div>
     </div>

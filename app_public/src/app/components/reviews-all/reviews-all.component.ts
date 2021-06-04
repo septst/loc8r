@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Review } from 'src/app/models/location';
 
 @Component({
   selector: 'app-reviews-all',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewsAllComponent implements OnInit {
 
-  constructor() { }
+  public reviews: Review[];
+
+  constructor(@Inject(MAT_DIALOG_DATA) data: any) {
+    this.reviews = data.reviews;
+  }
 
   ngOnInit(): void {
   }

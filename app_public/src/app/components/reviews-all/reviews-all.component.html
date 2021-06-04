@@ -1,1 +1,22 @@
-<p>reviews-all works!</p>
+<div fxLayout="column" fxLayoutGap="1vh">
+    <div>
+        <h2 mat-dialog-title class="accent-color">Customer reviews</h2>
+        <small>
+            Reviews are checked routinely to detect any offensive content and spam.
+        </small>
+    </div>
+    <div *ngIf="reviews.length">
+        <div *ngFor="let review of reviews" fxLayout="column" fxLayoutGap="1vh">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div class="reviewAuthor">{{ review.author }}</div>
+                <div>
+                    <app-rating-stars [rating]="review.rating">
+                    </app-rating-stars>
+                </div>
+            </div>
+            <div>
+                <p [innerHTML]="review.reviewText | addLineBreaks" class="reviewText"></p>
+            </div>
+        </div>
+    </div>
+</div>
